@@ -7,13 +7,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PLAYER = "White" if os.environ.get("SIDE", "white") == "white" else "Black"   # field mode: the "player" is the colour
 PLAYER_SHORT = PLAYER
 FULL_NAME = "Titled Tuesday"
-PGN_FILE = "ttc.pgn"
+PGN_FILE = os.environ.get("EVENT_PGN", "TTC_102726.pgn")      # file in data/ ; one tab per file
+EVENT_LABEL = os.path.splitext(PGN_FILE)[0]                    # "TTC_102726"
+EVENT = EVENT_LABEL.lower()                                     # url / anchor slug
 FIELD = True                            # whole tournament: every game appears on both sides
 SIDE = os.environ.get("SIDE", "white")  # "white" or "black": which colour this run builds
 assert SIDE in ("white", "black")
 SIDE_NAME = SIDE.capitalize()
 IS_WHITE = SIDE == "white"
-OUT = os.path.join(os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")), "static", SIDE)   # static/white or static/black
+OUT = os.path.join(os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")), "static", EVENT, SIDE)   # static/white or static/black
 DATA = os.path.join(HERE, "..", "data")
 
 def load_openings():
@@ -117,7 +119,7 @@ def pgn_moves_text(sans, upto=None):
 
 # ---------------------------------------------------------------- site structure
 FIRST_MOVES = [("e4", "1.e4", "e4"), ("d4", "1.d4", "d4"), ("c4", "1.c4", "c4"), ("Nf3", "1.Nf3", "nf3")]
-ANCHOR = {"e4": f"{SIDE}-1e4", "d4": f"{SIDE}-1d4", "c4": f"{SIDE}-1c4", "nf3": f"{SIDE}-1nf3", "other": f"{SIDE}-others"}   # section ids on the home page
+ANCHOR = {"e4": f"{EVENT}-{SIDE}-1e4", "d4": f"{EVENT}-{SIDE}-1d4", "c4": f"{EVENT}-{SIDE}-1c4", "nf3": f"{EVENT}-{SIDE}-1nf3", "other": f"{EVENT}-{SIDE}-others"}   # section ids on the home page
 MIN_REPLY = int(os.environ.get("MIN_REPLY", 25))       # a reply with at least this many games gets its own page
 
 def slugify(s):

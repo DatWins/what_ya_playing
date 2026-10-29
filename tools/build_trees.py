@@ -5,7 +5,7 @@ from PIL import Image
 import common, draw_tree as D
 
 ROOT = os.path.abspath(os.path.join(common.HERE, ".."))
-BUILD = os.path.join(ROOT, "build", common.SIDE); os.makedirs(BUILD, exist_ok=True)
+BUILD = os.path.join(ROOT, "build", common.EVENT, common.SIDE); os.makedirs(BUILD, exist_ok=True)
 IMG = os.path.join(BUILD, "boards")
 
 def auto_min(node, max_plies, cap, start=2):
@@ -43,14 +43,14 @@ def make(slug, node, title, max_plies, cap, back, backtxt, only=None):
 
 def main(only=None):
     games, _ = common.load_games(); root = common.build_tree(games)
-    make("big-picture", root, f"Titled Tuesday – {common.SIDE_NAME} – the big picture", 8, 60, f"../../../#{common.SIDE}", "Overview", only)
+    make("big-picture", root, f"{common.EVENT_LABEL} – {common.SIDE_NAME} – the big picture", 8, 60, f"../../../../#{common.EVENT}-{common.SIDE}", "Overview", only)
     for san, label, slug in common.FIRST_MOVES:
         if san not in root.kids:
             continue
-        make(slug, root.kids[san], f"Titled Tuesday – {common.SIDE_NAME} – {label}", 14, 90, f"../../../#{common.ANCHOR[slug]}", "Overview", only)
+        make(slug, root.kids[san], f"{common.EVENT_LABEL} – {common.SIDE_NAME} – {label}", 14, 90, f"../../../../#{common.ANCHOR[slug]}", "Overview", only)
     for p in common.line_groups(games, root):
         if p["node"] is not None:
-            make(p["slug"], p["node"], f"Titled Tuesday – {common.SIDE_NAME} – {p['title']}", 16, 100, f"../../lines/{p['slug']}/", "Games", only)
+            make(p["slug"], p["node"], f"{common.EVENT_LABEL} – {common.SIDE_NAME} – {p['title']}", 16, 100, f"../../lines/{p['slug']}/", "Games", only)
 
 if __name__ == "__main__":
     main(set(sys.argv[1:]) or None)

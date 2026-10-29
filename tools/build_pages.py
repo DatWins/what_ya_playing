@@ -4,7 +4,7 @@ import os, json, html, collections
 import common
 
 ROOT = os.path.abspath(os.path.join(common.HERE, ".."))
-BUILD = os.path.join(ROOT, "build", common.SIDE); os.makedirs(BUILD, exist_ok=True)
+BUILD = os.path.join(ROOT, "build", common.EVENT, common.SIDE); os.makedirs(BUILD, exist_ok=True)
 esc = html.escape
 S, SN, P = common.SIDE, common.SIDE_NAME, common.PLAYER
 
@@ -46,10 +46,10 @@ def line_page(p, games, tpl, pieces, chessjs):
         tree = (f'    <a class="tree" id="treeLink" href="../../trees/{p["slug"]}/"><img id="treeImg" src="../../trees/{p["slug"]}/preview.jpg" '
                 f'alt="Opening tree for {esc(p["title"])}"><span id="treeCap">Open the zoomable tree &rarr;</span></a>\n'
                 f'    <div class="stats" id="treeNote"></div>\n')
-    back = f"../../../#{common.ANCHOR[p['first']]}"
-    out = (tpl.replace("__TITLE__", esc(p["title"])).replace("__KICKER__", (f"Titled Tuesday · White · {first_label}" if common.IS_WHITE else f"Titled Tuesday · Black · against {first_label}"))
+    back = f"../../../../#{common.ANCHOR[p['first']]}"
+    out = (tpl.replace("__TITLE__", esc(p["title"])).replace("__KICKER__", (f"{common.EVENT_LABEL} · White · {first_label}" if common.IS_WHITE else f"{common.EVENT_LABEL} · Black · against {first_label}"))
               .replace("__DEK__", dek).replace("__TREE__", tree).replace("__BACKHREF__", back).replace("__BACKTXT__", "Overview")
-              .replace("__PLAYER__", P).replace("__SIDENAME__", SN).replace("__PIECES__", pieces).replace("__CHESSJS__", chessjs)
+              .replace("__EVENT__", common.EVENT_LABEL).replace("__SIDENAME__", SN).replace("__PIECES__", pieces).replace("__CHESSJS__", chessjs)
               .replace("__DATA__", json.dumps({"games": rows, "chips": chips, "trees": trees, "player": P, "playerShort": common.PLAYER_SHORT, "side": S, "field": True}, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")))
     d = os.path.join(common.OUT, "lines", p["slug"]); os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(out)
@@ -58,7 +58,7 @@ def line_page(p, games, tpl, pieces, chessjs):
 
 def card(p, st, fams):
     names = " · ".join(f for f, _ in fams[:3])
-    return (f'{{{{< linecard href="{S}/lines/{p["slug"]}/" title="{p["title"]}" n="{st["n"]}" w="{st["w"]}" d="{st["d"]}" l="{st["l"]}" '
+    return (f'{{{{< linecard href="{common.EVENT}/{S}/lines/{p["slug"]}/" title="{p["title"]}" n="{st["n"]}" w="{st["w"]}" d="{st["d"]}" l="{st["l"]}" '
             f'score="{st["score"]:.0%}" names="{names}" >}}}}\n')
 
 def main():
@@ -81,8 +81,8 @@ def main():
     sec.append(f"**{total['n']:,} games** with {SN}, {fmt_wdl(total)}, score **{total['score']:.0%}** (average rating {elo([g['id'] for g in games])}). "
                + ("The thicker the branch, the more often it was played. " if common.IS_WHITE else "The thicker the branch, the more often White played it. Boards are shown from Black's side. ")
                + "Scores are always from the point of view of " + SN + ".\n\n"
-               f"[![What {SN} played, the big picture]({S}/trees/big-picture/preview.jpg)]({S}/trees/big-picture/)\n\n"
-               f"- [Open the zoomable big-picture tree]({S}/trees/big-picture/)\n")
+               f"[![What {SN} played, the big picture]({common.EVENT}/{S}/trees/big-picture/preview.jpg)]({common.EVENT}/{S}/trees/big-picture/)\n\n"
+               f"- [Open the zoomable big-picture tree]({common.EVENT}/{S}/trees/big-picture/)\n")
     # --- popularity tables
     def row(cells): return "| " + " | ".join(str(c) for c in cells) + " |\n"
     N = total["n"]
@@ -134,8 +134,8 @@ def main():
         head = f"{label}" if common.IS_WHITE else f"Against {label}"
         sec.append(f"\n### {head} {{#{common.ANCHOR[slug]}}}\n\n"
                    f"**{s['n']} games**, {fmt_wdl(s)}, score **{s['score']:.0%}**. Most often: " + ", ".join(f"{esc(f)} ({n})" for f, n in fams) + ".\n\n"
-                   f"[![{label} opening tree]({S}/trees/{slug}/preview.jpg)]({S}/trees/{slug}/)\n\n"
-                   f"- [Open the zoomable tree]({S}/trees/{slug}/)\n\n"
+                   f"[![{label} opening tree]({common.EVENT}/{S}/trees/{slug}/preview.jpg)]({common.EVENT}/{S}/trees/{slug}/)\n\n"
+                   f"- [Open the zoomable tree]({common.EVENT}/{S}/trees/{slug}/)\n\n"
                    "{{< linecards >}}\n" + cards + "{{< /linecards >}}\n")
     other_ids = [g["id"] for g in games if g["moves"][0] not in {m for m, _, _ in common.FIRST_MOVES}]
     if other_ids:

@@ -6,7 +6,7 @@ from PIL import Image
 import common, draw_tree as D
 
 ROOT = os.path.abspath(os.path.join(common.HERE, ".."))
-BUILD = os.path.join(ROOT, "build", common.SIDE); IMG = os.path.join(BUILD, "boards")
+BUILD = os.path.join(ROOT, "build", common.EVENT, common.SIDE); IMG = os.path.join(BUILD, "boards")
 
 def tree_for(task):
     page_slug, title, path, label, ids = task
@@ -58,7 +58,7 @@ def main(only=None):
         path = p["node"].path()
         for label, n in labels:
             ids = [i for i in p["ids"] if of_game[i] == label]
-            tasks.append((p["slug"], f"Titled Tuesday – {common.SIDE_NAME} – {p['title']}", path, label, ids))
+            tasks.append((p["slug"], f"{common.EVENT_LABEL} – {common.SIDE_NAME} – {p['title']}", path, label, ids))
     print(len(tasks), "trees", flush=True)
     import json
     mpath = os.path.join(BUILD, "variations.json")
