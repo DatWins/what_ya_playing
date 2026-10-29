@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.e4 e5 – TTC_101326 · White</title>
+<style>
+:root{
+  --fs:21px;
+  --paper:#fbfaf7; --ink:#1d1f22; --muted:#5d6670; --line:#e2e0da; --side:#f2f0eb;
+  --main:#1f4fa3; --var:#2b2f36; --hl:#ffe08a; --hlink:#e8eefb;
+  --light:#dee3e6; --dark:#8ca2ad; --lm:rgba(155,199,0,.45);
+  --btn:#ffffff; --btnb:#cfd5db; --win:#2f6b3a; --loss:#a33a2a;
+}
+:root[data-theme="dark"]{
+  --paper:#16191d; --ink:#e4e6e9; --muted:#9aa3ad; --line:#2c3238; --side:#1d2126;
+  --main:#86b4ff; --var:#d5d9de; --hl:#6b5a1e; --hlink:#25324a;
+  --btn:#232930; --btnb:#3a434c; --win:#7fcf93; --loss:#f08a7a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink)}
+body{font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;font-size:var(--fs);line-height:1.6}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:8px 16px;background:var(--side);border-bottom:1px solid var(--line);font-family:system-ui,"Segoe UI",sans-serif;font-size:15px}
+.top a.lib{color:var(--main);text-decoration:none;font-weight:600;white-space:nowrap}
+.top .t{font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+button,select,input{font:inherit;font-family:system-ui,"Segoe UI",sans-serif;background:var(--btn);color:var(--ink);border:1px solid var(--btnb);border-radius:7px;padding:6px 12px}
+button{cursor:pointer;min-width:40px}
+button:hover{border-color:var(--main)}
+button:disabled{opacity:.35;cursor:default}
+.wrap{display:grid;grid-template-columns:240px minmax(0,1fr) auto;align-items:start}
+nav.toc{position:sticky;top:49px;height:calc(100vh - 49px);overflow:auto;padding:18px 12px;border-right:1px solid var(--line);background:var(--side);font-family:system-ui,"Segoe UI",sans-serif;font-size:14px}
+nav.toc .h{font-weight:700;color:var(--muted);text-transform:uppercase;font-size:12px;letter-spacing:.06em;margin-bottom:8px}
+nav.toc a{display:block;padding:5px 8px;border-radius:6px;color:var(--ink);text-decoration:none;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav.toc a:hover,nav.toc a.on{background:var(--hlink);color:var(--main)}
+nav.toc a .r{color:var(--muted);font-size:12px}
+main{padding:28px 40px 120px;max-width:44em;margin:0 auto;width:100%}
+aside.bp{position:sticky;top:49px;padding:16px 20px;border-left:1px solid var(--line);height:calc(100vh - 49px);overflow:auto;width:calc(var(--bw) + 70px)}
+:root{--bw:min(44vw, calc(100vh - 290px), 680px)}
+.kicker{font-family:system-ui,"Segoe UI",sans-serif;font-size:.7em;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+h1{font-family:system-ui,"Segoe UI",sans-serif;font-size:2.3em;line-height:1.1;margin:.2em 0 .15em}
+.dek{color:var(--main);font-size:1.15em;margin:.2em 0}
+.stats{font-family:system-ui,"Segoe UI",sans-serif;font-size:.78em;color:var(--muted);margin:.5em 0 1em}
+.stats b{color:var(--ink)}
+h2{font-family:system-ui,"Segoe UI",sans-serif;font-size:1.25em;margin:1.8em 0 .3em;padding-top:.5em;border-top:2px solid var(--line);cursor:pointer}
+h2:hover{color:var(--main)}
+p{margin:.65em 0}
+.gamehead{font-size:.88em;line-height:1.5;margin:.15em 0;color:var(--muted)}
+.gamehead b{color:var(--ink)}
+.opn{font-family:system-ui,"Segoe UI",sans-serif;font-size:.72em;font-weight:600;color:var(--muted);margin:.3em 0 0}
+a.mv{cursor:pointer;border-radius:4px;padding:0 2px;color:var(--var);text-decoration:none}
+a.mv:hover{background:var(--hlink)}
+a.mv.cur{background:var(--hl)}
+p.ml{font-weight:700;font-size:1.08em;margin:.7em 0 .3em}
+p.ml a.mv{color:var(--main)}
+.res{font-family:system-ui,"Segoe UI",sans-serif;font-weight:700;font-size:.85em;color:var(--muted)}
+.tree{display:block;margin:.8em 0 .3em}
+.tree img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain;object-position:top;border-radius:10px;box-shadow:0 0 0 5px #3b2416;background:#fff}
+.tree span{font-family:system-ui,"Segoe UI",sans-serif;font-size:.7em;color:var(--main);font-weight:600}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:.8em 0 .4em;font-family:system-ui,"Segoe UI",sans-serif;font-size:15px}
+.tools input{flex:1;min-width:12em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:.6em 0;font-family:system-ui,"Segoe UI",sans-serif;font-size:14px}
+.chips button{border-radius:999px;padding:4px 12px}
+.chips button.on{background:var(--main);border-color:var(--main);color:#fff}
+.chips small{opacity:.7}
+.more{display:block;margin:2em auto;font-size:16px;padding:10px 22px}
+.empty{color:var(--muted);font-style:italic}
+/* board */
+.bwrap{display:grid;grid-template-columns:auto 1fr;grid-template-rows:1fr auto;width:max-content}
+.bd{display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(8,1fr);aspect-ratio:1;border:2px solid #5b6f79;user-select:none}
+.sq{position:relative}
+.sq.l{background:var(--light)} .sq.d{background:var(--dark)}
+.sq.lm::after{content:"";position:absolute;inset:0;background:var(--lm)}
+.pc{position:absolute;inset:0;background-size:100% 100%;z-index:1}
+.rk{display:grid;grid-template-rows:repeat(8,minmax(0,1fr));line-height:1;font-family:system-ui,sans-serif;color:var(--muted);text-align:center;padding-right:5px}
+.fl{grid-column:2;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));line-height:1.4;font-family:system-ui,sans-serif;color:var(--muted);text-align:center}
+.rk span{display:flex;align-items:center}
+#live .bd{width:var(--bw)} #live .rk,#live .fl{font-size:14px}
+.bhead{font-family:system-ui,"Segoe UI",sans-serif;font-size:15px;color:var(--muted);margin-bottom:8px;min-height:1.4em;display:flex;justify-content:space-between;gap:10px}
+.bhead b{color:var(--ink);font-size:17px;white-space:nowrap}
+.ctrls{display:flex;gap:6px;margin:12px 0 0 22px;flex-wrap:wrap}
+.ctrls button{font-size:18px;padding:5px 12px}
+.gnav{display:flex;gap:6px;margin:8px 0 0 22px;font-size:14px}
+.gnav button{font-size:14px;padding:4px 10px}
+.msg{margin:8px 0 0 22px;font-family:system-ui,"Segoe UI",sans-serif;font-size:14px;color:var(--muted)}
+.tog{display:none}
+@media (max-width:1100px){
+  .top{height:49px;padding:0 10px;gap:6px}
+  .top button{padding:5px 9px;min-width:0}
+  .tog{display:inline-block}
+  .wrap{grid-template-columns:1fr}
+  nav.toc{display:none}
+  aside.bp{order:-1;position:sticky;top:49px;z-index:10;height:auto;width:auto;border-left:0;border-bottom:1px solid var(--line);background:var(--paper);padding:8px 12px 10px}
+  :root{--bw:min(calc(100vw - 56px), 38vh, 560px);--bw:min(calc(100vw - 56px), 38svh, 560px)}
+  .bhead{font-size:13px;margin-bottom:4px;align-items:baseline}
+  .bhead #who{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+  .bhead b{font-size:15px}
+  #live{display:flex;justify-content:center}
+  #live .rk,#live .fl{font-size:11px}
+  .ctrls,.gnav,.msg{margin-left:0;justify-content:center;text-align:center}
+  .ctrls{margin-top:8px}
+  .ctrls button{font-size:17px;padding:4px 0;flex:1;max-width:64px}
+  .gnav{margin-top:4px}
+  .msg{margin-top:4px;font-size:12px}
+  main{padding:16px 16px 80px}
+  body.hideb #live,body.hideb .bhead,body.hideb .gnav{display:none}
+}
+@media (max-width:480px){ .top .t{display:none} .top a.lib{flex:1} }
+</style>
+<style>.pc.wP{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PHBhdGggZD0iTTIyLjUgOWMtMi4yMSAwLTQgMS43OS00IDQgMCAuODkuMjkgMS43MS43OCAyLjM4QzE3LjMzIDE2LjUgMTYgMTguNTkgMTYgMjFjMCAyLjAzLjk0IDMuODQgMi40MSA1LjAzLTMgMS4wNi03LjQxIDUuNTUtNy40MSAxMy40N2gyM2MwLTcuOTItNC40MS0xMi40MS03LjQxLTEzLjQ3IDEuNDctMS4xOSAyLjQxLTMgMi40MS01LjAzIDAtMi40MS0xLjMzLTQuNS0zLjI4LTUuNjIuNDktLjY3Ljc4LTEuNDkuNzgtMi4zOCAwLTIuMjEtMS43OS00LTQtNHoiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==')}
+.pc.wB{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxnIGZpbGw9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJidXR0Ij48cGF0aCBkPSJNOSAzNmMzLjM5LS45NyAxMC4xMS40MyAxMy41LTIgMy4zOSAyLjQzIDEwLjExIDEuMDMgMTMuNSAyIDAgMCAxLjY1LjU0IDMgMi0uNjguOTctMS42NS45OS0zIC41LTMuMzktLjk3LTEwLjExLjQ2LTEzLjUtMS0zLjM5IDEuNDYtMTAuMTEuMDMtMTMuNSAxLTEuMzU0LjQ5LTIuMzIzLjQ3LTMtLjUgMS4zNTQtMS45NCAzLTIgMy0yeiIvPjxwYXRoIGQ9Ik0xNSAzMmMyLjUgMi41IDEyLjUgMi41IDE1IDAgLjUtMS41IDAtMiAwLTIgMC0yLjUtMi41LTQtMi41LTQgNS41LTEuNSA2LTExLjUtNS0xNS41LTExIDQtMTAuNSAxNC01IDE1LjUgMCAwLTIuNSAxLjUtMi41IDQgMCAwLS41LjUgMCAyeiIvPjxwYXRoIGQ9Ik0yNSA4YTIuNSAyLjUgMCAxIDEtNSAwIDIuNSAyLjUgMCAxIDEgNSAweiIvPjwvZz48cGF0aCBkPSJNMTcuNSAyNmgxME0xNSAzMGgxNW0tNy41LTE0LjV2NU0yMCAxOGg1IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIi8+PC9nPjwvc3ZnPg==')}
+.pc.wN{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMiAxMGMxMC41IDEgMTYuNSA4IDE2IDI5SDE1YzAtOSAxMC02LjUgOC0yMSIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0yNCAxOGMuMzggMi45MS01LjU1IDcuMzctOCA5LTMgMi0yLjgyIDQuMzQtNSA0LTEuMDQyLS45NCAxLjQxLTMuMDQgMC0zLTEgMCAuMTkgMS4yMy0xIDItMSAwLTQuMDAzIDEtNC00IDAtMiA2LTEyIDYtMTJzMS44OS0xLjkgMi0zLjVjLS43My0uOTk0LS41LTItLjUtMyAxLTEgMyAyLjUgMyAyLjVoMnMuNzgtMS45OTIgMi41LTNjMSAwIDEgMyAxIDMiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNOS41IDI1LjVhLjUuNSAwIDEgMS0xIDAgLjUuNSAwIDEgMSAxIDB6bTUuNDMzLTkuNzVhLjUgMS41IDMwIDEgMS0uODY2LS41LjUgMS41IDMwIDEgMSAuODY2LjV6IiBmaWxsPSIjMDAwIi8+PC9nPjwvc3ZnPg==')}
+.pc.wR{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik05IDM5aDI3di0zSDl2M3ptMy0zdi00aDIxdjRIMTJ6bS0xLTIyVjloNHYyaDVWOWg1djJoNVY5aDR2NSIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz48cGF0aCBkPSJNMzQgMTRsLTMgM0gxNGwtMy0zIi8+PHBhdGggZD0iTTMxIDE3djEyLjVIMTRWMTciIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIi8+PHBhdGggZD0iTTMxIDI5LjVsMS41IDIuNWgtMjBsMS41LTIuNSIvPjxwYXRoIGQ9Ik0xMSAxNGgyMyIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIvPjwvZz48L3N2Zz4=')}
+.pc.wQ{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0iI2ZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik04IDEyYTIgMiAwIDEgMS00IDAgMiAyIDAgMSAxIDQgMHptMTYuNS00LjVhMiAyIDAgMSAxLTQgMCAyIDIgMCAxIDEgNCAwek00MSAxMmEyIDIgMCAxIDEtNCAwIDIgMiAwIDEgMSA0IDB6TTE2IDguNWEyIDIgMCAxIDEtNCAwIDIgMiAwIDEgMSA0IDB6TTMzIDlhMiAyIDAgMSAxLTQgMCAyIDIgMCAxIDEgNCAweiIvPjxwYXRoIGQ9Ik05IDI2YzguNS0xLjUgMjEtMS41IDI3IDBsMi0xMi03IDExVjExbC01LjUgMTMuNS0zLTE1LTMgMTUtNS41LTE0VjI1TDcgMTRsMiAxMnoiIHN0cm9rZS1saW5lY2FwPSJidXR0Ii8+PHBhdGggZD0iTTkgMjZjMCAyIDEuNSAyIDIuNSA0IDEgMS41IDEgMSAuNSAzLjUtMS41IDEtMS41IDIuNS0xLjUgMi41LTEuNSAxLjUuNSAyLjUuNSAyLjUgNi41IDEgMTYuNSAxIDIzIDAgMCAwIDEuNS0xIDAtMi41IDAgMCAuNS0xLjUtMS0yLjUtLjUtMi41LS41LTIgLjUtMy41IDEtMiAyLjUtMiAyLjUtNC04LjUtMS41LTE4LjUtMS41LTI3IDB6IiBzdHJva2UtbGluZWNhcD0iYnV0dCIvPjxwYXRoIGQ9Ik0xMS41IDMwYzMuNS0xIDE4LjUtMSAyMiAwTTEyIDMzLjVjNi0xIDE1LTEgMjEgMCIgZmlsbD0ibm9uZSIvPjwvZz48L3N2Zz4=')}
+.pc.wK{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMi41IDExLjYzVjZNMjAgOGg1IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIi8+PHBhdGggZD0iTTIyLjUgMjVzNC41LTcuNSAzLTEwLjVjMCAwLTEtMi41LTMtMi41cy0zIDIuNS0zIDIuNWMtMS41IDMgMyAxMC41IDMgMTAuNSIgZmlsbD0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiLz48cGF0aCBkPSJNMTEuNSAzN2M1LjUgMy41IDE1LjUgMy41IDIxIDB2LTdzOS00LjUgNi0xMC41Yy00LTYuNS0xMy41LTMuNS0xNiA0VjI3di0zLjVjLTMuNS03LjUtMTMtMTAuNS0xNi00LTMgNiA1IDEwIDUgMTBWMzd6IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTExLjUgMzBjNS41LTMgMTUuNS0zIDIxIDBtLTIxIDMuNWM1LjUtMyAxNS41LTMgMjEgMG0tMjEgMy41YzUuNS0zIDE1LjUtMyAyMSAwIi8+PC9nPjwvc3ZnPg==')}
+.pc.bP{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PHBhdGggZD0iTTIyLjUgOWMtMi4yMSAwLTQgMS43OS00IDQgMCAuODkuMjkgMS43MS43OCAyLjM4QzE3LjMzIDE2LjUgMTYgMTguNTkgMTYgMjFjMCAyLjAzLjk0IDMuODQgMi40MSA1LjAzLTMgMS4wNi03LjQxIDUuNTUtNy40MSAxMy40N2gyM2MwLTcuOTItNC40MS0xMi40MS03LjQxLTEzLjQ3IDEuNDctMS4xOSAyLjQxLTMgMi40MS01LjAzIDAtMi40MS0xLjMzLTQuNS0zLjI4LTUuNjIuNDktLjY3Ljc4LTEuNDkuNzgtMi4zOCAwLTIuMjEtMS43OS00LTQtNHoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg==')}
+.pc.bB{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxnIGZpbGw9IiMwMDAiIHN0cm9rZS1saW5lY2FwPSJidXR0Ij48cGF0aCBkPSJNOSAzNmMzLjM5LS45NyAxMC4xMS40MyAxMy41LTIgMy4zOSAyLjQzIDEwLjExIDEuMDMgMTMuNSAyIDAgMCAxLjY1LjU0IDMgMi0uNjguOTctMS42NS45OS0zIC41LTMuMzktLjk3LTEwLjExLjQ2LTEzLjUtMS0zLjM5IDEuNDYtMTAuMTEuMDMtMTMuNSAxLTEuMzU0LjQ5LTIuMzIzLjQ3LTMtLjUgMS4zNTQtMS45NCAzLTIgMy0yeiIvPjxwYXRoIGQ9Ik0xNSAzMmMyLjUgMi41IDEyLjUgMi41IDE1IDAgLjUtMS41IDAtMiAwLTIgMC0yLjUtMi41LTQtMi41LTQgNS41LTEuNSA2LTExLjUtNS0xNS41LTExIDQtMTAuNSAxNC01IDE1LjUgMCAwLTIuNSAxLjUtMi41IDQgMCAwLS41LjUgMCAyeiIvPjxwYXRoIGQ9Ik0yNSA4YTIuNSAyLjUgMCAxIDEtNSAwIDIuNSAyLjUgMCAxIDEgNSAweiIvPjwvZz48cGF0aCBkPSJNMTcuNSAyNmgxME0xNSAzMGgxNW0tNy41LTE0LjV2NU0yMCAxOGg1IiBzdHJva2U9IiNlY2VjZWMiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiLz48L2c+PC9zdmc+')}
+.pc.bN{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMiAxMGMxMC41IDEgMTYuNSA4IDE2IDI5SDE1YzAtOSAxMC02LjUgOC0yMSIgZmlsbD0iIzAwMCIvPjxwYXRoIGQ9Ik0yNCAxOGMuMzggMi45MS01LjU1IDcuMzctOCA5LTMgMi0yLjgyIDQuMzQtNSA0LTEuMDQyLS45NCAxLjQxLTMuMDQgMC0zLTEgMCAuMTkgMS4yMy0xIDItMSAwLTQuMDAzIDEtNC00IDAtMiA2LTEyIDYtMTJzMS44OS0xLjkgMi0zLjVjLS43My0uOTk0LS41LTItLjUtMyAxLTEgMyAyLjUgMyAyLjVoMnMuNzgtMS45OTIgMi41LTNjMSAwIDEgMyAxIDMiIGZpbGw9IiMwMDAiLz48cGF0aCBkPSJNOS41IDI1LjVhLjUuNSAwIDEgMS0xIDAgLjUuNSAwIDEgMSAxIDB6bTUuNDMzLTkuNzVhLjUgMS41IDMwIDEgMS0uODY2LS41LjUgMS41IDMwIDEgMSAuODY2LjV6IiBmaWxsPSIjZWNlY2VjIiBzdHJva2U9IiNlY2VjZWMiLz48cGF0aCBkPSJNMjQuNTUgMTAuNGwtLjQ1IDEuNDUuNS4xNWMzLjE1IDEgNS42NSAyLjQ5IDcuOSA2Ljc1UzM1Ljc1IDI5LjA2IDM1LjI1IDM5bC0uMDUuNWgyLjI1bC4wNS0uNWMuNS0xMC4wNi0uODgtMTYuODUtMy4yNS0yMS4zNC0yLjM3LTQuNDktNS43OS02LjY0LTkuMTktNy4xNmwtLjUxLS4xeiIgZmlsbD0iI2VjZWNlYyIgc3Ryb2tlPSJub25lIi8+PC9nPjwvc3ZnPg==')}
+.pc.bR{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik05IDM5aDI3di0zSDl2M3ptMy41LTdsMS41LTIuNWgxN2wxLjUgMi41aC0yMHptLS41IDR2LTRoMjF2NEgxMnoiIHN0cm9rZS1saW5lY2FwPSJidXR0Ii8+PHBhdGggZD0iTTE0IDI5LjV2LTEzaDE3djEzSDE0eiIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiLz48cGF0aCBkPSJNMTQgMTYuNUwxMSAxNGgyM2wtMyAyLjVIMTR6TTExIDE0VjloNHYyaDVWOWg1djJoNVY5aDR2NUgxMXoiIHN0cm9rZS1saW5lY2FwPSJidXR0Ii8+PHBhdGggZD0iTTEyIDM1LjVoMjFtLTIwLTRoMTltLTE4LTJoMTdtLTE3LTEzaDE3TTExIDE0aDIzIiBmaWxsPSJub25lIiBzdHJva2U9IiNlY2VjZWMiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIvPjwvZz48L3N2Zz4=')}
+.pc.bQ{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxnIHN0cm9rZT0ibm9uZSI+PGNpcmNsZSBjeD0iNiIgY3k9IjEyIiByPSIyLjc1Ii8+PGNpcmNsZSBjeD0iMTQiIGN5PSI5IiByPSIyLjc1Ii8+PGNpcmNsZSBjeD0iMjIuNSIgY3k9IjgiIHI9IjIuNzUiLz48Y2lyY2xlIGN4PSIzMSIgY3k9IjkiIHI9IjIuNzUiLz48Y2lyY2xlIGN4PSIzOSIgY3k9IjEyIiByPSIyLjc1Ii8+PC9nPjxwYXRoIGQ9Ik05IDI2YzguNS0xLjUgMjEtMS41IDI3IDBsMi41LTEyLjVMMzEgMjVsLS4zLTE0LjEtNS4yIDEzLjYtMy0xNC41LTMgMTQuNS01LjItMTMuNkwxNCAyNSA2LjUgMTMuNSA5IDI2eiIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz48cGF0aCBkPSJNOSAyNmMwIDIgMS41IDIgMi41IDQgMSAxLjUgMSAxIC41IDMuNS0xLjUgMS0xLjUgMi41LTEuNSAyLjUtMS41IDEuNS41IDIuNS41IDIuNSA2LjUgMSAxNi41IDEgMjMgMCAwIDAgMS41LTEgMC0yLjUgMCAwIC41LTEuNS0xLTIuNS0uNS0yLjUtLjUtMiAuNS0zLjUgMS0yIDIuNS0yIDIuNS00LTguNS0xLjUtMTguNS0xLjUtMjcgMHoiIHN0cm9rZS1saW5lY2FwPSJidXR0Ii8+PHBhdGggZD0iTTExIDM4LjVhMzUgMzUgMSAwIDAgMjMgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiLz48cGF0aCBkPSJNMTEgMjlhMzUgMzUgMSAwIDEgMjMgMG0tMjEuNSAyLjVoMjBtLTIxIDNhMzUgMzUgMSAwIDAgMjIgMG0tMjMgM2EzNSAzNSAxIDAgMCAyNCAwIiBmaWxsPSJub25lIiBzdHJva2U9IiNlY2VjZWMiLz48L2c+PC9zdmc+')}
+.pc.bK{background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NSIgaGVpZ2h0PSI0NSI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMi41IDExLjYzVjYiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiLz48cGF0aCBkPSJNMjIuNSAyNXM0LjUtNy41IDMtMTAuNWMwIDAtMS0yLjUtMy0yLjVzLTMgMi41LTMgMi41Yy0xLjUgMyAzIDEwLjUgMyAxMC41IiBmaWxsPSIjMDAwIiBzdHJva2UtbGluZWNhcD0iYnV0dCIgc3Ryb2tlLWxpbmVqb2luPSJtaXRlciIvPjxwYXRoIGQ9Ik0xMS41IDM3YzUuNSAzLjUgMTUuNSAzLjUgMjEgMHYtN3M5LTQuNSA2LTEwLjVjLTQtNi41LTEzLjUtMy41LTE2IDRWMjd2LTMuNWMtMy41LTcuNS0xMy0xMC41LTE2LTQtMyA2IDUgMTAgNSAxMFYzN3oiIGZpbGw9IiMwMDAiLz48cGF0aCBkPSJNMjAgOGg1IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIi8+PHBhdGggZD0iTTMyIDI5LjVzOC41LTQgNi4wMy05LjY1QzM0LjE1IDE0IDI1IDE4IDIyLjUgMjQuNWwuMDEgMi4xLS4wMS0yLjFDMjAgMTggOS45MDYgMTQgNi45OTcgMTkuODVjLTIuNDk3IDUuNjUgNC44NTMgOSA0Ljg1MyA5IiBzdHJva2U9IiNlY2VjZWMiLz48cGF0aCBkPSJNMTEuNSAzMGM1LjUtMyAxNS41LTMgMjEgMG0tMjEgMy41YzUuNS0zIDE1LjUtMyAyMSAwbS0yMSAzLjVjNS41LTMgMTUuNS0zIDIxIDAiIHN0cm9rZT0iI2VjZWNlYyIvPjwvZz48L3N2Zz4=')}
+</style>
+</head>
+<body>
+<div class="top">
+  <a class="lib" href="../../../../#ttc_101326-white-1e4" title="Back to the repertoire">&larr; Overview</a>
+  <span class="t">1.e4 e5 — TTC_101326 · White</span>
+  <button id="fminus" title="Smaller text">A−</button>
+  <button id="fplus" title="Larger text">A+</button>
+  <button id="dark" title="Dark mode">Dark</button>
+  <button id="bTog" class="tog" title="Show or hide the board">Hide board</button>
+</div>
+<div class="wrap">
+  <nav class="toc">
+    <div class="h">Games <span id="tocn"></span></div>
+    <div id="toc"></div>
+  </nav>
+  <main>
+    <div class="kicker">TTC_101326 · White · 1.e4</div>
+    <h1>1.e4 e5</h1>
+    <div class="dek">Mostly Italian Game (50), Ruy Lopez (41), Four Knights Game (19)</div>
+    <div class="stats" id="stats"></div>
+    <a class="tree" id="treeLink" href="../../trees/e4-e5/"><img id="treeImg" src="../../trees/e4-e5/preview.jpg" alt="Opening tree for 1.e4 e5"><span id="treeCap">Open the zoomable tree &rarr;</span></a>
+    <div class="stats" id="treeNote"></div>
+
+    <div class="chips" id="chips"></div>
+    <div class="tools">
+      <input id="q" type="search" placeholder="Search player, opening, ECO…" aria-label="Search games">
+      <select id="sort" aria-label="Sort games">
+        <option value="new">Newest first</option>
+        <option value="old">Oldest first</option>
+        <option value="elo">Highest rated first</option>
+        <option value="long">Longest games first</option>
+      </select>
+    </div>
+    <p class="stats">Click any move to see the position on the board. Use ← → to step through a game, Home / End to jump, [ and ] for the previous or next game, F to flip the board.</p>
+    <div id="games"></div>
+    <button class="more" id="more" hidden>Show more games</button>
+  </main>
+  <aside class="bp">
+    <div class="bhead"><span id="who"></span><b id="cur"></b></div>
+    <div id="live"></div>
+    <div class="ctrls">
+      <button id="bStart" title="Start (Home)">⏮</button>
+      <button id="bPrev" title="Back (←)">◀</button>
+      <button id="bNext" title="Forward (→)">▶</button>
+      <button id="bEnd" title="End of game (End)">⏭</button>
+      <button id="bFlip" title="Flip board (F)">⇅</button>
+    </div>
+    <div class="gnav"><button id="gPrev" title="Previous game ([)">◀ game</button><button id="gNext" title="Next game (])">game ▶</button></div>
+    <div class="msg" id="msg"></div>
+  </aside>
+</div>
+<script>/*
+ * Copyright (c) 2020, Jeff Hlywa (jhlywa@gmail.com)
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ *
+ *----------------------------------------------------------------------------*/
+
+/* minified license below  */
+
+/* @license
+ * Copyright (c) 2018, Jeff Hlywa (jhlywa@gmail.com)
+ * Released under the BSD license
+ * https://github.com/jhlywa/chess.js/blob/master/LICENSE
+ */
+
+var Chess = function(fen) {
+  var BLACK = 'b'
+  var WHITE = 'w'
+
+  var EMPTY = -1
+
+  var PAWN = 'p'
+  var KNIGHT = 'n'
+  var BISHOP = 'b'
+  var ROOK = 'r'
+  var QUEEN = 'q'
+  var KING = 'k'
+
+  var SYMBOLS = 'pnbrqkPNBRQK'
+
+  var DEFAULT_POSITION =
+    'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+
+  var POSSIBLE_RESULTS = ['1-0', '0-1', '1/2-1/2', '*']
+
+  var PAWN_OFFSETS = {
+    b: [16, 32, 17, 15],
+    w: [-16, -32, -17, -15]
+  }
+
+  var PIECE_OFFSETS = {
+    n: [-18, -33, -31, -14, 18, 33, 31, 14],
+    b: [-17, -15, 17, 15],
+    r: [-16, 1, 16, -1],
+    q: [-17, -16, -15, 1, 17, 16, 15, -1],
+    k: [-17, -16, -15, 1, 17, 16, 15, -1]
+  }
+
+  // prettier-ignore
+  var ATTACKS = [
+    20, 0, 0, 0, 0, 0, 0, 24,  0, 0, 0, 0, 0, 0,20, 0,
+     0,20, 0, 0, 0, 0, 0, 24,  0, 0, 0, 0, 0,20, 0, 0,
+     0, 0,20, 0, 0, 0, 0, 24,  0, 0, 0, 0,20, 0, 0, 0,
+     0, 0, 0,20, 0, 0, 0, 24,  0, 0, 0,20, 0, 0, 0, 0,
+     0, 0, 0, 0,20, 0, 0, 24,  0, 0,20, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,20, 2, 24,  2,20, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 2,53, 56, 53, 2, 0, 0, 0, 0, 0, 0,
+    24,24,24,24,24,24,56,  0, 56,24,24,24,24,24,24, 0,
+     0, 0, 0, 0, 0, 2,53, 56, 53, 2, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,20, 2, 24,  2,20, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0,20, 0, 0, 24,  0, 0,20, 0, 0, 0, 0, 0,
+     0, 0, 0,20, 0, 0, 0, 24,  0, 0, 0,20, 0, 0, 0, 0,
+     0, 0,20, 0, 0, 0, 0, 24,  0, 0, 0, 0,20, 0, 0, 0,
+     0,20, 0, 0, 0, 0, 0, 24,  0, 0, 0, 0, 0,20, 0, 0,
+    20, 0, 0, 0, 0, 0, 0, 24,  0, 0, 0, 0, 0, 0,20
+  ];
+
+  // prettier-ignore
+  var RAYS = [
+     17,  0,  0,  0,  0,  0,  0, 16,  0,  0,  0,  0,  0,  0, 15, 0,
+      0, 17,  0,  0,  0,  0,  0, 16,  0,  0,  0,  0,  0, 15,  0, 0,
+      0,  0, 17,  0,  0,  0,  0, 16,  0,  0,  0,  0, 15,  0,  0, 0,
+      0,  0,  0, 17,  0,  0,  0, 16,  0,  0,  0, 15,  0,  0,  0, 0,
+      0,  0,  0,  0, 17,  0,  0, 16,  0,  0, 15,  0,  0,  0,  0, 0,
+      0,  0,  0,  0,  0, 17,  0, 16,  0, 15,  0,  0,  0,  0,  0, 0,
+      0,  0,  0,  0,  0,  0, 17, 16, 15,  0,  0,  0,  0,  0,  0, 0,
+      1,  1,  1,  1,  1,  1,  1,  0, -1, -1,  -1,-1, -1, -1, -1, 0,
+      0,  0,  0,  0,  0,  0,-15,-16,-17,  0,  0,  0,  0,  0,  0, 0,
+      0,  0,  0,  0,  0,-15,  0,-16,  0,-17,  0,  0,  0,  0,  0, 0,
+      0,  0,  0,  0,-15,  0,  0,-16,  0,  0,-17,  0,  0,  0,  0, 0,
+      0,  0,  0,-15,  0,  0,  0,-16,  0,  0,  0,-17,  0,  0,  0, 0,
+      0,  0,-15,  0,  0,  0,  0,-16,  0,  0,  0,  0,-17,  0,  0, 0,
+      0,-15,  0,  0,  0,  0,  0,-16,  0,  0,  0,  0,  0,-17,  0, 0,
+    -15,  0,  0,  0,  0,  0,  0,-16,  0,  0,  0,  0,  0,  0,-17
+  ];
+
+  var SHIFTS = { p: 0, n: 1, b: 2, r: 3, q: 4, k: 5 }
+
+  var FLAGS = {
+    NORMAL: 'n',
+    CAPTURE: 'c',
+    BIG_PAWN: 'b',
+    EP_CAPTURE: 'e',
+    PROMOTION: 'p',
+    KSIDE_CASTLE: 'k',
+    QSIDE_CASTLE: 'q'
+  }
+
+  var BITS = {
+    NORMAL: 1,
+    CAPTURE: 2,
+    BIG_PAWN: 4,
+    EP_CAPTURE: 8,
+    PROMOTION: 16,
+    KSIDE_CASTLE: 32,
+    QSIDE_CASTLE: 64
+  }
+
+  var RANK_1 = 7
+  var RANK_2 = 6
+  var RANK_3 = 5
+  var RANK_4 = 4
+  var RANK_5 = 3
+  var RANK_6 = 2
+  var RANK_7 = 1
+  var RANK_8 = 0
+
+  // prettier-ignore
+  var SQUARES = {
+    a8:   0, b8:   1, c8:   2, d8:   3, e8:   4, f8:   5, g8:   6, h8:   7,
+    a7:  16, b7:  17, c7:  18, d7:  19, e7:  20, f7:  21, g7:  22, h7:  23,
+    a6:  32, b6:  33, c6:  34, d6:  35, e6:  36, f6:  37, g6:  38, h6:  39,
+    a5:  48, b5:  49, c5:  50, d5:  51, e5:  52, f5:  53, g5:  54, h5:  55,
+    a4:  64, b4:  65, c4:  66, d4:  67, e4:  68, f4:  69, g4:  70, h4:  71,
+    a3:  80, b3:  81, c3:  82, d3:  83, e3:  84, f3:  85, g3:  86, h3:  87,
+    a2:  96, b2:  97, c2:  98, d2:  99, e2: 100, f2: 101, g2: 102, h2: 103,
+    a1: 112, b1: 113, c1: 114, d1: 115, e1: 116, f1: 117, g1: 118, h1: 119
+  };
+
+  var ROOKS = {
+    w: [
+      { square: SQUARES.a1, flag: BITS.QSIDE_CASTLE },
+      { square: SQUARES.h1, flag: BITS.KSIDE_CASTLE }
+    ],
+    b: [
+      { square: SQUARES.a8, flag: BITS.QSIDE_CASTLE },
+      { square: SQUARES.h8, flag: BITS.KSIDE_CASTLE }
+    ]
+  }
+
+  var board = new Array(128)
+  var kings = { w: EMPTY, b: EMPTY }
+  var turn = WHITE
+  var castling = { w: 0, b: 0 }
+  var ep_square = EMPTY
+  var half_moves = 0
+  var move_number = 1
+  var history = []
+  var header = {}
+
+  /* if the user passes in a fen string, load it, else default to
+   * starting position
+   */
+  if (typeof fen === 'undefined') {
+    load(DEFAULT_POSITION)
+  } else {
+    load(fen)
+  }
+
+  function clear(keep_headers) {
+    if (typeof keep_headers === 'undefined') {
+      keep_headers = false
+    }
+
+    board = new Array(128)
+    kings = { w: EMPTY, b: EMPTY }
+    turn = WHITE
+    castling = { w: 0, b: 0 }
+    ep_square = EMPTY
+    half_moves = 0
+    move_number = 1
+    history = []
+    if (!keep_headers) header = {}
+    update_setup(generate_fen())
+  }
+
+  function reset() {
+    load(DEFAULT_POSITION)
+  }
+
+  function load(fen, keep_headers) {
+    if (typeof keep_headers === 'undefined') {
+      keep_headers = false
+    }
+
+    var tokens = fen.split(/\s+/)
+    var position = tokens[0]
+    var square = 0
+
+    if (!validate_fen(fen).valid) {
+      return false
+    }
+
+    clear(keep_headers)
+
+    for (var i = 0; i < position.length; i++) {
+      var piece = position.charAt(i)
+
+      if (piece === '/') {
+        square += 8
+      } else if (is_digit(piece)) {
+        square += parseInt(piece, 10)
+      } else {
+        var color = piece < 'a' ? WHITE : BLACK
+        put({ type: piece.toLowerCase(), color: color }, algebraic(square))
+        square++
+      }
+    }
+
+    turn = tokens[1]
+
+    if (tokens[2].indexOf('K') > -1) {
+      castling.w |= BITS.KSIDE_CASTLE
+    }
+    if (tokens[2].indexOf('Q') > -1) {
+      castling.w |= BITS.QSIDE_CASTLE
+    }
+    if (tokens[2].indexOf('k') > -1) {
+      castling.b |= BITS.KSIDE_CASTLE
+    }
+    if (tokens[2].indexOf('q') > -1) {
+      castling.b |= BITS.QSIDE_CASTLE
+    }
+
+    ep_square = tokens[3] === '-' ? EMPTY : SQUARES[tokens[3]]
+    half_moves = parseInt(tokens[4], 10)
+    move_number = parseInt(tokens[5], 10)
+
+    update_setup(generate_fen())
+
+    return true
+  }
+
+  /* TODO: this function is pretty much crap - it validates structure but
+   * completely ignores content (e.g. doesn't verify that each side has a king)
+   * ... we should rewrite this, and ditch the silly error_number field while
+   * we're at it
+   */
+  function validate_fen(fen) {
+    var errors = {
+      0: 'No errors.',
+      1: 'FEN string must contain six space-delimited fields.',
+      2: '6th field (move number) must be a positive integer.',
+      3: '5th field (half move counter) must be a non-negative integer.',
+      4: '4th field (en-passant square) is invalid.',
+      5: '3rd field (castling availability) is invalid.',
+      6: '2nd field (side to move) is invalid.',
+      7: "1st field (piece positions) does not contain 8 '/'-delimited rows.",
+      8: '1st field (piece positions) is invalid [consecutive numbers].',
+      9: '1st field (piece positions) is invalid [invalid piece].',
+      10: '1st field (piece positions) is invalid [row too large].',
+      11: 'Illegal en-passant square'
+    }
+
+    /* 1st criterion: 6 space-seperated fields? */
+    var tokens = fen.split(/\s+/)
+    if (tokens.length !== 6) {
+      return { valid: false, error_number: 1, error: errors[1] }
+    }
+
+    /* 2nd criterion: move number field is a integer value > 0? */
+    if (isNaN(tokens[5]) || parseInt(tokens[5], 10) <= 0) {
+      return { valid: false, error_number: 2, error: errors[2] }
+    }
+
+    /* 3rd criterion: half move counter is an integer >= 0? */
+    if (isNaN(tokens[4]) || parseInt(tokens[4], 10) < 0) {
+      return { valid: false, error_number: 3, error: errors[3] }
+    }
+
+    /* 4th criterion: 4th field is a valid e.p.-string? */
+    if (!/^(-|[abcdefgh][36])$/.test(tokens[3])) {
+      return { valid: false, error_number: 4, error: errors[4] }
+    }
+
+    /* 5th criterion: 3th field is a valid castle-string? */
+    if (!/^(KQ?k?q?|Qk?q?|kq?|q|-)$/.test(tokens[2])) {
+      return { valid: false, error_number: 5, error: errors[5] }
+    }
+
+    /* 6th criterion: 2nd field is "w" (white) or "b" (black)? */
+    if (!/^(w|b)$/.test(tokens[1])) {
+      return { valid: false, error_number: 6, error: errors[6] }
+    }
+
+    /* 7th criterion: 1st field contains 8 rows? */
+    var rows = tokens[0].split('/')
+    if (rows.length !== 8) {
+      return { valid: false, error_number: 7, error: errors[7] }
+    }
+
+    /* 8th criterion: every row is valid? */
+    for (var i = 0; i < rows.length; i++) {
+      /* check for right sum of fields AND not two numbers in succession */
+      var sum_fields = 0
+      var previous_was_number = false
+
+      for (var k = 0; k < rows[i].length; k++) {
+        if (!isNaN(rows[i][k])) {
+          if (previous_was_number) {
+            return { valid: false, error_number: 8, error: errors[8] }
+          }
+          sum_fields += parseInt(rows[i][k], 10)
+          previous_was_number = true
+        } else {
+          if (!/^[prnbqkPRNBQK]$/.test(rows[i][k])) {
+            return { valid: false, error_number: 9, error: errors[9] }
+          }
+          sum_fields += 1
+          previous_was_number = false
+        }
+      }
+      if (sum_fields !== 8) {
+        return { valid: false, error_number: 10, error: errors[10] }
+      }
+    }
+
+    if (
+      (tokens[3][1] == '3' && tokens[1] == 'w') ||
+      (tokens[3][1] == '6' && tokens[1] == 'b')
+    ) {
+      return { valid: false, error_number: 11, error: errors[11] }
+    }
+
+    /* everything's okay! */
+    return { valid: true, error_number: 0, error: errors[0] }
+  }
+
+  function generate_fen() {
+    var empty = 0
+    var fen = ''
+
+    for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
+      if (board[i] == null) {
+        empty++
+      } else {
+        if (empty > 0) {
+          fen += empty
+          empty = 0
+        }
+        var color = board[i].color
+        var piece = board[i].type
+
+        fen += color === WHITE ? piece.toUpperCase() : piece.toLowerCase()
+      }
+
+      if ((i + 1) & 0x88) {
+        if (empty > 0) {
+          fen += empty
+        }
+
+        if (i !== SQUARES.h1) {
+          fen += '/'
+        }
+
+        empty = 0
+        i += 8
+      }
+    }
+
+    var cflags = ''
+    if (castling[WHITE] & BITS.KSIDE_CASTLE) {
+      cflags += 'K'
+    }
+    if (castling[WHITE] & BITS.QSIDE_CASTLE) {
+      cflags += 'Q'
+    }
+    if (castling[BLACK] & BITS.KSIDE_CASTLE) {
+      cflags += 'k'
+    }
+    if (castling[BLACK] & BITS.QSIDE_CASTLE) {
+      cflags += 'q'
+    }
+
+    /* do we have an empty castling flag? */
+    cflags = cflags || '-'
+    var epflags = ep_square === EMPTY ? '-' : algebraic(ep_square)
+
+    return [fen, turn, cflags, epflags, half_moves, move_number].join(' ')
+  }
+
+  function set_header(args) {
+    for (var i = 0; i < args.length; i += 2) {
+      if (typeof args[i] === 'string' && typeof args[i + 1] === 'string') {
+        header[args[i]] = args[i + 1]
+      }
+    }
+    return header
+  }
+
+  /* called when the initial board setup is changed with put() or remove().
+   * modifies the SetUp and FEN properties of the header object.  if the FEN is
+   * equal to the default position, the SetUp and FEN are deleted
+   * the setup is only updated if history.length is zero, ie moves haven't been
+   * made.
+   */
+  function update_setup(fen) {
+    if (history.length > 0) return
+
+    if (fen !== DEFAULT_POSITION) {
+      header['SetUp'] = '1'
+      header['FEN'] = fen
+    } else {
+      delete header['SetUp']
+      delete header['FEN']
+    }
+  }
+
+  function get(square) {
+    var piece = board[SQUARES[square]]
+    return piece ? { type: piece.type, color: piece.color } : null
+  }
+
+  function put(piece, square) {
+    /* check for valid piece object */
+    if (!('type' in piece && 'color' in piece)) {
+      return false
+    }
+
+    /* check for piece */
+    if (SYMBOLS.indexOf(piece.type.toLowerCase()) === -1) {
+      return false
+    }
+
+    /* check for valid square */
+    if (!(square in SQUARES)) {
+      return false
+    }
+
+    var sq = SQUARES[square]
+
+    /* don't let the user place more than one king */
+    if (
+      piece.type == KING &&
+      !(kings[piece.color] == EMPTY || kings[piece.color] == sq)
+    ) {
+      return false
+    }
+
+    board[sq] = { type: piece.type, color: piece.color }
+    if (piece.type === KING) {
+      kings[piece.color] = sq
+    }
+
+    update_setup(generate_fen())
+
+    return true
+  }
+
+  function remove(square) {
+    var piece = get(square)
+    board[SQUARES[square]] = null
+    if (piece && piece.type === KING) {
+      kings[piece.color] = EMPTY
+    }
+
+    update_setup(generate_fen())
+
+    return piece
+  }
+
+  function build_move(board, from, to, flags, promotion) {
+    var move = {
+      color: turn,
+      from: from,
+      to: to,
+      flags: flags,
+      piece: board[from].type
+    }
+
+    if (promotion) {
+      move.flags |= BITS.PROMOTION
+      move.promotion = promotion
+    }
+
+    if (board[to]) {
+      move.captured = board[to].type
+    } else if (flags & BITS.EP_CAPTURE) {
+      move.captured = PAWN
+    }
+    return move
+  }
+
+  function generate_moves(options) {
+    function add_move(board, moves, from, to, flags) {
+      /* if pawn promotion */
+      if (
+        board[from].type === PAWN &&
+        (rank(to) === RANK_8 || rank(to) === RANK_1)
+      ) {
+        var pieces = [QUEEN, ROOK, BISHOP, KNIGHT]
+        for (var i = 0, len = pieces.length; i < len; i++) {
+          moves.push(build_move(board, from, to, flags, pieces[i]))
+        }
+      } else {
+        moves.push(build_move(board, from, to, flags))
+      }
+    }
+
+    var moves = []
+    var us = turn
+    var them = swap_color(us)
+    var second_rank = { b: RANK_7, w: RANK_2 }
+
+    var first_sq = SQUARES.a8
+    var last_sq = SQUARES.h1
+    var single_square = false
+
+    /* do we want legal moves? */
+    var legal =
+      typeof options !== 'undefined' && 'legal' in options
+        ? options.legal
+        : true
+
+    /* are we generating moves for a single square? */
+    if (typeof options !== 'undefined' && 'square' in options) {
+      if (options.square in SQUARES) {
+        first_sq = last_sq = SQUARES[options.square]
+        single_square = true
+      } else {
+        /* invalid square */
+        return []
+      }
+    }
+
+    for (var i = first_sq; i <= last_sq; i++) {
+      /* did we run off the end of the board */
+      if (i & 0x88) {
+        i += 7
+        continue
+      }
+
+      var piece = board[i]
+      if (piece == null || piece.color !== us) {
+        continue
+      }
+
+      if (piece.type === PAWN) {
+        /* single square, non-capturing */
+        var square = i + PAWN_OFFSETS[us][0]
+        if (board[square] == null) {
+          add_move(board, moves, i, square, BITS.NORMAL)
+
+          /* double square */
+          var square = i + PAWN_OFFSETS[us][1]
+          if (second_rank[us] === rank(i) && board[square] == null) {
+            add_move(board, moves, i, square, BITS.BIG_PAWN)
+          }
+        }
+
+        /* pawn captures */
+        for (j = 2; j < 4; j++) {
+          var square = i + PAWN_OFFSETS[us][j]
+          if (square & 0x88) continue
+
+          if (board[square] != null && board[square].color === them) {
+            add_move(board, moves, i, square, BITS.CAPTURE)
+          } else if (square === ep_square) {
+            add_move(board, moves, i, ep_square, BITS.EP_CAPTURE)
+          }
+        }
+      } else {
+        for (var j = 0, len = PIECE_OFFSETS[piece.type].length; j < len; j++) {
+          var offset = PIECE_OFFSETS[piece.type][j]
+          var square = i
+
+          while (true) {
+            square += offset
+            if (square & 0x88) break
+
+            if (board[square] == null) {
+              add_move(board, moves, i, square, BITS.NORMAL)
+            } else {
+              if (board[square].color === us) break
+              add_move(board, moves, i, square, BITS.CAPTURE)
+              break
+            }
+
+            /* break, if knight or king */
+            if (piece.type === 'n' || piece.type === 'k') break
+          }
+        }
+      }
+    }
+
+    /* check for castling if: a) we're generating all moves, or b) we're doing
+     * single square move generation on the king's square
+     */
+    if (!single_square || last_sq === kings[us]) {
+      /* king-side castling */
+      if (castling[us] & BITS.KSIDE_CASTLE) {
+        var castling_from = kings[us]
+        var castling_to = castling_from + 2
+
+        if (
+          board[castling_from + 1] == null &&
+          board[castling_to] == null &&
+          !attacked(them, kings[us]) &&
+          !attacked(them, castling_from + 1) &&
+          !attacked(them, castling_to)
+        ) {
+          add_move(board, moves, kings[us], castling_to, BITS.KSIDE_CASTLE)
+        }
+      }
+
+      /* queen-side castling */
+      if (castling[us] & BITS.QSIDE_CASTLE) {
+        var castling_from = kings[us]
+        var castling_to = castling_from - 2
+
+        if (
+          board[castling_from - 1] == null &&
+          board[castling_from - 2] == null &&
+          board[castling_from - 3] == null &&
+          !attacked(them, kings[us]) &&
+          !attacked(them, castling_from - 1) &&
+          !attacked(them, castling_to)
+        ) {
+          add_move(board, moves, kings[us], castling_to, BITS.QSIDE_CASTLE)
+        }
+      }
+    }
+
+    /* return all pseudo-legal moves (this includes moves that allow the king
+     * to be captured)
+     */
+    if (!legal) {
+      return moves
+    }
+
+    /* filter out illegal moves */
+    var legal_moves = []
+    for (var i = 0, len = moves.length; i < len; i++) {
+      make_move(moves[i])
+      if (!king_attacked(us)) {
+        legal_moves.push(moves[i])
+      }
+      undo_move()
+    }
+
+    return legal_moves
+  }
+
+  /* convert a move from 0x88 coordinates to Standard Algebraic Notation
+   * (SAN)
+   *
+   * @param {boolean} sloppy Use the sloppy SAN generator to work around over
+   * disambiguation bugs in Fritz and Chessbase.  See below:
+   *
+   * r1bqkbnr/ppp2ppp/2n5/1B1pP3/4P3/8/PPPP2PP/RNBQK1NR b KQkq - 2 4
+   * 4. ... Nge7 is overly disambiguated because the knight on c6 is pinned
+   * 4. ... Ne7 is technically the valid SAN
+   */
+  function move_to_san(move, sloppy) {
+    var output = ''
+
+    if (move.flags & BITS.KSIDE_CASTLE) {
+      output = 'O-O'
+    } else if (move.flags & BITS.QSIDE_CASTLE) {
+      output = 'O-O-O'
+    } else {
+      var disambiguator = get_disambiguator(move, sloppy)
+
+      if (move.piece !== PAWN) {
+        output += move.piece.toUpperCase() + disambiguator
+      }
+
+      if (move.flags & (BITS.CAPTURE | BITS.EP_CAPTURE)) {
+        if (move.piece === PAWN) {
+          output += algebraic(move.from)[0]
+        }
+        output += 'x'
+      }
+
+      output += algebraic(move.to)
+
+      if (move.flags & BITS.PROMOTION) {
+        output += '=' + move.promotion.toUpperCase()
+      }
+    }
+
+    make_move(move)
+    if (in_check()) {
+      if (in_checkmate()) {
+        output += '#'
+      } else {
+        output += '+'
+      }
+    }
+    undo_move()
+
+    return output
+  }
+
+  // parses all of the decorators out of a SAN string
+  function stripped_san(move) {
+    return move.replace(/=/, '').replace(/[+#]?[?!]*$/, '')
+  }
+
+  function attacked(color, square) {
+    for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
+      /* did we run off the end of the board */
+      if (i & 0x88) {
+        i += 7
+        continue
+      }
+
+      /* if empty square or wrong color */
+      if (board[i] == null || board[i].color !== color) continue
+
+      var piece = board[i]
+      var difference = i - square
+      var index = difference + 119
+
+      if (ATTACKS[index] & (1 << SHIFTS[piece.type])) {
+        if (piece.type === PAWN) {
+          if (difference > 0) {
+            if (piece.color === WHITE) return true
+          } else {
+            if (piece.color === BLACK) return true
+          }
+          continue
+        }
+
+        /* if the piece is a knight or a king */
+        if (piece.type === 'n' || piece.type === 'k') return true
+
+        var offset = RAYS[index]
+        var j = i + offset
+
+        var blocked = false
+        while (j !== square) {
+          if (board[j] != null) {
+            blocked = true
+            break
+          }
+          j += offset
+        }
+
+        if (!blocked) return true
+      }
+    }
+
+    return false
+  }
+
+  function king_attacked(color) {
+    return attacked(swap_color(color), kings[color])
+  }
+
+  function in_check() {
+    return king_attacked(turn)
+  }
+
+  function in_checkmate() {
+    return in_check() && generate_moves().length === 0
+  }
+
+  function in_stalemate() {
+    return !in_check() && generate_moves().length === 0
+  }
+
+  function insufficient_material() {
+    var pieces = {}
+    var bishops = []
+    var num_pieces = 0
+    var sq_color = 0
+
+    for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
+      sq_color = (sq_color + 1) % 2
+      if (i & 0x88) {
+        i += 7
+        continue
+      }
+
+      var piece = board[i]
+      if (piece) {
+        pieces[piece.type] = piece.type in pieces ? pieces[piece.type] + 1 : 1
+        if (piece.type === BISHOP) {
+          bishops.push(sq_color)
+        }
+        num_pieces++
+      }
+    }
+
+    /* k vs. k */
+    if (num_pieces === 2) {
+      return true
+    } else if (
+      /* k vs. kn .... or .... k vs. kb */
+      num_pieces === 3 &&
+      (pieces[BISHOP] === 1 || pieces[KNIGHT] === 1)
+    ) {
+      return true
+    } else if (num_pieces === pieces[BISHOP] + 2) {
+      /* kb vs. kb where any number of bishops are all on the same color */
+      var sum = 0
+      var len = bishops.length
+      for (var i = 0; i < len; i++) {
+        sum += bishops[i]
+      }
+      if (sum === 0 || sum === len) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  function in_threefold_repetition() {
+    /* TODO: while this function is fine for casual use, a better
+     * implementation would use a Zobrist key (instead of FEN). the
+     * Zobrist key would be maintained in the make_move/undo_move functions,
+     * avoiding the costly that we do below.
+     */
+    var moves = []
+    var positions = {}
+    var repetition = false
+
+    while (true) {
+      var move = undo_move()
+      if (!move) break
+      moves.push(move)
+    }
+
+    while (true) {
+      /* remove the last two fields in the FEN string, they're not needed
+       * when checking for draw by rep */
+      var fen = generate_fen()
+        .split(' ')
+        .slice(0, 4)
+        .join(' ')
+
+      /* has the position occurred three or move times */
+      positions[fen] = fen in positions ? positions[fen] + 1 : 1
+      if (positions[fen] >= 3) {
+        repetition = true
+      }
+
+      if (!moves.length) {
+        break
+      }
+      make_move(moves.pop())
+    }
+
+    return repetition
+  }
+
+  function push(move) {
+    history.push({
+      move: move,
+      kings: { b: kings.b, w: kings.w },
+      turn: turn,
+      castling: { b: castling.b, w: castling.w },
+      ep_square: ep_square,
+      half_moves: half_moves,
+      move_number: move_number
+    })
+  }
+
+  function make_move(move) {
+    var us = turn
+    var them = swap_color(us)
+    push(move)
+
+    board[move.to] = board[move.from]
+    board[move.from] = null
+
+    /* if ep capture, remove the captured pawn */
+    if (move.flags & BITS.EP_CAPTURE) {
+      if (turn === BLACK) {
+        board[move.to - 16] = null
+      } else {
+        board[move.to + 16] = null
+      }
+    }
+
+    /* if pawn promotion, replace with new piece */
+    if (move.flags & BITS.PROMOTION) {
+      board[move.to] = { type: move.promotion, color: us }
+    }
+
+    /* if we moved the king */
+    if (board[move.to].type === KING) {
+      kings[board[move.to].color] = move.to
+
+      /* if we castled, move the rook next to the king */
+      if (move.flags & BITS.KSIDE_CASTLE) {
+        var castling_to = move.to - 1
+        var castling_from = move.to + 1
+        board[castling_to] = board[castling_from]
+        board[castling_from] = null
+      } else if (move.flags & BITS.QSIDE_CASTLE) {
+        var castling_to = move.to + 1
+        var castling_from = move.to - 2
+        board[castling_to] = board[castling_from]
+        board[castling_from] = null
+      }
+
+      /* turn off castling */
+      castling[us] = ''
+    }
+
+    /* turn off castling if we move a rook */
+    if (castling[us]) {
+      for (var i = 0, len = ROOKS[us].length; i < len; i++) {
+        if (
+          move.from === ROOKS[us][i].square &&
+          castling[us] & ROOKS[us][i].flag
+        ) {
+          castling[us] ^= ROOKS[us][i].flag
+          break
+        }
+      }
+    }
+
+    /* turn off castling if we capture a rook */
+    if (castling[them]) {
+      for (var i = 0, len = ROOKS[them].length; i < len; i++) {
+        if (
+          move.to === ROOKS[them][i].square &&
+          castling[them] & ROOKS[them][i].flag
+        ) {
+          castling[them] ^= ROOKS[them][i].flag
+          break
+        }
+      }
+    }
+
+    /* if big pawn move, update the en passant square */
+    if (move.flags & BITS.BIG_PAWN) {
+      if (turn === 'b') {
+        ep_square = move.to - 16
+      } else {
+        ep_square = move.to + 16
+      }
+    } else {
+      ep_square = EMPTY
+    }
+
+    /* reset the 50 move counter if a pawn is moved or a piece is captured */
+    if (move.piece === PAWN) {
+      half_moves = 0
+    } else if (move.flags & (BITS.CAPTURE | BITS.EP_CAPTURE)) {
+      half_moves = 0
+    } else {
+      half_moves++
+    }
+
+    if (turn === BLACK) {
+      move_number++
+    }
+    turn = swap_color(turn)
+  }
+
+  function undo_move() {
+    var old = history.pop()
+    if (old == null) {
+      return null
+    }
+
+    var move = old.move
+    kings = old.kings
+    turn = old.turn
+    castling = old.castling
+    ep_square = old.ep_square
+    half_moves = old.half_moves
+    move_number = old.move_number
+
+    var us = turn
+    var them = swap_color(turn)
+
+    board[move.from] = board[move.to]
+    board[move.from].type = move.piece // to undo any promotions
+    board[move.to] = null
+
+    if (move.flags & BITS.CAPTURE) {
+      board[move.to] = { type: move.captured, color: them }
+    } else if (move.flags & BITS.EP_CAPTURE) {
+      var index
+      if (us === BLACK) {
+        index = move.to - 16
+      } else {
+        index = move.to + 16
+      }
+      board[index] = { type: PAWN, color: them }
+    }
+
+    if (move.flags & (BITS.KSIDE_CASTLE | BITS.QSIDE_CASTLE)) {
+      var castling_to, castling_from
+      if (move.flags & BITS.KSIDE_CASTLE) {
+        castling_to = move.to + 1
+        castling_from = move.to - 1
+      } else if (move.flags & BITS.QSIDE_CASTLE) {
+        castling_to = move.to - 2
+        castling_from = move.to + 1
+      }
+
+      board[castling_to] = board[castling_from]
+      board[castling_from] = null
+    }
+
+    return move
+  }
+
+  /* this function is used to uniquely identify ambiguous moves */
+  function get_disambiguator(move, sloppy) {
+    var moves = generate_moves({ legal: !sloppy })
+
+    var from = move.from
+    var to = move.to
+    var piece = move.piece
+
+    var ambiguities = 0
+    var same_rank = 0
+    var same_file = 0
+
+    for (var i = 0, len = moves.length; i < len; i++) {
+      var ambig_from = moves[i].from
+      var ambig_to = moves[i].to
+      var ambig_piece = moves[i].piece
+
+      /* if a move of the same piece type ends on the same to square, we'll
+       * need to add a disambiguator to the algebraic notation
+       */
+      if (piece === ambig_piece && from !== ambig_from && to === ambig_to) {
+        ambiguities++
+
+        if (rank(from) === rank(ambig_from)) {
+          same_rank++
+        }
+
+        if (file(from) === file(ambig_from)) {
+          same_file++
+        }
+      }
+    }
+
+    if (ambiguities > 0) {
+      /* if there exists a similar moving piece on the same rank and file as
+       * the move in question, use the square as the disambiguator
+       */
+      if (same_rank > 0 && same_file > 0) {
+        return algebraic(from)
+      } else if (same_file > 0) {
+        /* if the moving piece rests on the same file, use the rank symbol as the
+         * disambiguator
+         */
+        return algebraic(from).charAt(1)
+      } else {
+        /* else use the file symbol */
+        return algebraic(from).charAt(0)
+      }
+    }
+
+    return ''
+  }
+
+  function ascii() {
+    var s = '   +------------------------+\n'
+    for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
+      /* display the rank */
+      if (file(i) === 0) {
+        s += ' ' + '87654321'[rank(i)] + ' |'
+      }
+
+      /* empty piece */
+      if (board[i] == null) {
+        s += ' . '
+      } else {
+        var piece = board[i].type
+        var color = board[i].color
+        var symbol = color === WHITE ? piece.toUpperCase() : piece.toLowerCase()
+        s += ' ' + symbol + ' '
+      }
+
+      if ((i + 1) & 0x88) {
+        s += '|\n'
+        i += 8
+      }
+    }
+    s += '   +------------------------+\n'
+    s += '     a  b  c  d  e  f  g  h\n'
+
+    return s
+  }
+
+  // convert a move from Standard Algebraic Notation (SAN) to 0x88 coordinates
+  function move_from_san(move, sloppy) {
+    // strip off any move decorations: e.g Nf3+?!
+    var clean_move = stripped_san(move)
+
+    // if we're using the sloppy parser run a regex to grab piece, to, and from
+    // this should parse invalid SAN like: Pe2-e4, Rc1c4, Qf3xf7
+    if (sloppy) {
+      var matches = clean_move.match(
+        /([pnbrqkPNBRQK])?([a-h][1-8])x?-?([a-h][1-8])([qrbnQRBN])?/
+      )
+      if (matches) {
+        var piece = matches[1]
+        var from = matches[2]
+        var to = matches[3]
+        var promotion = matches[4]
+      }
+    }
+
+    var moves = generate_moves()
+    for (var i = 0, len = moves.length; i < len; i++) {
+      // try the strict parser first, then the sloppy parser if requested
+      // by the user
+      if (
+        clean_move === stripped_san(move_to_san(moves[i])) ||
+        (sloppy && clean_move === stripped_san(move_to_san(moves[i], true)))
+      ) {
+        return moves[i]
+      } else {
+        if (
+          matches &&
+          (!piece || piece.toLowerCase() == moves[i].piece) &&
+          SQUARES[from] == moves[i].from &&
+          SQUARES[to] == moves[i].to &&
+          (!promotion || promotion.toLowerCase() == moves[i].promotion)
+        ) {
+          return moves[i]
+        }
+      }
+    }
+
+    return null
+  }
+
+  /*****************************************************************************
+   * UTILITY FUNCTIONS
+   ****************************************************************************/
+  function rank(i) {
+    return i >> 4
+  }
+
+  function file(i) {
+    return i & 15
+  }
+
+  function algebraic(i) {
+    var f = file(i),
+      r = rank(i)
+    return 'abcdefgh'.substring(f, f + 1) + '87654321'.substring(r, r + 1)
+  }
+
+  function swap_color(c) {
+    return c === WHITE ? BLACK : WHITE
+  }
+
+  function is_digit(c) {
+    return '0123456789'.indexOf(c) !== -1
+  }
+
+  /* pretty = external move object */
+  function make_pretty(ugly_move) {
+    var move = clone(ugly_move)
+    move.san = move_to_san(move, false)
+    move.to = algebraic(move.to)
+    move.from = algebraic(move.from)
+
+    var flags = ''
+
+    for (var flag in BITS) {
+      if (BITS[flag] & move.flags) {
+        flags += FLAGS[flag]
+      }
+    }
+    move.flags = flags
+
+    return move
+  }
+
+  function clone(obj) {
+    var dupe = obj instanceof Array ? [] : {}
+
+    for (var property in obj) {
+      if (typeof property === 'object') {
+        dupe[property] = clone(obj[property])
+      } else {
+        dupe[property] = obj[property]
+      }
+    }
+
+    return dupe
+  }
+
+  function trim(str) {
+    return str.replace(/^\s+|\s+$/g, '')
+  }
+
+  /*****************************************************************************
+   * DEBUGGING UTILITIES
+   ****************************************************************************/
+  function perft(depth) {
+    var moves = generate_moves({ legal: false })
+    var nodes = 0
+    var color = turn
+
+    for (var i = 0, len = moves.length; i < len; i++) {
+      make_move(moves[i])
+      if (!king_attacked(color)) {
+        if (depth - 1 > 0) {
+          var child_nodes = perft(depth - 1)
+          nodes += child_nodes
+        } else {
+          nodes++
+        }
+      }
+      undo_move()
+    }
+
+    return nodes
+  }
+
+  return {
+    /***************************************************************************
+     * PUBLIC CONSTANTS (is there a better way to do this?)
+     **************************************************************************/
+    WHITE: WHITE,
+    BLACK: BLACK,
+    PAWN: PAWN,
+    KNIGHT: KNIGHT,
+    BISHOP: BISHOP,
+    ROOK: ROOK,
+    QUEEN: QUEEN,
+    KING: KING,
+    SQUARES: (function() {
+      /* from the ECMA-262 spec (section 12.6.4):
+       * "The mechanics of enumerating the properties ... is
+       * implementation dependent"
+       * so: for (var sq in SQUARES) { keys.push(sq); } might not be
+       * ordered correctly
+       */
+      var keys = []
+      for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
+        if (i & 0x88) {
+          i += 7
+          continue
+        }
+        keys.push(algebraic(i))
+      }
+      return keys
+    })(),
+    FLAGS: FLAGS,
+
+    /***************************************************************************
+     * PUBLIC API
+     **************************************************************************/
+    load: function(fen) {
+      return load(fen)
+    },
+
+    reset: function() {
+      return reset()
+    },
+
+    moves: function(options) {
+      /* The internal representation of a chess move is in 0x88 format, and
+       * not meant to be human-readable.  The code below converts the 0x88
+       * square coordinates to algebraic coordinates.  It also prunes an
+       * unnecessary move keys resulting from a verbose call.
+       */
+
+      var ugly_moves = generate_moves(options)
+      var moves = []
+
+      for (var i = 0, len = ugly_moves.length; i < len; i++) {
+        /* does the user want a full move object (most likely not), or just
+         * SAN
+         */
+        if (
+          typeof options !== 'undefined' &&
+          'verbose' in options &&
+          options.verbose
+        ) {
+          moves.push(make_pretty(ugly_moves[i]))
+        } else {
+          moves.push(move_to_san(ugly_moves[i], false))
+        }
+      }
+
+      return moves
+    },
+
+    in_check: function() {
+      return in_check()
+    },
+
+    in_checkmate: function() {
+      return in_checkmate()
+    },
+
+    in_stalemate: function() {
+      return in_stalemate()
+    },
+
+    in_draw: function() {
+      return (
+        half_moves >= 100 ||
+        in_stalemate() ||
+        insufficient_material() ||
+        in_threefold_repetition()
+      )
+    },
+
+    insufficient_material: function() {
+      return insufficient_material()
+    },
+
+    in_threefold_repetition: function() {
+      return in_threefold_repetition()
+    },
+
+    game_over: function() {
+      return (
+        half_moves >= 100 ||
+        in_checkmate() ||
+        in_stalemate() ||
+        insufficient_material() ||
+        in_threefold_repetition()
+      )
+    },
+
+    validate_fen: function(fen) {
+      return validate_fen(fen)
+    },
+
+    fen: function() {
+      return generate_fen()
+    },
+
+    board: function() {
+      var output = [],
+        row = []
+
+      for (var i = SQUARES.a8; i <= SQUARES.h1; i++) {
+        if (board[i] == null) {
+          row.push(null)
+        } else {
+          row.push({ type: board[i].type, color: board[i].color })
+        }
+        if ((i + 1) & 0x88) {
+          output.push(row)
+          row = []
+          i += 8
+        }
+      }
+
+      return output
+    },
+
+    pgn: function(options) {
+      /* using the specification from http://www.chessclub.com/help/PGN-spec
+       * example for html usage: .pgn({ max_width: 72, newline_char: "<br />" })
+       */
+      var newline =
+        typeof options === 'object' && typeof options.newline_char === 'string'
+          ? options.newline_char
+          : '\n'
+      var max_width =
+        typeof options === 'object' && typeof options.max_width === 'number'
+          ? options.max_width
+          : 0
+      var result = []
+      var header_exists = false
+
+      /* add the PGN header headerrmation */
+      for (var i in header) {
+        /* TODO: order of enumerated properties in header object is not
+         * guaranteed, see ECMA-262 spec (section 12.6.4)
+         */
+        result.push('[' + i + ' "' + header[i] + '"]' + newline)
+        header_exists = true
+      }
+
+      if (header_exists && history.length) {
+        result.push(newline)
+      }
+
+      /* pop all of history onto reversed_history */
+      var reversed_history = []
+      while (history.length > 0) {
+        reversed_history.push(undo_move())
+      }
+
+      var moves = []
+      var move_string = ''
+
+      /* build the list of moves.  a move_string looks like: "3. e3 e6" */
+      while (reversed_history.length > 0) {
+        var move = reversed_history.pop()
+
+        /* if the position started with black to move, start PGN with 1. ... */
+        if (!history.length && move.color === 'b') {
+          move_string = move_number + '. ...'
+        } else if (move.color === 'w') {
+          /* store the previous generated move_string if we have one */
+          if (move_string.length) {
+            moves.push(move_string)
+          }
+          move_string = move_number + '.'
+        }
+
+        move_string = move_string + ' ' + move_to_san(move, false)
+        make_move(move)
+      }
+
+      /* are there any other leftover moves? */
+      if (move_string.length) {
+        moves.push(move_string)
+      }
+
+      /* is there a result? */
+      if (typeof header.Result !== 'undefined') {
+        moves.push(header.Result)
+      }
+
+      /* history should be back to what is was before we started generating PGN,
+       * so join together moves
+       */
+      if (max_width === 0) {
+        return result.join('') + moves.join(' ')
+      }
+
+      /* wrap the PGN output at max_width */
+      var current_width = 0
+      for (var i = 0; i < moves.length; i++) {
+        /* if the current move will push past max_width */
+        if (current_width + moves[i].length > max_width && i !== 0) {
+          /* don't end the line with whitespace */
+          if (result[result.length - 1] === ' ') {
+            result.pop()
+          }
+
+          result.push(newline)
+          current_width = 0
+        } else if (i !== 0) {
+          result.push(' ')
+          current_width++
+        }
+        result.push(moves[i])
+        current_width += moves[i].length
+      }
+
+      return result.join('')
+    },
+
+    load_pgn: function(pgn, options) {
+      // allow the user to specify the sloppy move parser to work around over
+      // disambiguation bugs in Fritz and Chessbase
+      var sloppy =
+        typeof options !== 'undefined' && 'sloppy' in options
+          ? options.sloppy
+          : false
+
+      function mask(str) {
+        return str.replace(/\\/g, '\\')
+      }
+
+      function has_keys(object) {
+        for (var key in object) {
+          return true
+        }
+        return false
+      }
+
+      function parse_pgn_header(header, options) {
+        var newline_char =
+          typeof options === 'object' &&
+          typeof options.newline_char === 'string'
+            ? options.newline_char
+            : '\r?\n'
+        var header_obj = {}
+        var headers = header.split(new RegExp(mask(newline_char)))
+        var key = ''
+        var value = ''
+
+        for (var i = 0; i < headers.length; i++) {
+          key = headers[i].replace(/^\[([A-Z][A-Za-z]*)\s.*\]$/, '$1')
+          value = headers[i].replace(/^\[[A-Za-z]+\s"(.*)"\]$/, '$1')
+          if (trim(key).length > 0) {
+            header_obj[key] = value
+          }
+        }
+
+        return header_obj
+      }
+
+      var newline_char =
+        typeof options === 'object' && typeof options.newline_char === 'string'
+          ? options.newline_char
+          : '\r?\n'
+
+      // RegExp to split header. Takes advantage of the fact that header and movetext
+      // will always have a blank line between them (ie, two newline_char's).
+      // With default newline_char, will equal: /^(\[((?:\r?\n)|.)*\])(?:\r?\n){2}/
+      var header_regex = new RegExp(
+        '^(\\[((?:' +
+          mask(newline_char) +
+          ')|.)*\\])' +
+          '(?:' +
+          mask(newline_char) +
+          '){2}'
+      )
+
+      // If no header given, begin with moves.
+      var header_string = header_regex.test(pgn)
+        ? header_regex.exec(pgn)[1]
+        : ''
+
+      // Put the board in the starting position
+      reset()
+
+      /* parse PGN header */
+      var headers = parse_pgn_header(header_string, options)
+      for (var key in headers) {
+        set_header([key, headers[key]])
+      }
+
+      /* load the starting position indicated by [Setup '1'] and
+       * [FEN position] */
+      if (headers['SetUp'] === '1') {
+        if (!('FEN' in headers && load(headers['FEN'], true))) {
+          // second argument to load: don't clear the headers
+          return false
+        }
+      }
+
+      /* delete header to get the moves */
+      var ms = pgn
+        .replace(header_string, '')
+        .replace(new RegExp(mask(newline_char), 'g'), ' ')
+
+      /* delete comments */
+      ms = ms.replace(/(\{[^}]+\})+?/g, '')
+
+      /* delete recursive annotation variations */
+      var rav_regex = /(\([^\(\)]+\))+?/g
+      while (rav_regex.test(ms)) {
+        ms = ms.replace(rav_regex, '')
+      }
+
+      /* delete move numbers */
+      ms = ms.replace(/\d+\.(\.\.)?/g, '')
+
+      /* delete ... indicating black to move */
+      ms = ms.replace(/\.\.\./g, '')
+
+      /* delete numeric annotation glyphs */
+      ms = ms.replace(/\$\d+/g, '')
+
+      /* trim and get array of moves */
+      var moves = trim(ms).split(new RegExp(/\s+/))
+
+      /* delete empty entries */
+      moves = moves
+        .join(',')
+        .replace(/,,+/g, ',')
+        .split(',')
+      var move = ''
+
+      for (var half_move = 0; half_move < moves.length - 1; half_move++) {
+        move = move_from_san(moves[half_move], sloppy)
+
+        /* move not possible! (don't clear the board to examine to show the
+         * latest valid position)
+         */
+        if (move == null) {
+          return false
+        } else {
+          make_move(move)
+        }
+      }
+
+      /* examine last move */
+      move = moves[moves.length - 1]
+      if (POSSIBLE_RESULTS.indexOf(move) > -1) {
+        if (has_keys(header) && typeof header.Result === 'undefined') {
+          set_header(['Result', move])
+        }
+      } else {
+        move = move_from_san(move, sloppy)
+        if (move == null) {
+          return false
+        } else {
+          make_move(move)
+        }
+      }
+      return true
+    },
+
+    header: function() {
+      return set_header(arguments)
+    },
+
+    ascii: function() {
+      return ascii()
+    },
+
+    turn: function() {
+      return turn
+    },
+
+    move: function(move, options) {
+      /* The move function can be called with in the following parameters:
+       *
+       * .move('Nxb7')      <- where 'move' is a case-sensitive SAN string
+       *
+       * .move({ from: 'h7', <- where the 'move' is a move object (additional
+       *         to :'h8',      fields are ignored)
+       *         promotion: 'q',
+       *      })
+       */
+
+      // allow the user to specify the sloppy move parser to work around over
+      // disambiguation bugs in Fritz and Chessbase
+      var sloppy =
+        typeof options !== 'undefined' && 'sloppy' in options
+          ? options.sloppy
+          : false
+
+      var move_obj = null
+
+      if (typeof move === 'string') {
+        move_obj = move_from_san(move, sloppy)
+      } else if (typeof move === 'object') {
+        var moves = generate_moves()
+
+        /* convert the pretty move object to an ugly move object */
+        for (var i = 0, len = moves.length; i < len; i++) {
+          if (
+            move.from === algebraic(moves[i].from) &&
+            move.to === algebraic(moves[i].to) &&
+            (!('promotion' in moves[i]) ||
+              move.promotion === moves[i].promotion)
+          ) {
+            move_obj = moves[i]
+            break
+          }
+        }
+      }
+
+      /* failed to find move */
+      if (!move_obj) {
+        return null
+      }
+
+      /* need to make a copy of move because we can't generate SAN after the
+       * move is made
+       */
+      var pretty_move = make_pretty(move_obj)
+
+      make_move(move_obj)
+
+      return pretty_move
+    },
+
+    undo: function() {
+      var move = undo_move()
+      return move ? make_pretty(move) : null
+    },
+
+    clear: function() {
+      return clear()
+    },
+
+    put: function(piece, square) {
+      return put(piece, square)
+    },
+
+    get: function(square) {
+      return get(square)
+    },
+
+    remove: function(square) {
+      return remove(square)
+    },
+
+    perft: function(depth) {
+      return perft(depth)
+    },
+
+    square_color: function(square) {
+      if (square in SQUARES) {
+        var sq_0x88 = SQUARES[square]
+        return (rank(sq_0x88) + file(sq_0x88)) % 2 === 0 ? 'light' : 'dark'
+      }
+
+      return null
+    },
+
+    history: function(options) {
+      var reversed_history = []
+      var move_history = []
+      var verbose =
+        typeof options !== 'undefined' &&
+        'verbose' in options &&
+        options.verbose
+
+      while (history.length > 0) {
+        reversed_history.push(undo_move())
+      }
+
+      while (reversed_history.length > 0) {
+        var move = reversed_history.pop()
+        if (verbose) {
+          move_history.push(make_pretty(move))
+        } else {
+          move_history.push(move_to_san(move))
+        }
+        make_move(move)
+      }
+
+      return move_history
+    }
+  }
+}
+
+/* export Chess object if using node or any other CommonJS compatible
+ * environment */
+if (typeof exports !== 'undefined') exports.Chess = Chess
+/* export Chess object for any RequireJS compatible environment */
+if (typeof define !== 'undefined')
+  define(function() {
+    return Chess
+  })
+</script>
+<script>
+const DATA = {"games":[["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","Igor_Lysyj","2587","2972","0-1","C80","Ruy Lopez: Open, Bernstein Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 Nbd2 Be7 c3 Qd7 Bc2 Bf5 Nb3 Bg6 Nbd4 Nxd4 cxd4 O-O Be3 Bh5 Qd3 f5 exf6 Bxf3 gxf3 Rxf6 Qe2 Qh3 Kh1 Bd6 f4 Rh6","Ruy Lopez","feuervogel10"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","thecatdoglady","2767","2335","1-0","C21","Danish Gambit Declined: Sörensen Defense","e4 e5 d4 exd4 c3 d5 exd5 Qxd5 cxd4 Nf6 Nc3 Qd8 Nf3 c6 Bc4 Be7 O-O O-O Qb3 Nbd7 Ng5 Nd5 Nxf7 Rxf7 Nxd5 cxd5 Bxd5 Qf8 Re1 Bf6 Bf4 g6 Bxf7+ Qxf7 Re8+ Kg7 Bh6+ Kxh6 Qxf7 Bxd4 Rc1","","ramitalab"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","aghasiyevkamal","2447","2840","0-1","C51","Italian Game: Evans Gambit, Anderssen Variation, Cordel Line","e4 e5 Nf3 Nc6 Bc4 Bc5 b4 Bxb4 c3 Be7 d4 Na5 Bd3 d6 dxe5 dxe5 Nxe5 Nf6 O-O O-O Qe2 c5 h3 Qc7 f4 Be6 Na3 a6 c4 Rad8 Bb2 b5 cxb5 axb5 Nxb5 Qb6 Kh2 c4 Nxc4 Qxb5 Nxa5 Qxd3 Qxd3 Rxd3 Nc6 Ba3 Bxf6 gxf6 Rf3 Rxf3 gxf3 Rc8 Nd4 Bb2 Rd1 Rd8","Italian Game","ferdipy"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","ChessIsShocking","2813","2409","1-0","C24","Bishop's Opening: Vienna Hybrid","e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Na5 Nge2 d6 O-O g6 Bb3 Bg7 f4 Nxb3 axb3 h6 Ng3 exf4 Bxf4 Be6 Qd2 Qd7 Kh1 O-O-O Rxa7 Qc6 d4 d5 e5 Ne4 Ncxe4 dxe4 c4 Qb6 Ra8+ Kd7 Rxd8+ Rxd8 d5 Ke8 Bxh6 Bxe5 Qg5 Bxg3 dxe6 Bd6 exf7+ Kd7 Qg4+ Kc6 Qxe4+","","viktorskliarov"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","FabianoCaruana","2702","3216","0-1","C47","Four Knights Game: Scotch Variation, Krause Gambit","e4 e5 Nf3 Nc6 Nc3 Nf6 d4 Bb4 Nxe5 Nxe4 Qg4 Nxc3 Qxg7 Rf8 a3 Nxd4 axb4 Nxc2+ Kd2 Nxa1 Kxc3 Qe7 Bc4 d5 Bh6 a5 Qxf8+ Qxf8 Bxf8 Kxf8 Bxd5 axb4+ Kxb4 f6 Nd3 Bf5 Kc3 c6 Bf3 Nb3 Kxb3 Bxd3 Rd1 Bf5 g4 Be6+ Kb4 Ke7 Re1 Kd6 Rd1+ Kc7 Re1 Kd6 Rd1+ Ke7 Re1 Rd8 Re2 Rd4+ Kc5 Rf4 Be4 Bxg4 f3 Be6 Kb6 f5 Bb1 Rb4+ Kc7 Kf6 Kd6 Bf7 Re5 Rd4+","Four Knights Game","Ako2008"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","tptagain","2665","3125","0-1","C50","Italian Game: Paris Defense","e4 e5 Nf3 Nc6 Bc4 d6 O-O Be7 a4 Nf6 Re1 O-O c3 Nxe4 Rxe4 d5 Re1 dxc4 Nxe5 Nxe5 Rxe5 Bd6 Re4 Be6 d4 Bd5 Rg4 f5 Bg5 Qe8 Rh4 Qg6 Qh5 Qxh5 Rxh5 Rae8 Nd2 Re2 Kf1 Rfe8 Rd1 f4 Rh4 Bc6 Nxc4 Bxa4 Ra1 Bb5 b3 a5 Bxf4 Bxf4 Rxf4 a4 g3 axb3 Kg2 Bxc4","Italian Game","gh6999"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","Khusln_Zya","2733","1985","1-0","C50","Italian Game: Hungarian Defense","e4 e5 Nf3 Nc6 Bc4 Be7 d4 d6 d5 Nb8 Nc3 Nf6 h3 c6 Bb3 O-O Be3 c5 a4 Nbd7 Qe2 a6 O-O g6 a5 Ne8 Nd2 f5 f4 Ng7 fxe5 Nxe5 Bxc5 dxc5 d6+ Kh8 dxe7 Qxe7 Nd5 Qh4 exf5 Nc6 fxg6 Bxh3 gxh3 Nd4 Qg4 Qh6 Rxf8+ Rxf8 Rf1 Rg8 Nf6 Qe3+ Kh1 Ngf5 Nde4 Rxg6 Qh5 Rh6 Qe8+ Kg7 Qg8#","Italian Game","TheINfinity011"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","christianallen359","2315","2763","0-1","C54","Italian Game: Classical Variation, Giuoco Pianissimo","e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 Nbd2 a5 Bb3 O-O h3 h6 O-O Be6 Bc2 d5 Re1 Re8 exd5 Bxd5 Ne4 Bb6 Ng3 Qd7 Be3 Rad8 Bxb6 cxb6 d4 exd4 Rxe8+ Rxe8 Nxd4 Nxd4 Qxd4 Qc6 f3 b5 Bd3 Bc4 Bxc4 Qxc4 Qxc4 bxc4 Rd1 b5 Kf2 b4 Rd4 Rb8 Rxc4 bxc3 b3 Nd5 Ne4 c2 Rxc2 Nb4 Rc5 Nd3+ Ke3 Nxc5 Nxc5 Rc8 Kd4 Rd8+ Kc4 Rd2 a4 Rxg2 Kb5 Rg5 Kb6 Rf5 Nb7 Rxf3 Nxa5 g5 b4 h5 Nc6 g4 a5 g3 a6 g2 a7 g1=Q+ Kb7 Ra3 Na5 Qg2+ Kb8 Rxh3 a8=Q Qxa8+ Kxa8 Ra3 Kb7 h4 Nc4 Rb3","Italian Game","senecacrane"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","Antosha_Chekhonte","2511","2904","0-1","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Bc4 Nf6 d3 Be7 Nf3 Nc6 Bb3 O-O c3 d5 Qe2 Re8 O-O Bg4 Re1 h6 Nbd2 Bf8 Nf1 a6 h3 Be6 Ng3 Qd7 Bc2 Rad8 Nh4 d4 Nhf5 Kh7 Qf3 Ng8 Nf1 g6 N5g3 Bg7 Bd2 Nge7 Qe2 Rf8 c4 a5 f4 exf4 Bxf4 Nb4 Bb1 Nec6 a3 Na6 Bc2 Nc5 Rab1 a4 Nd2 g5 Nh5 gxf4 Nxf4 Ne5 Rf1 Rg8 Nf3 Qe7 Nh5 Bh8 Nxe5 Bxe5 Qf3 Qg5 Rbe1 Rdf8 Re2 c6 Ref2 Kh8 Kh1 Qe3 Qxe3 dxe3 Re2 Bd4 Nf6 Rg6 Nh5 Rd8 g4 Nd7 Ng3 Ne5 Nf5 Bxf5 exf5 Rgd6 Rf4 f6 Re4 Kg7 Kg2 Ba7","Italian Game","Tonychess32"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","APOLLONZEROTV","3121","2660","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O Re1 d6 c3 Be6 Bb5 a6 Ba4 b5 Bc2 d5 Nbd2 d4 cxd4 exd4 a3 a5 Bb3 Qd7 h3 a4 Bxe6 fxe6 Nf1 e5 Ng3 Rfe8 Bd2 Bd6 Rc1 Nd8 Nf5 c5 Bg5 Rc8 Bxf6 gxf6 Nh2 Bf8 Qh5 Qf7 Qg4+ Qg6 Ne7+ Rxe7 Qxc8 Ne6 Rcd1 h5 Nf3 Nf4 Nh4 Qg5 g3 c4 dxc4 bxc4 Kh2 Ne6 Qxc4 Kf7 Qxa4 Rc7 Qb3 Bc5 Rd3 Ba7 Nf5 h4 Nxh4 Ke7 Nf5+ Kf7","Italian Game","Fandorine"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","FARIZA2018","2210","2753","0-1","C50","Italian Game: Giuoco Pianissimo, Normal","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 a3 d6 h3 h6 Nc3 a6 O-O O-O Nd5 Be6 Nxf6+ Qxf6 Bxe6 fxe6 Be3 Ba7 Bxa7 Nxa7 d4 Nc6 dxe5 dxe5 c3 Rf7 Qb3 b6 Rad1 Qg6 Kh1 Raf8 Rd3 Qf6 Qd1 Ne7 Rd7 Ng6 Rxf7 Rxf7 Nh2 Nf4 Ng4 Qg5 Ne3 h5 Kh2 Qh4 f3 Qg5 Qd2 Nxg2 Qxg2 Qxe3 Rf2 Qf4+ Qg3 Rd7 Qxf4 exf4 Rc2 Kf7 Kg2 g5 Kf2 Rd1 Kg2 Kf6 Re2 c5 Kh2 c4 Kg2 b5 Rc2 Ke5 Re2 a5 Rc2 Rd3 Kf2 g4 hxg4 hxg4 fxg4 Kxe4 Re2+ Kd5 g5 Rg3 Rd2+ Ke5 Re2+ Kf5 Rd2 Rxg5 Rd8 Rh5 Kg2 Ke4 Rb8 Ke3 Ra8 f3+ Kg3 f2 Rf8 Rf5 Re8 f1=Q Rxe6+ Kd2 b4 Qf3+","Italian Game","ritanovikova"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","Ratushnyi_Victor","2905","2513","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 Nc3 O-O h3 d6 a3 Be6 Nd5 Bxd5 exd5 Nb8 O-O Nbd7 Bb3 c6 dxc6 bxc6 Re1 Re8 Ng5 d5 c4 Bc5 cxd5 cxd5 Be3 Qb6 Rb1 Rac8 Ba2 Bxe3 fxe3 h6 Nf3 a5 Kh1 Nc5 b4 axb4 axb4 Ncd7 e4 dxe4 dxe4 Rc3 Qd2 Rec8 Rb2 Qc7 b5 Nb6 Bb3 Qc5 Ba2 Qc7 Qf2 Qc5 Qxc5 R8xc5 Nd2 Rc2 Reb1 Na4 Rxc2 Rxc2 Bb3 Rxd2 Bxa4 Nxe4 b6 Rd8 b7 Rb8 Bc6 Nd6 Ra1 Nxb7 Rb1 Rc8 Bxb7 Rb8 Kg1 Kf8 Kf2 Ke7 Be4 f6 Rxb8","Italian Game","ChessQueen"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","crescentmoon2411","2668","3132","0-1","C54","Italian Game: Classical Variation, Giuoco Pianissimo","e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 a5 a4 O-O O-O d5 exd5 Nxd5 h3 Bf5 Re1 Nb6 Bb5 f6 Be3 Bxe3 Rxe3 Nd5 Re1 Kh8 Bxc6 bxc6 d4 Rb8 Qd2 e4 Nh2 Bg6 Na3 Nb6 f3 exf3 Nxf3 Qd5 Qf2 Nxa4 Re2 Qb3 Nh4 Nxb2 Nxg6+ hxg6 Qg3 g5 h4 gxh4 Qxh4+ Kg8 Qg3 Rf7 Qf3 Na4 Rc2 Qd5 Qxd5 cxd5 Nb1 Nb6 Nd2 a4 Rb2 Ra8 Ra3 Re7 Rba2 Re2 Kf1 Rae8 Nf3 Rxa2 Rxa2 Re3 Ra3 Kf7 Kf2 Re8 Ne1 Ra8 Nd3 Nc4 Ra2 a3 Nb4 Ke6 Ke2 Kd6 Kd3 Re8 Nc2 Kd7 Ra1 g5 g3 f5 Rf1 a2 Ra1 Re4 Rf1 Rg4 Rxf5 Rxg3+ Ke2 Rxc3 Rxd5+ Ke6 Nb4 a1=Q","Italian Game","VorethVoidspawn2010"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","MajinSensei09","3088","2649","1-0","C45","Scotch Game: Mieses Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 e5 Qe7 Qe2 Nd5 g3 g6 c4 Ba6 b3 Bg7 Bb2 O-O Bg2 Rae8 O-O Bxe5 Qxe5 Qxe5 Bxe5 Rxe5 cxd5 Bxf1 Kxf1 cxd5 Nc3 c6 Rd1 Rfe8 Bf3 Kf8 Na4 Ke7 Nc5 Kd6 Nd3 R5e7 Rc1 f5 h4 Rg8 Rc5 h6 Ra5 Ra8 b4 g5 h5 Ree8 Ra6 Reb8 a4 Rb6 Ra5 a6 Ke1 Re8+ Kd2 Kc7 Rc5 d6 Rc1 Kd7 Kc3 Rc8 Bg2 Re8 Rc2 Rbb8 Bh3 Rf8 Kd2 Rbe8 Rb2 Re4 b5 axb5 axb5 c5 b6 Rd4 Kc2 Rc4+ Kb1 Kc6 Bxf5 Rb8 f4 gxf4 Nxf4 Rxb6 Bd7+ Kxd7 Rxb6 d4 Rb7+ Kc6 Rh7 Rb4+ Kc2 c4 Rxh6 Kc5 Ne6+ Kd5 Nf4+ Ke4 Re6+ Kf3 Rxd6 d3+ Kc3","Scotch Game","Cayse"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","carokannlover213","2671","3139","0-1","C70","Ruy Lopez: Morphy Defense, Schliemann Defense Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 f5 Nc3 b5 Bb3 fxe4 Nxe4 d5 Nc3 Nf6 d4 e4 Ne5 Na5 Bxd5 Nxd5 Qh5+ g6 Nxg6 hxg6 Qxg6+ Kd7 Nxd5 Bb7 Bg5 Bxd5 Bxd8 Rxd8 Qf5+ Kc6 a4 b4 Rc1 Bd6 c4 Nxc4 b3 Rdf8 Qg4 e3 bxc4 exf2+ Kf1 Bf7 Qe4+ Kd7 c5 Re8 Qg4+ Be6 Qg7+ Be7 c6+ Kd8 d5 Bf5 Rd1 Rhf8 d6 Bxd6 g4 Be6 Rxd6+ cxd6 Qb7 Rf7 Qb8+ Ke7 c7 Bc4+ Kg2 Bd5+ Kg3 Bxh1 Qxe8+ Kxe8 c8=Q+ Ke7 Qc7+ Ke8 Qc8+ Ke7 Qc7+ Ke6 Qc8+ Ke5 Qe8+ Kf6 Kxf2 Bd5 Kg3 Be6 Qd8+ Ke5 Qxd6+ Kxd6 g5 Rg7","Ruy Lopez","Glkllkllk"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","1","blackqueentkm","2758","2279","1-0","C23","Bishop's Opening","e4 e5 Bc4 d6 f4 exf4 d4 Qh4+ Kf1 Nf6 Nf3 Qh6 Nc3 Be7 e5 dxe5 dxe5 Nh5 Nd5 Bd8 Rg1 O-O g4 Qc6 Qd3 Be6 gxh5 b5 Bb3 Na6 Nf6+ Bxf6 exf6 Bf5 Rxg7+ Kh8 Qxf5 Qxf3+ Kg1 Qd1+ Kf2 Qd4+ Kf3 Qd1+ Kxf4 Qf1+ Kg5 h6+ Kg4 Qg1+ Kh4 Qxh2+ Qh3 Qf2+ Qg3 Qxf6+ Rg5 hxg5+ Bxg5 Qd4+ Qf4 Qxf4+ Bxf4 c5 c3 c4 Bc2 Rfe8 Bg5 Re6 Bf5 Re2 Bf6+ Kg8 Rg1+ Kf8 Bh7 Rh2+ Kg5 Ke8 h6 Nc5 Bf5 Ne6+ Bxe6 fxe6 Kg6 Kd7 h7 Rf8 Be5 Rxb2 Rd1+ Kc6 Kg7 Re8 h8=Q Rxh8 Kxh8 Rxa2 Kg7 Re2 Kf6 a5 Kxe6 b4 Rd6+ Kb5 cxb4 axb4 Rd5+ Ka4 Rc5 c3 Kd5 c2 Bf4 b3 Bc1 Re1 Rc4+","","bazar-wokzal"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","mestrefeitosa19","2715","2487","1-0","C61","Ruy Lopez: Bird Variation","e4 e5 Nf3 Nc6 Bb5 Nd4 Nxd4 exd4 O-O c6 Ba4 Nf6 d3 Be7 c4 dxc3 Nxc3 O-O d4 d5 e5 Nd7 f4 Nb6 Bc2 c5 f5 cxd4 Qxd4 Qc7 Kh1 Bc5 Qh4 Qxe5 f6 h6 fxg7 Re8 Bxh6 Be7 Bg5 Qxg7 Bxe7 Be6 Bf6","Ruy Lopez","Mr_ruthless"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","avri_hameleh","2647","2355","1-0","C68","Ruy Lopez: Exchange Variation","e4 e5 Nf3 Nc6 Bb5 a6 Bxc6 dxc6 d4 exd4 Qxd4 Qxd4 Nxd4 Nf6 Nc3 Bb4 f3 O-O Bd2 Rd8 Nb3 Be6 O-O-O a5 a3 a4 Na1 Bc5 Rhe1 b5 Be3 Rxd1+ Nxd1 Bxe3+ Nxe3 c5 c3 Nd7 Nac2 Ne5 Rd1 c4 Ne1 c5 f4 Ng4 Nxg4 Bxg4 Rd5 Rc8 f5 f6 h3 Bh5 Kd2 Bf7 Rd6 Kf8 Nf3 b4 e5 fxe5 Nxe5 Be8 Nxc4 Ke7 Re6+ Kf7 Nd6+ Kf8 Nxc8","Ruy Lopez","Wilver92"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","Sanan_Sjugirov","2823","3139","0-1","C47","Four Knights Game: Gunsberg Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 a3 d6 d4 exd4 Nxd4 Bd7 Be2 g6 Be3 Bg7 h3 O-O Qd2 Re8 Bf3 Ne5 Be2 c5 Ndb5 Bxb5 Bxb5 Nc6 O-O-O Qb6 f3 Rad8 Bc4 a6 g4 Ne5 Be2 d5 exd5 Nxd5 Nxd5 Nd3+ Qxd3 Qxb2+ Kd2 Rxd5 Qxd5 Qc3+ Kc1 Qxa3+ Kd2 Qxe3+ Ke1 Qxe2#","Four Knights Game","OmerAkkara34"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","KingCyber19","2517","2713","1-0","C56","Italian Game: Scotch Gambit, Anderssen Attack","e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 O-O Nxe4 Re1 d5 Bxd5 Qxd5 Nc3 Qd7 Nxe4 Be7 Bg5 O-O Bxe7 Qxe7 Nxd4 Bd7 Nxc6 Bxc6 Qf3 Rae8 Qc3 Bxe4 f3 f5 fxe4 fxe4 Qb3+ Kh8 Qxb7 Qc5+ Kh1 Qxc2 Rac1 Qd2 Qxc7 Rf2 Rxe4 Ref8 Rg1 Rf1 Qc5 Qxb2 Re1 R1f7 a4 h6 h3 Rf2 Qxa7 R8f3 Re8+ Kh7 Qb8 Qf6 Rh8+ Kg6 Qe8+ Kf5 gxf3","Italian Game","I_Love_Chess_Surprises"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","kanzaww","2012","2592","0-1","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O c3 d5 exd5 Nxd5 Re1 Bg4 h3 Bh5 Nbd2 Nb6 Bb5 f6 Qb3+ Kh8 Bxc6 bxc6 Qc2 Bg6 Re3 Bc5 Re1 Bxd3 Qb3 Qd5 Qd1 e4 Nh2 f5 Nhf1 f4 b3 Rae8 c4 Qd4 Bb2 Qxb2 a3 Bxf2+ Kxf2 Qd4+ Ne3 fxe3+ Kg1 e2+ Kh2 exd1=Q Raxd1 Rf2 Nf1 Qe5+ Ng3 h5 Rxd3 exd3 Rxe5 Rxe5 Nxh5 Rxh5 b4 Rg5 b5 Rfxg2+ Kh1 Rg1+ Kh2 R5g2#","Italian Game","AnviHinge"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","daika91","2431","2808","0-1","C45","Scotch Game: Schmidt Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 Bd3 d5 exd5 cxd5 O-O Be7 c4 d4 b4 O-O b5 Bg4 Qc2 a6 Bg5 h6 Bh4 axb5 cxb5 Nd5 Bxe7 Qxe7 Nd2 Nb4 Qb3 Rfe8 Bc4 d3 Bxf7+ Qxf7 Qxb4 Be2 Rfe1 Rxa2 Qc3 Rc2 Qb4 Rf8 f3 Qf4 Qxf4 Rxf4 Ne4 d2 Rxe2 Rc1+ Kf2 d1=Q Ng3 Qg1#","Scotch Game","KaiBombado"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","Zurability","3188","2861","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 h6 c3 d6 Nbd2 g6 Nf1 Bg7 Ne3 O-O a4 Nh5 Nd5 Kh7 h4 f5 Ng5+ hxg5 hxg5 Rf7 Rxh5+ Kg8 Rh1 Be6 Nf6+ Rxf6 gxf6 Qxf6 Qb3 Bxc4 Qxc4+ Kf8 a5 a6 Rh7 Re8 b4 Re7 b5 axb5 Qxb5 Nd8 a6 bxa6 Rxa6 Rf7 Ra8 fxe4 Be3 Kg8 Rh3 exd3 Rf3 Qe7 Qd5 Kh7 Rh3+ Kg8 Rf3 Kh7 Rxd8 Rxf3 Qg8#","Italian Game","ChristopherYoo"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","BeanScreen","3198","2862","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O Re1 d6 c3 Na5 Bb5 a6 Ba4 b5 Bc2 c5 Nbd2 Nc6 Nf1 h6 Ng3 Be6 h3 Rc8 d4 cxd4 cxd4 exd4 Ne2 Nb4 Nexd4 Nxc2 Nxc2 d5 e5 Ne4 Nfd4 Bh4 Be3 Qc7 Qh5 Bg5 Bxg5 hxg5 f3 Nc5 Qxg5 Qb6 Kh2 Nd3 Re3 Nxb2 f4 Qd8 Qh5 Nc4 Rg3 Qc7 f5 Nxe5 fxe6 fxe6 Nxe6 Nf3+ gxf3 Qxc2+ Rg2","Italian Game","Duhless"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","Barad_Yeganegi01","2612","2949","0-1","C41","Philidor Defense","e4 e5 Nf3 d6 Nc3 Nf6 g3 Be7 Bg2 h6 O-O O-O d4 exd4 Nxd4 c6 h3 Nbd7 Nf5 Nc5 Nxe7+ Qxe7 Re1 Rd8 Bf4 a5 Qf3 Ne6 e5 dxe5 Bxe5 Nd7 Bc7 Re8 Rad1 Ng5 Qe2 Qxe2 Rxe2 Rxe2 Nxe2 Nf8 Rd8 Ne6 Rxc8 Rxc8 Bxa5 Ra8 Bc3 Rxa2 Bf3 Nd7 Kg2 Nb6 Nc1 Ra1 Nb3 Ra2 Nc1 Ra8 Nd3 Na4 Bd2 Rd8 Bc1 Nd4 Bd1 Ne6 Bf3 Nac5 Ne5 Nd4 Bd1 f6 Nc4 b5 Ne3 b4 c3 bxc3 bxc3 Nb5 Bf3 Rc8 c4 Nd4 Bd1 Rd8 Bb2 Nd3 Bc3 c5 Nd5 Ne5 Ne3 Nf5 Nd5 Nd6 Ba5 Ra8 Bb6 Ne4 Bf3 Nxf3 Kxf3 Nd2+ Ke2 Ra2 Kd3 Nb3 Kc3 Nd2 Bxc5 Ne4+ Kd4 f5 Ne7+ Kf7 Nxf5 Nxc5 Kxc5 Ra5+","","SONIC-2025"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","FairChess_on_YouTube","2902","3249","0-1","C56","Italian Game: Scotch Gambit, Max Lange Attack","e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 e5 d5 Bb5 Ne4 Nxd4 Bc5 Be3 O-O Nxc6 bxc6 Bxc5 Nxc5 Bxc6 Rb8 Qxd5 Qe7 O-O Rd8 Qf3 Rxb2 Nc3 Rxc2 Rad1 Ba6 Nd5 Qf8 Rfe1 Nd3 Rxd3 Bxd3 Ba4 Re2 Rd1 Rxe5 Bb3 Be4 Qg3 Bxd5 Qxe5 Bxb3 Re1 Bxa2 Qxc7 a6 Qc6 Ra8 Ra1 Be6 h3 a5 Qb5 Qd8 Qc6 h6","Italian Game","MohammadHosseinDarvishi88"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","lamomiablanca","2967","2729","1-0","C79","Ruy Lopez: Morphy Defense, Steinitz Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O d6 Bxc6+ bxc6 d4 exd4 Nxd4 c5 Nc6 Qd7 Na5 Qa4 Nb3 Bb7 Nc3 Qd7 Na5 Bc8 e5 dxe5 Qf3 c6 Bg5 Be7 Rad1 Qc7 Qxc6+ Qxc6 Nxc6 Bb7 Na5 Bc8 Rfe1 h6 Bh4 g5 Bg3 Nd7 Nd5 Kf8 Nxe7 Kxe7 Nc6+ Kf8 Nxe5 Ra7 Nc6 Rb7 Ne7 Nb6 Nxc8 Nxc8 Rd8+ Kg7 Be5+ f6 Bxf6+ Kxf6 Rxh8 Ne7 Rh7 c4 h3 a5 a4 Rd7 c3 h5 g3 h4 gxh4 gxh4 Kg2 Rb7 Kf3 Rd7 Kg4 Rb7 Rhxe7 Rxe7 Rxe7 Kxe7 Kxh4","Ruy Lopez","only_strong_moves"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","Artem_0degov","2746","2975","1/2-1/2","C56","Italian Game: Scotch Invitation Declined","e4 e5 Nf3 Nc6 Bc4 d6 d4 Nf6 dxe5 dxe5 Qxd8+ Nxd8 Nxe5 Bd6 Nf3 Nxe4 Nbd2 Nxd2 Bxd2 Be6 Bxe6 Nxe6 O-O-O O-O-O Ng5 Nxg5 Bxg5 f6 Be3 Rde8 h3 h5 Rhe1 a6 c3 b5 Kc2 a5 Bd4 Kb7 Kd2 Bf4+ Be3 Be5 Kc2 Kc6 Rd3 a4 Red1 Bd6 Rd5 Re5 Rxe5 Bxe5 Bd4 Bd6 Be3 Re8 b3 Re4 Rd4 axb3+ axb3 Re8 Rh4 g6 g4 Re4 Kd3 f5 f3 Rxe3+ Kxe3 Bg3 gxh5 Bxh4 hxg6 Bf6 h4 Bxc3 Kf4 Kd5 Kxf5 c5 h5 Bg7 Kg5 Ke6 h6 Bf6+ Kf4 c4 bxc4 bxc4 Ke4 c3 Kd3 Ke7 g7 Kf7 f4 Kg8 Kc2 Kh7 Kd3 Kg8 Kc2 Kh7 Kd3 Kg8","Italian Game","MaxiDag30"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","chessdevotee26","2937","2443","1-0","C29","Vienna Game: Vienna Gambit","e4 e5 Nc3 Nf6 f4 d6 Nf3 Nc6 Bb5 Bd7 d3 Be7 Bxc6 Bxc6 fxe5 dxe5 Nxe5 Bc5 Nxc6 bxc6 Bg5 h6 Bh4 g5 Bg3 h5 h3 h4 Bh2 Nh5 Qf3 Rb8 Rf1 Qe7 O-O-O Bd4 e5 Qe6 Qe4 Rb4 a3 Bg1 Qxb4 Bxh2 Qb8+ Ke7 Qxh8 Bf4+ Kb1 Ng3 Qf6+ Qxf6 exf6+ Kxf6 Rxf4+ gxf4 Ne4+ Nxe4 dxe4 Ke5 Rf1 Kxe4 Rf3 f5 Kc1 c5 Kd2 c4 Kc3 a6 Kxc4 c6 b4 Ke5 Kc5 Ke4 Kxc6 Ke5 Kc5 Ke4 c4 Ke5 b5 axb5 cxb5 Ke4 b6 Ke5 b7 Ke4 a4 Ke5 b8=Q+ Ke4 Qe8#","Vienna Game","NikitaShandrygin"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","FARIZA2018","3010","2750","1-0","C58","Italian Game: Two Knights Defense, Polerio Defense, Bishop Check Line","e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6 Bd3 Nd5 Nf3 Bd6 O-O Nf4 Re1 Nxd3 cxd3 O-O Nxe5 c5 b3 Bxe5 Rxe5 Qd4 Re1 Qxa1 Nc3 Be6 Qe2 Nxb3 Ba3 Nd4 Qf1 Qxe1 Qxe1 Nc2 Qc1 Nxa3 Qxa3 Rfd8 Ne4 c4 Nc5 cxd3 Nxe6 fxe6 Qa6 Kf7 f4 Rd7 Kf2 Rb8 Ke3 Rb6 Qa4 Ke7 Qe4 h6 Qg6 Kd8 Qh7 Kc7 Qg8 Kb7 g4 Ra6 h4 Rc7 g5 hxg5 fxg5 Rxa2 Qxe6 Ra6 Qd5+ Rac6 h5 Kb8 Kxd3 Rc5 Qg8+ Kb7 h6 gxh6 gxh6 Rd7+ Ke4 Rcc7 d4 a5 Qb3+ Ka6 d5 Rd6 Qd3+ Ka7 Qe3+ Ka6 Qf4 Re7+ Kd4 Rdd7 d6 Re6 Kd5 Rg6 Kc6 Rh7 Qc4+ Ka7 Qc5+ Kb8 Qb5+ Ka8 Qxa5+ Kb8 Qb5+ Ka8 Qa4+ Kb8 Qb3+ Kc8 Qe3 Rc7+ Kd5","Italian Game","Germanovs_Georgijs"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","Cayse","2792","3082","1/2-1/2","C47","Four Knights Game","e4 e5 Nf3 Nc6 Nc3 Nf6 h3 d5 exd5 Nxd5 Bb5 Nxc3 bxc3 Bd6 d4 exd4 O-O O-O cxd4 Bf5 Re1 Nb4 Ba4 c6 Bb3 a5 a4 Qf6 Bb2 Rae8 Qd2 Rxe1+ Rxe1 Bxh3 Qg5 Bf5 Qxf6 gxf6 Re2 Rc8 Ne1 Kf8 c3 Nd5 c4 Nf4 Re3 Re8 c5 Bc7 g3 Ne2+ Kg2 Rxe3 fxe3 Nxg3 Bc4 Be4+ Kh3 Nf5 Bc1 Ke7 Bd2 h5 Ng2 Bf3 Nf4 Bg4+ Kg2 Bxf4 exf4 Nxd4 Bxa5 Be2 Ba2 Bd1 Bc7 Bxa4 Bd6+ Ke8 Bc4 Bb5 Ba2 Bd3 Kh3 Nf5 Bc7 Bf1+ Kh2 Bd3 Bb3 Be4 Bd1 h4 Kh3 Ke7 Bg4 Nd4 Bd6+ Ke8 Kxh4 Bf3 Bc8 Bd5 Kh5 Nb5 Bb8 Kd8 Bxb7 Kd7 Ba6 Nd4 Kh6 Nf5+ Kh7 Be4 Kg8 Ke7 Bc4 Nh6+ Kg7 Nf5+ Kg8 Bd5 Bd3 Be6 Bxf5 Bxf5 Bd6+ Ke6 Kg7 Be4 Kh6 Bf5 Kg7 Be4 Kf8 Bf5 Ke8 Be4 Kd8 Bf5 Kc7 Be4 Kb6 Bd5 Ka5 Kf5 Kb4 Ke6 Kc3 Kf5 Kd4 Ke6 Ke3 Kf5 Kf2 Ke6 Kg3 Kf5 Kh4 Be4 Kh5 Bd5 Kh4 Be4 Kg3 Bd5 Kf2 Be4 Ke3 Bd5 Kd4 Be4 Ke3 Bd5","Four Knights Game","AlihanHuseyinoglu"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","SeyedAbolfazlMoosavifar","2796","3063","1-0","C54","Italian Game: Classical Variation, Giuoco Pianissimo","e4 e5 Nf3 Nc6 Bc4 Bc5 O-O Nf6 d3 d6 c3 a6 Nbd2 Ba7 Re1 h6 Nf1 g5 Be3 g4 Nh4 Nxe4 Qb3 Ng5 d4 Na5 Bxg5 Qxg5 Bxf7+ Ke7 Ng6+ Qxg6 Bxg6 Nxb3 axb3 Kf6 Be4 exd4 Ng3 dxc3 Nh5+ Kg5 Ra5+ c5 Ng3 cxb2 Rb1 Re8 Rxb2 h5 h4+ Kh6 Rd2 Bb8 b4 Bc7 Ra4 Bd7 Ra1 cxb4 Rc1 Bb8 Rcd1 Be6 Bd5 a5 Re2 Bd7 Be4 a4 Rd5 Re5 Red2 a3 Rxe5 dxe5 Rxd7 a2 Rh7#","Italian Game","NigiriSushies"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","ericmp008","2953","2620","1-0","C47","Four Knights Game: Gunsberg Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 a3 Bc5 Nxe5 Nxe5 d4 Bd6 dxe5 Bxe5 Nb5 c6 Nd6+ Bxd6 Qxd6 Nxe4 Qe5+ Qe7 Qxg7 Nf6+ Be3 Rg8 Qh6 Rg6 Qh4 Rg4 Qh3 d5 O-O-O Rg6 Qh4 Ng4 Qxe7+ Kxe7 Bc5+ Kd8 f3 b6 Bd4 Nh6 g4 f5 Bd3 Be6 h4 Rg8 g5 Nf7 f4 Kc7 Rde1 Rae8 Rxe6 Rxe6 Bxf5 Re2 Bxh7 Rge8 g6 Nh6 g7 Rg2 h5 Ree2 Bd3 Re8 Bf6 Rg8 Bg5 Rxg7 Bxh6 R7g3 Bg5 Kd7 h6 Ke6 Re1+ Kf7 h7 Rh2 b4 Rgh3 Re7+ Kf8 Rxa7 c5 bxc5 bxc5 Bg6 c4 Bf6 Rh1+ Kb2 c3+ Ka2 Rxh7 Ra8#","Four Knights Game","Rakhmanov_Aleksandr"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","gh6999","2398","2668","0-1","C92","Ruy Lopez: Closed, Flohr System","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 d6 c3 O-O h3 Bb7 d3 Re8 Ng5 Rf8 f4 h6 Nf3 exf4 Bxf4 Re8 Nbd2 Bf8 d4 Na5 Bc2 c5 d5 Nd7 b3 Bc8 Kh1 Nb7 a4 Nb6 a5 Nd7 b4 Qf6 Bh2 Qxc3 bxc5 Nbxc5 e5 Nxe5 Nxe5 dxe5 Ne4 Nxe4 Bxe4 Bb7 Rc1 Qxa5 Qh5 Qb6 Bxe5 g6 Bc7 gxh5 Bxb6 Rac8 Ra1 Bb4 Re2 Bxd5 Bf3 Bxf3 Rxe8+ Rxe8 gxf3 a5 Bd4 Re2 Rg1+ Kf8 Bg7+ Ke7 Bxh6 Bd6 Rb1 b4 Bg5+ f6 Bh6 a4 Kg1 b3 Kf1 Rc2 Ke1 b2 Be3 a3 Bd4 Ke6 Kd1 Rg2 f4 Bxf4 Bc5 Bd6 Bd4 a2 Bxb2 axb1=Q+ Bc1 Qc2+ Ke1 Qe2#","Ruy Lopez","ssunu"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","2","NoCampNeeded","2430","2689","0-1","C54","Italian Game: Classical Variation, Giuoco Pianissimo","e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 O-O a4 a5 Bg5 Be7 Nbd2 d6 Nf1 Be6 Ne3 Bxc4 Nxc4 Nd7 h4 Nc5 Ne3 Ne6 Bxe7 Nxe7 Ng5 h6 Nh3 Qd7 Qg4 Nc5 Qxd7 Nxd7 Ke2 f5 f3 fxe4 dxe4 Ra6 Nf2 Nc5 Nd3 Nxd3 Kxd3 Ng6 Nf5 Nf4+ Kc2 Kf7 g3 Ne6 h5 Rb8 Rhd1 b6 Rd5 Nc5 Rf1 Nd7 g4 Rf8 Rd2 Kg8 b3 Nc5 Rd5 Ne6 Ne7+ Kh7 Nf5 Raa8 Rd2 Ng5 Kd3 Rf6 Kc4 Ne6 Kb5 Nc5 Rb1 Rf7 Kc6 Ne6 Kb7 Raf8 Kc6 Nd8+ Kb5 Nb7 b4 Rc8 bxa5 Nxa5 Ka6 Ra8+ Kb5 Nb7 Ra2 Ra5+ Kc4 Nc5 Rb5 Rxa4+ Rxa4 Nxa4 Rb4 Nc5 Kd5 Nd3 Ra4 Ne1 Ke6 Rf6+ Kd7 Nxf3 Kxc7 Nd2 Kxb6 d5+ Kc5 dxe4 Kd5 Rb6 Ne3 Rb5+ Ke6 Rb3 Kf5 Rxc3 Ra8 Rxe3 Ke6 Rd3 Re8 Ra3 Kf5 e3 Rxe5 e2 Rxe2 Rf3+ Ke5 Nc4+ Kd4 Rg3 Kxc4 Rxg4+ Kc5 Rg5+ Kc6 Rxh5 Kb7 Rg5 Kc8 Rg6 Rc2 h5 Rc6 Rh6 Rc7 h4 Re7 h3 Re8 h2 Re1 h1=Q Re7 Qc1+ Rc7 Qd2 Rd7 Rc6+ Rc7 Qd7+ Kxd7 Rxc7+","Italian Game","lopesakalopes"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","laurens97","2892","2629","1-0","C67","Ruy Lopez: Berlin Defense, Rio Gambit Accepted","e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 Re1 Nd6 a4 Be7 Nc3 e4 Nxe4 Nxe4 Rxe4 O-O d4 d5 Re1 Bf6 h3 Ne7 c3 c6 Bd3 g6 a5 a6 b4 Bf5 Ne5 Bxd3 Qxd3 Nf5 Ng4 Bg7 Bf4 Nh6 Nxh6+","Ruy Lopez","GalaxyRoman"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","yegchesss","2426","2741","0-1","C40","Elephant Gambit","e4 e5 Nf3 d5 Nxe5 Bd6 d4 dxe4 Bf4 Bxe5 Bxe5 Nf6 Nc3 Nc6 Bxf6 Qxf6 Nxe4 Qe7 Bd3 f5 d5 fxe4 dxc6 exd3+ Kf1 O-O Qxd3 bxc6 Re1 Qc5 f3 a5 c4 a4 h4 Ba6 Re4 Rae8 b3 axb3 axb3 Rxe4 Qxe4 Rd8 Rh3 Qd6 Kg1 Bc8 Rh1 Qg3 Qe2 h6 c5 Kh8 h5 Ba6 Qxa6 Rd1+ Qf1 Rxf1+ Kxf1 Qe5 Rh4 Qa1+ Kf2 Qb2+ Kg3 Qxb3 Re4 Qd5 Re8+ Kh7 Re7 Qxc5 Rf7 Qg5+ Kf2 Qd2+ Kg3 Qe1+ Kg4 Qe6+ Rf5 g6","","Edward220312"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","Vahan","3014","2685","1-0","C44","King's Knight Opening: Konstantinopolsky","e4 e5 Nf3 Nc6 g3 Nf6 d3 Bc5 Bg2 d6 O-O O-O h3 a6 Kh1 h6 Nh2 d5 Ng4 Bxg4 hxg4 dxe4 g5 hxg5 Bxg5 exd3 Nc3 Be7 cxd3 Qd7 Qe2 Rad8 Rad1 Rfe8 a3 Nd4 Qxe5 Bxa3 Qa5 Be7 Rfe1 c6 Kg1 Qf5 Re5 Nf3+ Bxf3 Qxf3 Rxe7 Ng4 Rd2 Kh7 Ne4 Rxe7 Bxe7 f6 Qh5+ Kg8 Bxd8 Ne5 Qxf3 Nxf3+ Kg2 Nxd2 Nxd2 Kf7 Bb6","","Daniil_Kolbasenk0"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","Duhless","2955","3201","0-1","C77","Ruy Lopez: Morphy Defense, Anderssen Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 d3 b5 Bb3 Bc5 a4 Rb8 axb5 axb5 Nc3 d6 Nd5 h6 c3 O-O O-O Nxd5 Bxd5 Ne7 Bb3 Ng6 d4 Bb6 Be3 Qf6 dxe5 dxe5 Bxb6 Qxb6 h3 Qf6 Ra7 Nf4 Rxc7 Bxh3 Ne1 Qg6 g3 Bxf1 Kxf1 Ne6 Rc6 Qxe4 Bd5 Rfd8 Bxe4 Rxd1 Bc2 Rd2 Bb3 Ng5","Ruy Lopez","Torosyan_chess"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","Livix_panda","3053","2773","1-0","C81","Ruy Lopez: Open, Howell Attack","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Nxe4 d4 b5 Bb3 d5 dxe5 Be6 Qe2 Be7 Rd1 O-O c4 bxc4 Bxc4 Bc5 Be3 Bxe3 Qxe3 Qb8 Bb3 Na5 Nbd2 Nxb3 Nxb3 c5 Nxc5 Nxc5 Qxc5 Qxb2 Qd4 Rab8 Rd2 Qxd4 Nxd4 Rfc8 f4 g6 Kf2 Rb4 g3 Rc3 Re1 h5 Re3 Rcc4 Red3 Kg7 Ke3 Rc1 Rb3 a5 Rxb4 axb4 Rb2 Re1+ Kd2 Rh1 Kd3 Bc8 Nc6 Ba6+ Ke3 Re1+ Kd4 Rd1+ Kc5 Rc1+ Kb6 Bc4 Nxb4 d4 Rd2 Ra1 Kc5","Ruy Lopez","shimastream"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","FabianoCaruana","2964","3221","0-1","C70","Ruy Lopez: Morphy Defense, Cozio Defense","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nge7 O-O Ng6 c3 d5 exd5 Qxd5 d4 Bg4 Bb3 Qd7 h3 Bxf3 Qxf3 O-O-O Qxf7 Qxf7 Bxf7 exd4 cxd4 Nxd4 Bxg6 hxg6 Nc3 Be7 Bf4 Bf6 Rac1 g5 Bh2 Rhe8 Rfe1 Rxe1+ Rxe1 Nb5 Ne4 Bxb2 Nxg5 Bc3 Rb1 Re8 Bg3 c5 Nf7 Rf8 a4 Rxf7 axb5 axb5 Rxb5 Bd4 Kf1 Rf6 Ke2 b6 Rb1 Kb7 f4 Kc6 Kf3 b5 Bh4 Rf7 g4 b4 f5 Kd5 Be1 Rb7 g5 b3 Kf4 b2 h4 c4 h5 c3 Bxc3 Bxc3 f6 gxf6 g6 Ke6 h6 Bd2+ Ke4 Bxh6","Ruy Lopez","only_strong_moves"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","lopesakalopes","2703","2427","1-0","C43","Petrov's Defense: Modern Attack","e4 e5 Nf3 Nf6 d4 exd4 e5 Nd5 Qxd4 Nb6 Bd3 Nc6 Qe4 Be7 a3 h6 Nc3 d6 exd6 cxd6 O-O d5 Qf4 Be6 Qg3 g5 Ne5 Bd6 f4 Rg8 Bd2 a6 Rae1 Qc7 Nxf7 Qxf7 Qe3 O-O-O Qxe6+ Qxe6 Rxe6 gxf4 Rxh6 Ne5 Bf5+ Kb8 Bxf4 Bc7 Kh1 Ka7 Rh7 Bb8 Be3 d4 Be4 Rd7 Rxd7 Nexd7 Bxd4 Ka8 Rf7 Rh8 h3 Re8 Bxb6 Nxb6 Bxb7+","","MikaKarttunen"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","Little_Skib","3292","3003","1-0","C76","Ruy Lopez: Morphy Defense, Modern Steinitz Defense, Fianchetto Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 d6 c3 Bd7 d4 g6 O-O Bg7 h3 Nf6 Re1 b5 Bb3 O-O Nbd2 Re8 a3 Na5 Ba2 Nh5 b4 Nc6 Nf1 a5 bxa5 Nxa5 dxe5 dxe5 Ng5 Nc4 Ne3 h6 Nxc4 bxc4 Nf3 Be6 Qe2 Nf4 Bxf4 exf4 Red1 Qe7 Bxc4 Bxc3 Rac1 Rxa3 Bxe6 Qxe6 Rd3 Bb2 Rxc7 Rxd3 Qxd3 Bg7 Rc4 Kh7 h4 Rd8 Qxd8 Qxc4 Qe8 Qe6 Qxe6 fxe6 Kf1 Kg8 Ke2 Kf7 e5 Bf8 Nd2 Be7 h5 gxh5 Kf3 Kg6 Ke4 Bc5 f3 Kg5 Nc4 h4 Nd6 h3 gxh3 Kh4 Nf7 h5 Nd8 Ba3 Nxe6 Kxh3 Nxf4+ Kh4 Ne2 Kg5 f4+ Kg4 f5 h4 Ng1 Bc5 Nf3 h3 f6 Bd4 Kxd4 Kxf3 f7","Ruy Lopez","LyonBeast"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","thecatdoglady","2733","2347","1-0","C67","Ruy Lopez: Berlin Defense, Rio Gambit Accepted","e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 Re1 Nd6 Nxe5 Nxe5 Rxe5+ Be7 Bf1 O-O d4 Bf6 Re1 Re8 Rxe8+ Nxe8 c3 d5 Bf4 Bf5 Nd2 Nd6 Nf3 c6 h3 h6 Ne5 Qe7 Qb3 Re8 Re1 Ne4 Nf3 Qd7 Ne5 Bxe5 Bxe5 f6 Bf4 b6 Qd1 Kh7 Bd3 g5 Bc1 Kg7 a4 Nd6 Bf1 Rxe1 Qxe1 Qe6 Qd1 Qe4 Be3 Qc2 Qa1 Qb1 Qa3 Nf7 b4 Bd3 Qc1 Qxc1 Bxc1 Bxf1 Kxf1 Nd6 Bd2 Nc4 Bc1 a5 bxa5 bxa5 Ke2 Nb6 Kd3 Nxa4 Kc2 Nb6 Kb3 Nc4 Ka4 Kf7 Kb3 Ke6 Ka4 Kf5 f3 h5 Kb3 g4 fxg4+ hxg4 h4 Kg6 Bf4 g3 Bxg3 Ne3 Ka4 Nxg2 Kxa5 Kh5 Kb6 Kg4 Bf2 Kf3 h5 Nf4 Bh4 Nxh5 Kxc6 f5 Kxd5 f4 c4 Kg4 Be1 Ng3 c5 Nf5 Kc4 Ne3+ Kd3 Ng2 Bf2 Kf3 c6 Kxf2 c7 Kg1 c8=Q f3 Qc1+ Kh2 Qh6+ Kg1 d5 f2 Qc1+","Ruy Lopez","Lucsd"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","tptagain","2875","3130","0-1","C50","Italian Game: Paris Defense","e4 e5 Nf3 Nc6 Bc4 d6 d4 Be7 dxe5 Nxe5 Nxe5 dxe5 Qxd8+ Bxd8 Nc3 c6 Be3 Bb6 Ke2 Ke7 Rhd1 Nf6 f3 Nd7 a4 Bxe3 Kxe3 a5 Ne2 Nc5 c3 h5 h4 g6 Nc1 Be6 Bxe6 Nxe6 Nd3 f6 Rd2 Rhd8 Rad1 Rd6 g3 Rad8 Nc1 Rxd2 Rxd2 Rg8 Rh2 Nc5 b3 Ra8 Ra2 Kd6 Nd3 Nxd3 Kxd3 Kc5 Ke3 Rd8 Ra1 f5 Ke2 b6 Rg1 fxe4 fxe4 b5 g4 b4 gxh5 gxh5 c4 Rf8 Ke3 Rf4 Rg5 Rxh4 Rxe5+ Kb6 c5+ Kc7 Kd4 Rh3 Re7+ Kd8 Re6 Kd7 Rd6+ Kc7 Rh6 Rxb3 Rxh5 Ra3 Ke5 Rxa4 Rh7+ Kb8 Kd6 b3 Rh8+ Ka7 Rh7+ Ka6 Rh8 Rxe4 Kxc6 Re6+ Kd7 Re2 c6 Rd2+ Kc7 b2 Rb8 a4 Rb6+ Ka5 Kb7 a3 c7 Rd7 Kc6 Rxc7+ Kxc7 a2 Rxb2 a1=Q Rb7 Qe5+ Kc8 Qe6+ Kc7 Ka6 Rb8 Qe7+ Kc8 Qc5+ Kd7 Ka7 Rc8 Qd5+ Ke7 Kb7 Rd8 Qg5+ Kf7 Qxd8","Italian Game","Brave_spirit12"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","betta2004","3090","2701","1-0","C26","Vienna Game: Falkbeer Variation","e4 e5 Nc3 Nf6 d4 exd4 Qxd4 Nc6 Qa4 Bb4 Bd2 O-O O-O-O Re8 f3 d6 Bb5 Bxc3 Bxc3 Bd7 Ne2 a6 Bxc6 Bxc6 Qd4 Qe7 Ng3 Bd7 Qd2 Be6 Kb1 Nd7 h4 b5 h5 h6 Ne2 a5 Qd4 f6 Nf4 b4 Bd2 Ne5 Bc1 Qf7 Nxe6 Qxe6 Rhe1 Red8 f4 Nf7 g4 Qxg4 Rg1 Qe6 Rg6 Kh7 Rdg1 Rg8 Qd3 Nh8 e5 Nxg6 hxg6+ Kh8 f5 Qxe5 Qh3 Rge8 Bxh6 Kg8 Bd2 Qe2 Qh7+ Kf8 Qh8+ Ke7 Qxg7+ Kd8 Qxf6+ Kc8 Qd4 Kb7 f6 Re4 Qd5+ c6 Qxd6 Qf2 Qd7+ Kb6 Rc1 Rd4 Qe7 Rxd2 f7 Rad8 g7 Rxc2 Qxd8+ Kb7 Qd7+ Kb6 Rxc2 Qe1+ Rc1 Qe4+ Ka1 Qe3 Qxc6+ Ka7 Qc7+ Ka6 Qc4+ Kb6 f8=Q Qe5 Qfc5+ Kb7 Qxe5 a4 Qec7+","Vienna Game","rezamahdavi2008"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","Cayse","2783","3068","1-0","C47","Four Knights Game: Scotch Variation Accepted","e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Qd4 c5 Qe5+ Kf8 Bd2 d6 Qf4 Bb7 f3 Nd7 O-O-O Qf6 Qg3 h6 a3 Ba5 Qf4 Bxc3 bxc3 Qe6 Qf5 Qa2 Bf4 Bc6 Kd2 g6 Qh3 Ba4 Bd3 Nb6 Ra1 Qb2 Rhc1 Re8 Rab1 Qa2 Ra1 Qe6 Bxh6+ Ke7 Bg5+ Kd7 Qxe6+ fxe6 h4 Kc6 e5 d5 Bxg6 Nc4+ Ke2 Nxe5 Bxe8+ Rxe8 Bf6 Nd7 Bg5 e5 Kd2 Rg8 Rh1 Nb6 Rae1 Nc4+ Kc1 Rb8 Kd1 Rb2 Ke2 Bxc2 Kf1 d4 Kg1 dxc3 h5 Bh7 Rh4 Nxa3 Bc1 Rb1 Kf2 Nc2 Reh1 Nb4 g4 Nd3+ Ke3 Nxc1 g5 c2 g6 Bg8 h6 Nd3 Kxd3 c1=Q Rxc1 Rxc1 h7 Rd1+ Ke2 Rd8 h8=Q Bc4+ Ke3 Rxh8 Rxh8 a5 g7 a4 g8=Q Bxg8 Rxg8 Kd5 Ra8 Kc4 Rxa4+ Kb3 Re4 c4 Rxe5 c3 Rc5 c2 Rxc7 Kb2 Kd2 Kb3 Rxc2 Kb4 f4 Kb5 f5 Kb6 f6 Kb5 f7 Kb6 f8=Q Kb5 Qf3 Kb6 Qb3+","Four Knights Game","KasimovR21"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","Ako2008","3108","2704","1-0","C50","Italian Game: Giuoco Pianissimo, Normal","e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 a3 d6 h3 h6 Be3 Bxe3 fxe3 Be6 Nc3 Bxc4 dxc4 O-O Qe2 a5 O-O-O Qe7 g4 Nh7 h4 Nd8 g5 h5 g6 fxg6 Rhg1 c6 Rxg6 Rf6 Rg3 Ne6 Ng5 Nexg5 hxg5 Rg6 Qxh5 Rxg5 Rxg5 Qxg5 Qh3 Rd8 Qe6+ Kh8 Kb1 Qf6 Qh3 Kg8 Rg1 Nf8 Rf1 Qg5 Rf5 Qg6 Ne2 Ne6 Ng3 Rf8 Ka2 Nc5 Rh5 Rf3 Rh8+ Kf7 Qc8 Qxg3 Qe8+ Kf6 Rf8+ Kg5 Qe7+ Kg4 Rg8 Kh3 Rxg7 Qf2 Qg5 Rg3 Qh6+ Kg2 Rh7 Kf1 Qxd6 Nxe4 Qd1+ Qe1 Rh1+ Rg1 Rxg1+ Kxg1 Qxe1+ Kg2 Qe2+ Nf2 e4 Kg3 c5 Kg2 b4 Kg3 bxa5 Kg2 a6","Italian Game","Fandorine"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","3","Abund","2588","2818","0-1","C47","Four Knights Game","e4 e5 Nf3 Nf6 Nc3 Nc6 h3 d5 Bb5 Nxe4 O-O Bd6 Nxd5 O-O d3 Nc5 Bxc6 bxc6 Ne3 f6 d4 exd4 Qxd4 Kh8 Rd1 Be6 b3 Qe7 Bb2 Rad8 Qh4 Qf7 Nd4 Bd7 Ndf5 Be6 Rd4 Rfe8 Rad1 Nb7 Rg4 Bf8 Rxd8 Nxd8 Rf4 Qd7 Rd4 Qf7 Ra4 Qd7 Rf4 Qf7 Qg3 Bd6 Nxd6 cxd6 Nf5 Bxf5 Rxf5 Qe6 Qf4 Rf8 Ra5 Rf7 Ra4 Qd7 Re4 Re7 Qe3 Rxe4 Qxe4 Nf7 h4 Kg8 h5 d5 Qf4 Qd6 Qf5 Qd8 Qe6 h6 Qxc6 d4 Qe6 Qd6 Qxd6 Nxd6 Bxd4 a6 Bc5 Nf5 c4 Kf7 g4 Nh4 Kh2 g5 Kg3 Ke6 f4 f5 fxg5 hxg5 gxf5+ Kxf5 Be3 Kf6 h6 Kg6 Kg4 Nf5 Bxg5 Nd4 Bf4 Ne6 Be3 Nf8 Bf2 Nh7 Bg3 Nf6+ Kf3 Nd7 Kf2 Nf6 Kg2 Nh7 Kf2 Ng5 Kg2 Nh7 Kh2 Kf7 Kg2 Ke6 Kg1 a5 Kf1 a4","Four Knights Game","kanzaww"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","Antosha_Chekhonte","2603","2907","0-1","C45","Scotch Game: Steinitz Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Qh4 Qd3 Nb4 Qe2 Bc5 c3 Nc6 Nxc6 dxc6 Be3 Bg4 Qc4 Bxe3 g3 Qd8 fxe3 Qd1+ Kf2 Qf3+ Ke1 Qxh1","Scotch Game","giomar27"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","FREDERICKtheMATE","2774","3082","0-1","C58","Italian Game: Two Knights Defense, Polerio Defense, Bishop Check Line","e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6 Bd3 Nd5 h4 Be7 Qf3 Bxg5 hxg5 Qxg5 Rh5 Qe7 b3 Nf6 Ba3 Qe6 Bf5 Qd5 Be4 Nxe4 d3 Nf6 Qxd5 cxd5 Rxe5+ Be6 Nc3 Nc6 Rg5 h6 Rg3 Nh5 Rf3 Nd4","Italian Game","zverr1"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","daika91","2580","2810","0-1","C89","Ruy Lopez: Marshall Attack, Modern Main Line","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O c3 d5 exd5 Nxd5 Nxe5 Nxe5 Rxe5 c6 d4 Bd6 Re1 Qh4 g3 Qh3 Nd2 Bg4 f3 Bxg3 Re2 Ne3 fxg4 Nxd1 hxg3 Qxg3+ Rg2 Qe3+ Kh2 Qf4+ Kg1 Ne3","Ruy Lopez","VladimirSofronie"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","Artemiki","3194","2901","1-0","C63","Ruy Lopez: Schliemann Defense, Dyckhoff Variation","e4 e5 Nf3 Nc6 Bb5 f5 Nc3 fxe4 Nxe4 d5 Nc3 e4 Ne5 Qf6 d4 Bb4 O-O Ne7 f3 Bxc3 bxc3 e3 Bxe3 Bf5 Qd2 O-O Bg5 Qd6 Rae1 Nxe5 Bxe7 Qxe7 Rxe5 Qd6 Qe2 Qa3 Re7 Be4 Rxc7 Qa5 Re7 Qxc3 fxe4 Qxd4+ Kh1 Rxf1+ Qxf1 Rf8 Re8","Ruy Lopez","ChristopherYoo"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","chesslh93","2779","2562","1-0","C43","Petrov's Defense: Modern Attack","e4 e5 Nf3 Nf6 d4 Nxe4 dxe5 d5 Nbd2 Be7 Nxe4 dxe4 Qxd8+ Bxd8 Nd4 O-O Bf4 Nd7 Bc4 Nc5 O-O-O Bg4 Rd2 c6 a3 Bb6 h3 Be6 Nxe6 Nxe6 Be3 Bxe3 fxe3 Rad8 Rhd1 Rxd2 Rxd2 Rd8 Bxe6 Rxd2 Kxd2 fxe6 Kc3 Kf7 Kd4 Kg6 Kc5 Kf5 Kd6 h5 g3 g5 c4 a6 c5 a5 a4","","MaestroCheck"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","OsboAM","3252","2768","0-1","C48","Four Knights Game: Spanish Variation, Rubinstein Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Nd4 Ba4 c6 Nxe5 d5 d3 Bd6 f4 O-O O-O dxe4 dxe4 Bxe5 fxe5 Ng4 Bf4 b5 Bb3 Nxb3 axb3 Qb6+ Kh1 Nf2+ Rxf2 Qxf2 Bg3 Qc5 Qd6 Qe3 Qxc6 Be6 Nd5 Qe2 Nf4 Qg4 Qxb5 Rac8 c3 h5 Qe2 Rfd8 Qf2 Rd1+ Rxd1 Qxd1+ Qe1 Rd8 Kg1 Qc2 Qe3 Rd1+ Be1 Qb1 Kf1 Qxb2 Nxh5 Bxb3 Qg3 Bc4+ Kg1 Qb6+ Kh1 Qg6 Qh4 Qxh5 Qf2 Qxe5 h3 Qxc3 Kh2 Qxe1 Qf4 Qg1+ Kg3 Rd3+ Kh4 Qe1+ g3 Qxg3+ Qxg3 Rxg3 e5 Re3 Kg5 Rxe5+ Kf4 f6 h4 a5 h5 a4 h6 g5+ Kg3 a3 h7+ Kxh7 Kf3 a2 Kf2 a1=Q Kf3 Qa3+ Kg2 Re2+ Kf1 Qc1#","Four Knights Game","artooon"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","Slawomir_Kurpiewski","2398","2152","1/2-1/2","C56","Italian Game: Scotch Gambit, Max Lange Attack","e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 e5 d5 Bb5 Ne4 Nxd4 Bc5 Bxc6+ bxc6 O-O Bd7 Kh1 Qh4 Be3 O-O Nd2 Nxd2 Qxd2 h6 f4 Bxd4 Qxd4 Bf5 Rf3 Be4 Rg3 g6 f5 Kh7 f6 Rfe8 Kg1 Qh5 Bxh6 Qxe5 Qd2 Qxb2 Bg7 Qxa1+ Kf2 g5 Rxg5 Kg8 Rh5 Bh7 Rxh7 Re2+ Kxe2 Qe5+ Kd1 Qa1+ Ke2 Qe5+ Kd1 Qa1+ Ke2","Italian Game","ChessIsShocking"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","frederiksvane","2933","3187","0-1","C47","Four Knights Game: Gunsberg Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 a3 Bd6 Bc4 O-O d3 Re8 h3 Nd4 Be3 Bc5 O-O c6 Bxd4 exd4 Ne2 d5 exd5 Nxd5 Nexd4 Nf4 c3 Qf6 Re1 Bxh3 Rxe8+ Rxe8 g3 Bg4 Qd2 Ne2+ Nxe2 Bxf2+ Kh2 Bxf3 d4 Be3","Four Knights Game","M_Pank_537"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","kaidanov","3010","2742","1-0","C58","Italian Game: Two Knights Defense, Polerio Defense, Bishop Check Line","e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ Bd7 Qe2 Bd6 Nc3 O-O O-O Bxb5 Qxb5 c6 dxc6 Nxc6 Nge4 Nxe4 Nxe4 Nd4 Qd3 Be7 c3 Ne6 Qb5 Qc7 d3 Rad8 Be3 f5 Nd2 b6 Qc4 Qd7 Nf3 Bf6 d4 e4 Ne5 Bxe5 dxe5 Kh8 h3 f4 Bd4 f3 Be3 fxg2 Rfd1 Qf7 Qxe4 h6 Kxg2 Rde8 Rd2 Qh5 Re1 Rf5 Qg4 Qf7 Red1 Rf8 Rd7 Qe8 Rxa7 Ng5 Rdd7 Qxe5 Bd4 Qe1 Qxf5 Rxf5 Rd8+","Italian Game","Germanovs_Georgijs"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","Sibelephant","3011","3250","0-1","C47","Four Knights Game: Naroditsky Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 Nd5 Bc5 c3 O-O d3 Nxd5 exd5 Ne7 Nxe5 Nxd5 d4 Be7 Bc4 Nf6 O-O d6 Nf3 d5 Bd3 Bg4 h3 Bh5 g4 Bg6 Ne5 Bxd3 Qxd3 c6 Bf4 Ne4 f3 Nd6 Qc2 Bg5 Bg3 Bh4 Qf2 Bxg3 Qxg3 Re8 Rae1 h6 Nd3 Qf6 Re5 Nc4 Rxe8+ Rxe8 Re1 Rxe1+ Qxe1 Qxf3 b3 Ne3 Qf2 Qxh3 Ne1 Qxg4+ Ng2 Qxg2+ Qxg2 Nxg2 Kxg2 f5","Four Knights Game","ShadowKing71"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","NigiriSushies","3128","2791","1-0","C45","Scotch Game: Schmidt Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 Qe2 Qe7 Nc3 d5 exd5 cxd5 Nb5 Qxe2+ Bxe2 Bb4+ c3 Ba5 Bf4 c6 Bc7 Ba6 Bxa5 Bxb5 Bf3 Ne4 b3 f5 Bxe4 fxe4 Bb4 a5 Bc5 a4 Kd2 Kd7 Rhc1 axb3 axb3 Ba6 Bd4 Bb7 Ke3 Rhg8 Rxa8 Rxa8 Bxg7 Rg8 Be5 Rxg2 Bg3 h5 h4 c5 b4 Kc6 Ra1 cxb4 cxb4 Kb5 Kd4 Bc8 Ra8 Bg4 Rb8+ Kc6 b5+ Kd7 Rb7+ Kd8 b6 Rg1 Rh7 Rb1 b7 Rb4+ Kc5 Rb1","Scotch Game","carokannlover213"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","only_strong_moves","2743","2951","1-0","C58","Italian Game: Two Knights Defense, Polerio Defense, Bishop Check Line","e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 Bb5+ c6 dxc6 bxc6 Bd3 Nd5 h4 h6 Qh5 Qf6 Nh7 Rxh7 Bxh7 g6 Qe2 Nf4 Qf3 h5 Nc3 Bg4 Qg3 Bh6 f3 Bf5 Ne4 Bxe4 fxe4 Nc4 Rf1 Rb8 Rf2 Kf8 b3 Nd6 Ba3 Kg7 Qf3 Qe6 g3 Nh3 Bxd6 Nxf2 Bxb8 Ng4 O-O-O Kxh7 Bxa7 Qe7 Bg1 Kg7 Kb2 Qd7 Qc3 Qe6 a4 Nf6 Qc4 Qg4 Rf1 Bxd2 Qxc6 Nxe4 Qd5 Bc3+ Ka2 f5 Be3 Qe2 Qd3 Qxd3 cxd3 Nxg3 Rc1 Bb4 Rc4 Be1 b4 f4 Bxf4 exf4 Rxf4 Ne2 Rc4 Bf2 a5 Kf6 b5 Ke5 b6 Kd5 b7 Ba7 Rc8 Nd4 Ra8 Nc6 Rxa7 Nxa7 b8=Q Nc6 Qb7","Italian Game","Harry_Rakkel"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","Abund","3178","2816","1-0","C42","Petrov's Defense: Damiano Variation, Kholmov Gambit","e4 e5 Nf3 Nf6 Nxe5 Nxe4 Qe2 Qe7 Qxe4 d6 d4 dxe5 dxe5 Nc6 Nc3 Qxe5 Qxe5+ Nxe5 Bf4 Bd6 Bg3 f6 Nb5 Bd7 Nxd6+ cxd6 O-O-O Ke7 f3 Rhc8 Rd2 Be6 b3 a6 Kb2 Rc6 a4 Rac8 Be2 Rc3 Bf2 Bf5 Rc1 R3c6 g4 Be6 h3 g5 a5 h6 Bd4 Bf7 Rf1 Bg6 Bd1 Nd7 f4 gxf4 Rxf4 Ne5 Rdf2 d5 Re2 Be4 Rd2 Ng6 Rf1 Ne5 Rdf2 Nd7 h4 Rg8 Be3 Ne5 Rg1 f5 g5 hxg5 hxg5 Ng6 Bd4 Ke6 Rh2 Rc7 Rh6 f4 Bg4+ Kd6 c4 dxc4 Re1 Kd5 Bf6 f3 Rh2 Kc5 Rxe4 cxb3 Kxb3 Kd6 Rd2+ Kc6 Rc4+ Kb5 Rd5+ Rc5 Rdxc5#","","sokidze"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","Zuko07","2673","2436","1/2-1/2","C40","Elephant Gambit","e4 e5 Nf3 d5 exd5 Nf6 d3 Bd6 c4 c6 dxc6 Nxc6 Be2 O-O O-O h6 Nc3 Re8 Ne4 Bc7 Be3 Ng4 Bd2 f5 Nc3 e4 dxe4 fxe4 h3 exf3 Bxf3 Nf6 Nd5 Nxd5 Bxd5+ Be6 Bc3 Qd6 f4 Rad8 Qg4 Re7 Rae1 Qxd5 cxd5 Bxg4 dxc6 Rxe1 Rxe1 Bc8 cxb7 Bxb7 Re7 Bb6+ Kh2 Bd5 Rxg7+ Kf8 Rh7 Re8 Rxh6 Re2 Rg6 Be4 Rg3 Be3 Rg4 Bf5 Rg5 Bxf4+ Kg1 Bxg5 Kf1 Rc2 Bd4 Bd3+ Ke1 Re2+ Kd1 Rxg2 b3 Rd2+ Kc1 Rxa2+ Kd1 Rh2 Bc3 Rxh3 Be1 Rh1 b4 Be3 b5 Ke7 b6 axb6","","nicholas_ilic"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","Igor_Lysyj","3257","2977","1-0","C50","Italian Game: Giuoco Pianissimo, Normal","e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 Bg5 d6 c3 h6 Bh4 a6 Nbd2 Ba7 O-O g5 Bg3 Bg4 Kh1 O-O a4 Qe7 b4 Rae8 b5 Na5 Ba2 Bb6 Qc2 axb5 axb5 c6 bxc6 bxc6 Rab1 Bc7 Rfe1 Nh5 d4 Nxg3+ hxg3 Kg7 Qd3 Qf6 Kg1 h5 Nf1 h4 Ne3 Bc8 g4 h3 gxh3 Rh8 Nh2 exd4 cxd4 Rxh3 Nf5+ Bxf5 Qxh3 Bxe4 d5 Re5 Rb4 cxd5 Nf1 Nc6 Rb7 Nd4 Re3 Ba5 Ng3 Nf3+ Kh1 Bg6 Nh5+ Bxh5 Rxf3 Re1+ Kg2 Qa1 Qh2 Bg6 Bxd5","Italian Game","FaustinoOro"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","GMKrikor","2705","3072","1/2-1/2","C26","Vienna Game: Stanley Variation","e4 e5 Nc3 Nf6 Bc4 Bc5 f4 exf4 d4 Bb4 e5 d5 exf6 dxc4 fxg7 Rg8 Bxf4 Rxg7 Qe2+ Qe7 Qxe7+ Kxe7 Kf2 Bxc3 bxc3 Be6 Bxc7 Nd7 Bg3 Nb6 Nf3 Nd5 Rhe1 f6 Nd2 Rc8 Ne4 Rc6 Rab1 b6 Bh4 Rf7 a4 Kd7 a5 Bf5 axb6 axb6 Ra1 Bxe4 Rxe4 Nxc3 Rf4 Nd5 Rf5 Ne7 Ra7+ Rc7 Rxc7+ Kxc7 Rxf6 Rxf6+ Bxf6 Nd5 Be5+ Kd7 g4 Nb4 c3 Nd5 h4 Nxc3 Ke3 Ke6 h5 Nd5+ Kd2 b5 g5 Kf7 Bd6 Ke6 Be5 Ne7 Kc3 Kf5 g6 hxg6 h6 g5 h7 Ng6 h8=Q Nxh8 Bxh8 Ke4 Be5 g4 Bc7 Kd5 Be5 Ke4 Bg3 Kd5 Bf2 g3 Bg1 g2 Bh2 Ke4 Bg1 Kd5 Bf2 Ke4 Kc2 Kd5 Kd2 b4 Kc2 b3+ Kc3 Ke4 Bg1 Kd5 Kb2 Ke4 Bh2 Kd5 Bg1 Ke4 Bf2 Kd5 Kc3 Ke4 Kxc4 b2 d5 b1=Q d6 Qd3+ Kc5 Qxd6+ Kxd6 Kf3 Bg1 Ke2 Bh2 Kf1 Ke5 Ke2 Kf4","Vienna Game","elpeordelosmejores"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","4","fixer-mind","2680","2493","0-1","C45","Scotch Game: Tartakower Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 Nd2 d5 exd5 cxd5 Bb5+ Bd7 Bxd7+ Qxd7 O-O Be7 b3 O-O Bb2 c6 Qf3 Rfe8 Rad1 Rad8 Rfe1 Bb4 Bxf6 gxf6 c3 Bf8 Nf1 Rxe1 Rxe1 Re8 Rd1 Bg7 Ne3 Re5 h3 h5 Rd4 Bh6 Qg3+ Kh7 Qf3 Qe6 Nf1 c5 Rd3 Rf5 Qd1 c4 bxc4 dxc4 Rd6 Qe5 Rd7 Kg6 Ng3 Rg5 Qc2+ Kg7 Ne4 Rg6 Nd6 Qe1+ Kh2 Bf4+ g3 Bxg3+ Kg2 Bxd6+ Kf3 Qh1+ Ke2 Qd5 Kf1 Qe6 Rxa7 Qxh3+ Ke2 Rg4 Qd2 Bf4 Qd5 Qd3+ Qxd3 cxd3+ Kxd3 Be5 Kc2 h4 c4 h3 c5 h2 c6 h1=Q c7 Qc6+ Kd2 Rd4+ Ke2 Qc2+ Kf1 Rd1+ Kg2 Qg6+ Kf3 Rd2 Ke3 Qg5+ Ke4 Qf4#","Scotch Game","GMShoti"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","Manukyan_Artak","2656","2473","1-0","C46","Three Knights Opening","e4 e5 Nf3 Nc6 Nc3 Bc5 Nxe5 Nxe5 d4 Bd6 dxe5 Bxe5 Nb5 c6 Nd6+ Bxd6 Qxd6 Qe7 Qf4 Nf6 f3 d5 Bd3 dxe4 fxe4 O-O O-O Nd7 c3 Ne5 Bc2 f6 Be3 Be6 h3 Rad8 Qf2 b6 b3 c5 a4 Bf7 a5 Bg6 axb6 axb6 b4 cxb4 Bxb6 Rc8 Ra7 Qe6 Bc5 Rf7 Rxf7 Nxf7 cxb4 Bxe4 Re1 f5 Bxe4 fxe4 Qd4 Re8 b5 h5 b6 Qc6 Bb4 e3 Bc3 Qh6 b7 e2 Rxe2 Rxe2 b8=Q+","","Tamizhamudhan2017"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","FARIZA2018","3009","2762","1-0","C77","Ruy Lopez: Morphy Defense, Anderssen Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 d3 b5 Bb3 Be7 O-O d6 Bd2 O-O h3 Bb7 a4 Qd7 Re1 Nd8 axb5 axb5 Rxa8 Bxa8 Nc3 Ne6 Be3 c6 d4 exd4 Nxd4 Nxd4 Bxd4 c5 Bxf6 Bxf6 e5 c4 exf6 cxb3 fxg7 Re8 Rxe8+ Qxe8 cxb3 Qe6 Nxb5 Qe4 Qg4 Qe1+ Kh2 Qe5+ f4 Qxb5 Qc8+ Kxg7 Qxa8 Qxb3 Qa3 Qe6 Qc3+ Kg8 Qd4 h5 b4 h4 f5 Qxf5 Qxd6 Kh7 Qb8 Qg5 b5 f5 Qc7+ Kh6 Qd6+ Kh7 Qe5 Qg6 Qc7+ Kg8 b6 f4 Qxf4 Qxb6 Qxh4 Qb1 Qg3+ Kh7 Qf4 Kg8 h4 Qc2 Kg3 Qd3+ Qf3 Qc2 Kh3 Kh7 g4 Qb1 Qf5+","Ruy Lopez","Little_Skib"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","KasimovR21","3298","2795","1-0","C42","Petrov's Defense: Damiano Variation, Kholmov Gambit","e4 e5 Nf3 Nf6 Nxe5 Nxe4 Qe2 Qe7 Qxe4 d6 d4 dxe5 dxe5 Nc6 Nc3 Qxe5 Qxe5+ Nxe5 Nb5 Bb4+ Bd2 Bxd2+ Kxd2 Kd8 Re1 Nd7 Bc4 Rf8 h4 a6 Nd4 Nb6 Bd3 c5 Nf3 h6 Re5 c4 Be2 Bg4 Kc1 Re8 Rd1+ Kc7 Rc5+ Kb8 Bxc4 Bxf3 gxf3 Nxc4 Rxc4 Ka7 Rc7 Rac8 Rxc8 Rxc8 Rd4 Rc5 Kd2 Kb6 c4 Rh5 b4 Kc7 Ke3 g5 hxg5 Rxg5 Rh4 h5 f4 Rg1 Rxh5 Rc1 Kd3 Rd1+ Kc3 Rc1+ Kb3 Rb1+ Ka4 Rb2 a3 Rc2 c5 Rxf2 Rf5 Rf3 Rxf7+ Kc6 Rf6+ Kc7 f5 Kc8 Rf7 Kb8 c6 bxc6 f6 Rf5 Kb3 Ka8 Kc4 Kb8 Kd4 a5 Ke4 Rf1 Ke5 axb4 axb4 Re1+ Kd6 Rb1 Re7","","DenLaz"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","carokannlover213","2903","3132","0-1","C70","Ruy Lopez: Morphy Defense, Schliemann Defense Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 f5 d3 fxe4 dxe4 Nf6 O-O d6 Qd3 Be7 Bg5 Bd7 Nbd2 O-O Bxf6 Bxf6 c3 Kh8 Qe3 Rb8 b4 Qe8 Bb3 Ne7 Rfe1 Ng6 g3 Ne7 h4 Ng8 Kg2 Nh6 Nh2 Qg6 Kh1 b6 Bd1 Qf7 Be2 Ra8 Bc4 Qe7 a3 b5 Be2 g5 h5 Qg7 g4 Be7 f3 Nf7 Nhf1 Nd8 Ng3 Ne6 Nf5 Qf6 c4 Nf4 Bf1 Rfc8 Rec1 Bf8 Nb3 c6 Rd1 Bxf5 exf5 d5 cxd5 cxd5 Rac1 Qd6 Nc5 Be7 Nd3 Nxd3 Qxd3 Rd8 Bg2 Ra7 Qe3 Rad7 Rc5 d4 Qe4 Bf6 Rc6 Qe7 Re6 Qf7 Rxa6 Kg7 Re6 Rd6 Rd3 Rxe6 fxe6 Qxe6 Bf1 Rc8 Rd1 Qc6 Bd3 Qxe4 Bxe4 Rc3 Rd3 Rc1+ Kg2 Ra1 Kg3 Be7 Rb3 h6 Bd3 e4 Bxb5 Bd6+ f4 gxf4+ Kh3 f3 g5 Rh1+ Kg4 Rg1+ Kf5 Rxg5+","Ruy Lopez","K_A_S_T_O_R"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","FairChess_on_YouTube","3027","3251","0-1","C49","Four Knights Game: Spanish Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bb4 O-O O-O d3 Bxc3 bxc3 d6 Bg5 h6 Bh4 Qe7 Re1 Bd7 d4 a6 Bf1 Bg4 Rb1 b6 Be2 Rfe8 h3 Bxf3 Bxf3 g5 Bg3 Qf8 Qd2 Qg7 Rbd1 Re7 Qd3 Qg6 Qc4 Na5 Qa4 Rae8 dxe5 dxe5 Re3 Kg7 c4 Nb7 Qxa6 Nc5 Qb5 Nfxe4 Bxe4 Nxe4 Rde1 Nd6 Qd5 f6 c5 Nf5 Rd3 Nd4 cxb6 cxb6 Qc4 b5 Qc5 Qf7 c3 Qc4 cxd4 Qxd3 dxe5 f5 e6 f4 Qe5+ Kg6","Four Knights Game","youngKID"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","KnightDuta","3203","2994","0-1","C77","Ruy Lopez: Morphy Defense, Duras Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 d3 d6 c4 g6 Nc3 Bg7 h3 O-O Bg5 h6 Be3 Nd7 Qd2 Kh7 g4 Nd4 Bxd4 exd4 Ne2 c5 g5 Ne5 Nxe5 dxe5 h4 f5 exf5 Bxf5 Ng3 h5 O-O-O b5 Bb3 Bg4 Rde1 Bf3 Rh2 Rf4 Kb1 Qf8 a3 Re8 Ka2 e4 dxe4 Bxe4 f3 Bc6 Bc2 Rxf3 Rxe8 Bxe8 Nxh5 bxc4 Be4 c3 Qc2 d3 Bxd3 cxb2 Nxg7 Bf7+ Bc4 Qb8 Bxf7 b1=Q+ Qxb1 Qxh2+ Ka1 Rxa3+ Ba2 Qe5+ Qb2 Qxg7 Kb1 Qxb2+ Kxb2 Rh3","Ruy Lopez","GHANDEEVAM2003"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","Sergg33","2918","2656","0-1","C54","Italian Game: Classical Variation, Giuoco Pianissimo","e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 Bg5 h6 Bh4 a5 Nbd2 Ba7 Nf1 g5 Bg3 Be6 Bxe6 fxe6 Ne3 Qe7 O-O O-O-O Qa4 Rdg8 b4 h5 h4 Ng4 b5 Nb8 Nc4 gxh4 b6 Bxb6 Nxb6+ cxb6 Nxh4 Ne3 Rfe1 Nxg2 Nxg2 h4 Re3 hxg3 fxg3 Nd7 Rf1 Qh7 Qc4+ Kb8 Ref3 Nc5 Kf2 Qh2 Qb5 Rf8 Qb1 Rxf3+ Kxf3 Rf8+ Ke3 Qxg3+","Italian Game","m1b3v7"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","ericmp008","2444","2619","0-1","C44","Ponziani Opening: Jaenisch Counterattack","e4 e5 Nf3 Nc6 c3 Nf6 d4 exd4 e5 Ne4 Qe2 Nc5 cxd4 Na4 Nc3 Bb4 Qc2 Nb6 Bd3 h6 O-O O-O Bf4 d6 Rad1 Bg4 Be2 Re8 h3 Bh5 a3 Bxc3 bxc3 Qe7 Rfe1 dxe5 Nxe5 Bxe2 Nxc6 bxc6 Rd2 Qe4 Qxe4 Rxe4 Bxc7 Bd3 Rxe4 Bxe4 Re2 Bd5 Bd6 Nc4 Bc5 Be6 f4 a5 g4 g6 Kf2 Re8 f5 Bd7 Rxe8+ Bxe8 f6 Bd7 Ke2 Be6 Kd3 g5 Ke4 Kh7 Kd3 Kg6","","Battery_chess"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","yosephtaher","3368","3159","1-0","C63","Ruy Lopez: Schliemann Defense","e4 e5 Nf3 Nc6 Bb5 f5 d3 fxe4 dxe4 Nf6 O-O Bc5 Bxc6 bxc6 Nxe5 O-O Nc3 d6 Na4 Nxe4 Nxc5 Nxc5 Be3 Qe8 Bxc5 Qxe5 Bd4 Qd5 Re1 c5 Bc3 Qxd1 Raxd1 Bf5 Rc1 Rae8 f3 Rxe1+ Bxe1 Re8 Kf2 Kf7 g4 Bg6 Ba5 c6 b3 d5 Bd2 h5 h3 hxg4 hxg4 a5 a4 Ra8 Bf4 Ke6 c4 dxc4 Rxc4 Bf7 Rxc5 Kd7 Rg5 g6 Ke3 Bxb3 Rxg6 Bxa4 Be5 Re8 f4 Bb5 Kd4 a4 f5 a3 Rg7+ Kc8 Rc7+ Kd8 Ra7 c5+ Kxc5 Bd7 Kd6","Ruy Lopez","nihalsarin"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","daika91","3105","2807","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O Re1 d6 c3 Na5 Bb5 a6 Ba4 b5 Bc2 c5 Nbd2 Nc6 h3 Re8 Nf1 h6 Ng3 Be6 Nh2 d5 Qf3 d4 Nf5 dxc3 bxc3 b4 Bb2 bxc3 Bxc3 Nd4 Bxd4 cxd4 Bb3 Rc8 Ng4 Nxg4 Qxg4 Bxf5 Qxf5 Bf6 Bc4 Rc6 Reb1 Qc7 Rb3 Bg5 Rab1 g6 Qg4 Qc8 Rb8 Qxb8 Rxb8 Rxb8 Bxf7+ Kf8 Bb3 Rf6 h4 Bd2 Qd7 Be1 Qh7 Bxf2+ Kh2 Rbb6 Qxh6+ Ke7 Qg5 Rb5 Qh6 Rbb6 g3 Be3 Qg7+ Kd8 Kh3 Rbd6 Qg8+ Kc7 Qe8 Kb6 Qxe5 Rc6 a3 Rf1 Qb8+ Kc5 Qb4#","Italian Game","Fandorine"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","tptagain","2919","3115","1-0","C50","Italian Game: Paris Defense","e4 e5 Nf3 Nc6 Bc4 d6 d4 Be7 dxe5 Nxe5 Nxe5 dxe5 Qh5 g6 Qxe5 Nf6 Bh6 Qd6 Qxd6 cxd6 Nc3 Be6 Bb5+ Nd7 O-O-O a6 Bxd7+ Kxd7 Nd5 Bxd5 Rxd5 Ke6 Rhd1 Rhc8 Bf4 Rc6 c3 b5 a3 Rac8 Kb1 h5 e5 dxe5 Rxe5+ Kf6 Re2 Re6 Be3 Bc5 Bd4+ Bxd4 Rxe6+ Kxe6 Rxd4 g5 h4 f6 Kc2 Rg8 g3 Rc8 Kb3 Rc5 Re4+ Kf5 f3 Rd5 Kc2 Rd8 Rd4 Rg8 g4+ hxg4 fxg4+ Ke5 hxg5 Rxg5 a4 Rg8 axb5 axb5 Kb3 Ra8 Kb4 Ra2 b3 Rb2 Rd8 Rg2 Rg8 Rb2 g5 f5 Re8+ Kf4 g6 Rg2 Kxb5 Rxg6 c4 Kg5 c5 f4 Rf8 Rf6 Rg8+ Kf5 c6 Ke6 c7","Italian Game","MohammadHosseinDarvishi88"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","Hikaru","3200","3484","1/2-1/2","C65","Ruy Lopez: Berlin Defense, Nyholm Attack","e4 e5 Nf3 Nc6 Bb5 Nf6 d4 exd4 O-O a6 Ba4 Be7 e5 Nd5 Nxd4 O-O Nf5 d6 Nxe7+ Ncxe7 exd6 Qxd6 c4 Nb6 Qxd6 cxd6 Bb3 Be6 Na3 Rfc8 Bf4 Bxc4 Nxc4 Nxc4 Bxc4 Rxc4 Bxd6 Nc6 Rac1 Rd4 Rfd1 Rxd1+ Rxd1 Rd8 Re1 f6 Bf4 Rd4 g3 Kf7 Kg2 Nb4 Be3 Rd7 a3 Nd3 Re2 Ne5 Rc2 Nc6 h4 h5 Rc5 g6 b4 Ke6 b5 Ne5 bxa6 bxa6 Ra5 Rd6 Rc5 Rc6 Rxc6+ Nxc6 Kf3 Kd5 Bc1 Ne5+ Ke3 Ng4+ Ke2 Kc4 f3 Ne5 Ke3 Kd5 a4 Nc4+ Kf4 Ne5 Bd2 g5+ Kf5 gxh4 gxh4 Nxf3 Bf4 Nxh4+ Kxf6 Ke4 Bb8 Nf3 Ke6 h4 Kd7 Kd5 Bf4 h3 Kc7 Kc5 Bd6+ Kd5 Bg3 Kc5 Bd6+ Kd5 Bg3 Ng5 Kb6 Ne4 Bh2 Nc5 a5 Kc4 Bd6 Kd5 Bh2 Kd4 Bg1+ Kc4 Bh2 Nb3 Kxa6 Kb4 Kb6 Nxa5 Bd6+ Ka4 Bh2 Nb3 Kc6 Nd2 Kd5 Nf3 Bg3 Kb3 Ke4 h2 Bxh2","Ruy Lopez","ChristopherYoo"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","Sunnika","2578","2376","1-0","C25","Vienna Game: Max Lange Defense","e4 e5 Nc3 Nc6 Bb5 Nf6 d3 Bc5 Nf3 a6 Bxc6 dxc6 O-O Nd7 d4 exd4 Nxd4 O-O Be3 Re8 a3 Nf8 Re1 Qe7 Qh5 g6 Qh6 f6 Rad1 Bd7 b4 Bd6 f4 Qg7 Qh4 a5 Rb1 axb4 axb4 Ra3 Nde2 Ne6 Bc1 Raa8 Rd1 c5 b5 Nd4 Nxd4 cxd4 Nd5 Rf8 Rxd4 Bc5 c3 Bxb5 Rxb5 Bxd4+ cxd4 Ra1 Rc5 c6 Ne3 Qd7 Rc4 Qe6 d5 cxd5 Nxd5 Qa6 Rc7 h5 Qg3 f5 exf5 Qd6 Qxg6+ Qxg6 fxg6 Rd8 Nf6+","Vienna Game","wild3000"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","mestrefeitosa19","2693","2496","1/2-1/2","C54","Italian Game: Classical Variation, Giuoco Pianissimo","e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 h6 Nbd2 d6 Bb3 a6 h3 Be6 Nf1 Qd7 Be3 g5 Bxc5 dxc5 Bxe6 fxe6 Ne3 O-O-O Nc4 g4 Nfxe5 Nxe5 Nxe5 Qg7 Nxg4 Nxe4 Qe2 Nxc3 Qxe6+ Kb8 Qf6 Rhe8+ Kf1 Qxf6 Nxf6 Re6 bxc3 Rxf6 Rd1 Rfd6 Ke2 b5 g4 Re8+ Kd2 Rf8 Rh2 Rf3 Ke2 Rf8 f3 c4 d4 c5 d5 Rfd8 Ke3 Rxd5 Rxd5 Rxd5 Rd2 Rxd2 Kxd2 Kc7 h4 Kd6 f4 Ke6 Ke3 b4 cxb4 cxb4 Kd4 c3 Kd3 a5 Kc2 Kf6 a3 Kg6 Kb3 Kf6 Kc2 Kg6 h5+ Kf6 Kb3 Kg7 g5 hxg5 fxg5 Kh7 Kc2 Kg7 Kd3 Kh7 Kc2 Kg7 axb4 axb4 Kb3 Kh7 Kc2 Kg7 Kb3 Kh7 Kc2 Kg7","Italian Game","bbartekk"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","avri_hameleh","2566","2359","1-0","C89","Ruy Lopez: Marshall Attack, Modern Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O c3 d5 exd5 Nxd5 Nxe5 Nxe5 Rxe5 c6 d3 Bd6 Re1 Qh4 g3 Qh3 Re4 Bb7 Nd2 Rae8 Rh4 Qf5 Ne4 Be7 Qh5 Qxh5 Rxh5 f5 Bg5 g6 Bxe7 Rxe7 Rh4 fxe4 dxe4 Kg7 exd5 cxd5 Kf1 Ref7 f4 h5 Rd1 Rd7 Rd4 Kf6 Kg1 Re8 f5 Re2 fxg6 Kxg6 Rhf4 Rde7 Rf2 Re1+ Rf1 R1e2 Rf2 Re1+ Kg2 R7e2 h4 Rxf2+ Kxf2 Rb1 Bc2+","Ruy Lopez","chesslh93"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","futurechamp1907","2437","2667","0-1","C40","Elephant Gambit: Paulsen Countergambit","e4 e5 Nf3 d5 exd5 e4 Qe2 Nf6 Nc3 Bf5 d3 Bb4 Bd2 O-O Nxe4 Nxe4 dxe4 Re8 O-O-O Rxe4 Qb5 Bxd2+ Nxd2 Rd4 Re1 Nd7 Nf3 a6 Qb3 Re4 Bd3 Rxe1+ Rxe1 Nc5 Qc4 Nxd3+ cxd3 b5 Qc6 Bd7 Qc5 Qf6 Qd4 Qd6 Ne5 Bf5 Nc6 Bg6 Ne7+ Kf8 Nxg6+ hxg6 Kb1 Rd8 Qe5 Qxd5 Qe7+ Kg8 Re3 c5 a3 a5 h4 b4 axb4 axb4 h5 gxh5 Rg3 Ra8 Qf6 g6 Rf3 Qa2+ Kc1 Re8 Kd2 Qd5 Qf4 b3 Qc4 Qxc4 dxc4 Kg7 Kc3 Re2 Kxb3 g5 Kc3 Kg6 b4 cxb4+ Kxb4 Rb2+ Ka5 Rc2 Kb5 g4 c5 gxf3 gxf3 h4 c6 h3 Kb6 h2 c7 h1=Q Kb7 Qh3 c8=Q Qxc8+ Kb6 Qb8+","","KaiBombado"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","Antosha_Chekhonte","3138","2904","1-0","C47","Four Knights Game: Scotch Variation Accepted, Main Line","e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 O-O O-O d5 exd5 cxd5 h3 c6 Qf3 Bd6 Bg5 Re8 Rad1 Rb8 Bxf6 Qxf6 Qxf6 gxf6 b3 Be6 Ne2 c5 Ng3 Bxg3 fxg3 c4 Bf5 cxb3 cxb3 Kg7 Bd3 a5 Rf4 Rb4 Kf2 Reb8 Ke3 Rxf4 gxf4 Rb4 Bc2 f5 Rd4 Rb5 Bd3 Rc5 Kd2 Kf6 a3 h5 b4 axb4 axb4 Rc8 b5 Ke7 Ra4 Kd6 Be2 h4 Ra3 d4 g3 hxg3 Rxg3 Bc4 Bxc4 Rxc4 Rb3 Kc7 Kd3 Ra4 b6+ Kb7 Rb5 Ra3+ Kxd4 Rxh3 Ke5 Rh6 Rd5 Kxb6 Rd7 Rh7 Kxf5 Kc6 Ra7 Kd6 Kf6 Kd5 Re7 Kd4 f5 Kd5 Rxf7 Rh6+ Kg5 Ra6 Re7 Ra1 f6 Rg1+ Kf5 Kd6 Re2 Rg3 f7","Four Knights Game","crescentmoon2411"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","bobrocco","2803","2632","1-0","C78","Ruy Lopez: Morphy Defense","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O b5 Bb3 Be7 d4 d6 c3 O-O h3 h6 Re1 Re8 a4 b4 a5 Bf8 Nbd2 bxc3 bxc3 Rb8 Ba4 Bd7 d5 Ne7 c4 Ng6 g3 Qc8 Bxd7 Qxd7 Kg2 Nh5 Nf1 Nf6 Qc2 c6 Ne3 Rec8 Qd3 c5 Nf5 Ne7 N3h4 Kh7 Qf3 Ng6 Nxg6 fxg6 Nxh6 gxh6 Qxf6 Rb4 Bd2 Rxc4 Rab1 Bg7 Qf3 Rc2 Qd3 Qa4 Rb7 Rf8 h4 Qa2 Re2 Kg8 Rxg7+ Kxg7 Bxh6+ Kxh6 Rxc2 Qxa5 Rb2 Qe1 Re2 Qa1 Qe3+ Kg7 h5 Rf6 Qg5 Qd1 h6+ Kf7 Re3 Qd2 Kh3 Qxf2 Kg4 Qf1 Qxf6+ Qxf6 Rf3 Qxf3+ Kxf3 a5 g4 g5 Ke2 Kg6 Kd3 Kxh6 Kc4 a4 Kc3 Kg6 Kb2 Kf6 Ka3 c4 Kxa4 Ke7 Kb4 Kd7 Kxc4 Kc7 Kb5 Kb7 Ka5 Ka7 Ka4 Kb6 Kb4 Ka6 Kc4 Kb6 Kc3 Ka6 Kb4 Kb6 Ka4 Ka6 Kb4 Kb6 Kc3 Ka6 Kd3 Kb6 Ke3 Ka6 Ke2 Kb5 Kd3 Kb4 Kc2 Kc5 Kd3 Kb4 Ke3 Kc4 Ke2 Kc3 Kf3 Kd4 Kg3","Ruy Lopez","GMchavez"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","platy3","2906","3120","1/2-1/2","C47","Four Knights Game: Scotch Variation Accepted, Main Line","e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 O-O O-O d5 exd5 cxd5 h3 Rb8 Bf4 Rb6 Qf3 Bb7 Na4 d4 Qd1 Re6 c3 Qd5 f3 dxc3 bxc3 Bxc3 Nxc3 Qd4+ Kh1 Qxf4 Qc1 Qd4 Rd1 Qh4 Ne2 Bxf3 gxf3 Qxh3+ Kg1 Qxf3 Qf4 Qb7 Rab1 Rb6 Rbc1 Rd6 Bc2 Re8 Ng3 Qb6+ Kh2 Rxd1 Rxd1 Qb2 Rd2 Qc3 Rg2 Qe5 Qxe5 Rxe5 Re2 Rxe2+ Nxe2 Kf8 Nd4 a6 Bd3 c5 Nb3 Ke7 Bxa6 Kd6 a4 Ne4 a5 Nc3 Bc4 f5 a6 Na4 a7 Nb6 Bd3 g6 Be2 c4 Na5 Kc7 Nxc4 Na8 Bf3 Nb6 Nxb6 Kd6 a8=Q Ke5 Qc6 Kf4 Qd5 Kg5 Nd7 Kh6 Qe5 Kg5 Qf6+ Kh6 Nf8 f4 Qh4+ Kg7 Qxh7+ Kf6 Qxg6+ Ke5 Qe4+ Kd6 Qe6+ Kc5 Nd7+ Kb4 Qe5 Kb3 Qxf4 Kc2 Qe5 Kc1 Qd6 Kc2 Bg4 Kc3 Qd5 Kc2 Qe5 Kb3 Qe4 Kc3 Ne5 Kd2 Qd3+ Ke1 Nf3+ Kf2 Qd4+ Ke2 Qe4+ Kd1 Qe2+ Kc1 Nd4 Kb1 Qc2+ Ka1 Qc3+ Kb1 Nb3 Ka2","Four Knights Game","Artemiki"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","5","Mr_ruthless","2954","2715","1-0","C70","Ruy Lopez: Morphy Defense, Classical Defense Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Bc5 c3 Nge7 d4 exd4 cxd4 Bb4+ Bd2 Bxd2+ Qxd2 d5 exd5 Qxd5 Nc3 Qe6+ Qe3 O-O O-O Nd5 Nxd5 Qxd5 Bb3 Qd6 Ne5 Nxd4 Nxf7 Qf6 Nh6+ Kh8 Nf7+ Kg8 Bc4 Be6 Bxe6 Nxe6 Ne5 Rae8 Nd7 Qf7 Nxf8 Nxf8 Qg3 Ng6 Rfe1 Rf8 Rad1 Qxa2 Qxc7 Qxb2 Qc4+ Kh8 Re2 Qf6 Red2 h6 Qe4 b5 g3 Ne5 Kg2 Nc4 Re2 Nd6 Qc6 Nc4 Qe4 Nd6 Qd5 Nf5 Rd3 Qg5 Qe4 Qg6 Rf3 Rf6 Qe8+ Qxe8 Rxe8+ Kh7 Ra8 Kg6 Ra3 b4 R3xa6 Nd4 Ra2 b3 Rb2 Rd6 Ra4 Kf5 Rxd4 Ke5 Rxb3 Kxd4 Re3 Rf6 Re7 g5 f3 Kd5 Re2 Kd6 Kf2 Kd5 Re3 Kd4 Re4+ Kd3 h4 Rb6 hxg5 hxg5 Kg2 Rh6 Re5 Rg6 g4 Kd4 Rf5 Ke3 Kg3 Rg7 Re5+ Kd4 Re4+ Kd5 Re8 Rf7 Re2 Kd4 Rd2+ Ke3 Rf2 Rxf3+ Rxf3+ Ke4 Rf5","Ruy Lopez","only_strong_moves"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","snehahalder2009","3104","2715","1-0","C42","Petrov's Defense: Classical Attack, Staunton Variation","e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 d4 d5 Bd3 Bd6 O-O O-O c4 c6 Qc2 Bf5 Nc3 Re8 Re1 Nxc3 Bxf5 Rxe1+ Nxe1 Ne4 Bxe4 Qh4 cxd5 Qxh2+ Kf1 cxd5 Qc8+ Bf8 Bxd5 Nc6 Qxa8 Qh1+ Ke2 Nxd4+ Kd1 Qf1 Qe8 Ne6 Bxe6 Qxf2 Qxf7+","","ilqar_74"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","Witty_Alien","2391","2598","0-1","C40","Elephant Gambit: Paulsen Countergambit","e4 e5 Nf3 d5 exd5 e4 Ne5 Qxd5 d4 exd3 Bf4 Qe4+ Be3 dxc2 Qc1 cxb1=R Qxb1 Qxe5 Bd3 Bd6 g3 Bh3 a3 Nc6 Qd1 O-O-O Qh5 Qxh5","","ChessMarkoD"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","kaidanov","2933","2740","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O c3 d6 Re1 Na5 Bb5 a6 Ba4 b5 Bc2 c5 a4 Bb7 Nbd2 Qc7 Nf1 Nc6 Ng3 Rfe8 Bb3 Na5 Bc2 Nc6 h3 Bf8 Bg5 Nd7 Bb3 Na5 Bc2 b4 d4 cxd4 cxd4 Rac8 Bd3 exd4 Nxd4 Nc5 Bc2 Nc4 b3 Na3 Bd3 Nxd3 Qxd3 Qc3 Qxc3 Rxc3 Bd2 Rd3 Bxb4 Rxd4 Bxa3 Bxe4 Bb2 Rb4 Bc3 Rxb3 Nxe4 Rxe4 Rxe4 Rxc3 Re8 g6 Rb1","Italian Game","LoruF"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","ArtemyKhan","2652","2870","0-1","C48","Four Knights Game: Spanish Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bd6 O-O O-O Re1 Re8 h3 Nd4 Bc4 c6 Ng5 Rf8 a4 h6 Nf3 Re8 a5 Bc7 a6 b5 Bf1 Rb8 d3 b4 Nxd4 bxc3 Nb3 cxb2 Bxb2 d5 Qc1 Be6 Nc5 Bb6 Nxe6 Rxe6 Bc3 Qe7 g3 Nh5 Be2 Nxg3 Kh2 Bxf2 Bg4 Rg6 exd5 Qh4 Ra4 Ne2 Rxe2 Qg3+ Kh1 Rxg4 Rxf2 Qxh3+","Four Knights Game","ural58"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","NMChess2Impress","1982","2342","0-1","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O c3 d5 exd5 Nxd5 Re1 Bg4 h3 Bh5 Nbd2 Nb6 Bb5 f6 Bxc6 bxc6 Qc2 Bg6 Qb3+ Bf7 Qc2 Re8 d4 exd4 Nxd4 Bd6 Nxc6 Rxe1+ Nf1 Bc4 Bf4 Qe8 Rxe1 Qxe1 Bxd6 Qxf1+ Kh2 cxd6 Ne7+ Kh8 Qe4 Qe2 Qb7 Qxf2 a4 Qf4+ Kh1 Re8 a5 Qc1+ Kh2 Qf4+ Kh1 Qe5 axb6 Qxe7 Qc6 Qe1+ Kh2 Qe5+ Kh1 Bd5 Qb5 Bxg2+ Kxg2 Qxb5 bxa7 Qxb2+ Kg3 Qxc3+ Kf4 Qe5+ Kg4 h5+ Kh4 Qg5#","Italian Game","AnviHinge"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","Ratushnyi_Victor","2719","2504","1-0","C72","Ruy Lopez: Morphy Defense, Modern Steinitz Defense","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 d6 O-O Bg4 h3 h5 c3 Qf6 d3 Bxf3 Qxf3 Qxf3 gxf3 Ne7 f4 exf4 Bxf4 g5 Be3 f6 f4 Bh6 fxg5 Bxg5 Kf2 O-O-O Nd2 Ne5 Bc2 Rhg8 Rg1 Rdf8 d4 N5g6 Nf3 Nf4 Bxf4 Bxf4 Bb3 d5 exd5 Nf5 d6 Rxg1 Nxg1 Nxd6 Ne2 Bg5 Kf3 Kd7 Nf4 Bxf4 Kxf4 Re8 Kf3 Nf5 Rg1 h4 Rg6 Re3+ Kf4 Ne7 Kxe3 Nxg6 Ke4 Kd6 Kf5 Nf8 Kxf6 Nh7+ Kg6 Nf8+ Kg5 c5 dxc5+ Kxc5 Kxh4 Ng6+ Kg5 Ne5 h4 b5 h5 Nd7 h6 Nf8 Kf6 Nh7+ Kg7 Ng5 Kg6 Nf3 h7 Ne5+ Kg7","Ruy Lopez","Mr_ruthless"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","SuanQuek","1885","2463","0-1","C65","Ruy Lopez: Berlin Defense, Anti-Berlin Variation","e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 O-O d6 h3 O-O c3 h6 Re1 Bd7 Nbd2 Re8 Nf1 d5 exd5 Nxd5 Bxc6 Bxc6 Nxe5 Bxf2+ Kxf2 Rxe5 Rxe5 Qf6+ Qf3 Qxe5 d4 Qe7 Qg4 Re8 Bxh6 Qf6+ Kg1 Qxh6 c4 Ne3 Nxe3 Qxe3+ Kh2 Qf2 d5 f5 Qg6 Bd7 Rg1 f4 d6 Qg3+ Qxg3 fxg3+ Kxg3 cxd6 Rd1 Re2 Rxd6 Bc6 b4 Rxg2+ Kf4 Rxa2 b5 Bg2 Rd8+ Kf7 Rd7+ Kf6 Rd6+ Ke7 Rg6 Kf7 Rd6 Bxh3 Kg3 Be6 Kf4 Rc2 Ke5 Rxc4 b6 axb6 Rxb6 Rc5+ Kd4 Rc7 Ke5 Re7 Kf4 Bd5 Kg5 Bc6 Rb4 Re5+ Kg4 Re4+ Rxe4 Bxe4 Kg5 Bc6 Kf4 Kf6 Kg3 g5 Kf2 Ke5 Kg3 Kf5 Kf2 Kf4 Kg1 Kg3","Ruy Lopez","Tzotzii"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","GMKrikor","2787","3077","0-1","C41","Philidor Defense","e4 e5 Nf3 d6 Bc4 Nf6 Nc3 Be7 d3 O-O h3 c5 O-O Nc6 a4 Be6 Ba2 h6 Nd5 Bxd5 exd5 Nb4 c4 Nd7 Bd2 a5 Re1 f5 Bb1 Qe8 Qe2 Bf6 Bc3 Qg6 Kh1 Rae8 Nd2 Bg5 Nf1 Qf7 Qf3 g6 Bd2 Bxd2 Nxd2 Kg7 Ra3 Re7 Rc3 Rfe8 Rcc1 Qf6 Nb3 b6 Re2 h5 Rce1 h4 Nc1 Qg5 Nb3 Nf8 g3 Nh7 Rg1 hxg3 Rxg3 Qf6 Re1 Kh8 Reg1 Rg7 Nd2 Rf8 Kh2 Rfg8 Ne4 fxe4 Qxe4 Qf4 Qe2 Rf8 Rg2 Ng5 Kh1 Nf3 Qd1 Rf6 d4 e4 dxc5 bxc5 Rg4 Qd2 Qf1 Qe1 Qxe1 Nxe1 Rg1 Ned3 Rh4+ Kg8 Rg2 Rxf2 Rxe4 Rf1+ Kh2 Rxb1 Re8+ Kh7 Rg4 g5 h4 Rxb2+ Kg3 Ne5 Rxg5 Rxg5+ hxg5 Kg6 Re6+ Kxg5 Rxd6 Nxc4","","TanVinhVictory"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","Anton_Demchenko","3237","3046","0-1","C84","Ruy Lopez: Closed, Martinez Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 d3 b5 Bb3 d6 a3 Bg4 Be3 Na5 Ba2 c5 Nc3 Nc6 Nd5 Nxd5 Bxd5 Rc8 c3 O-O b4 a5 bxc5 dxc5 h3 Bh5 g4 Bg6 Bxc6 Rxc6 Nxe5 Rb6 Nxg6 Rxg6 d4 cxd4 cxd4 h5 f3 Qd7 Kf2 Rc8 Qd3 Rgc6 Rfc1 Rxc1 Rxc1 Rxc1 Bxc1 Qc7 Bd2 Qh2+ Ke1 Qxh3 gxh5 b4 axb4 axb4 d5 Qxh5 Kd1 Qe5 Kc2 Bf6 d6 Qb2+ Kd1 b3 Ke2 Qa2 Qc4 Qa3 Qc8+ Kh7 Qf5+ Kg8 e5 Qa6+ Qd3 Qxd3+ Kxd3 b2 d7 b1=Q+","Ruy Lopez","lachesisQ"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","IlanSchnaider","2712","3026","0-1","C70","Ruy Lopez: Morphy Defense, Classical Defense Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Bc5 O-O Nge7 c3 Ba7 d4 Ng6 Bg5 f6 Be3 O-O Nbd2 Kh8 Re1 d6 h3 Bd7 d5 Nce7 Bxa7 Rxa7 Bxd7 Qxd7 c4 Raa8 b4 f5 c5 fxe4 Nxe4 Rf4 cxd6 cxd6 Nfg5 Rc8 g3 Rf5 Qg4 Rcf8 Ne6 R8f7 N4g5 R7f6 Ne4 Rf7 Rac1 Nxd5 N6g5 Rf8 Qh5 Rxg5 Qxg5 Qxh3 Nxd6 Qe6 Nc4 h6 Qh5 Ndf4 gxf4 Nxf4 Rxe5 Qf6 Qg4 Nd3 Rc2 Nxe5 Nxe5 Qxe5 Rc8 Qe1+","Ruy Lopez","Let_it_be_1"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","thecatdoglady","2638","2354","1-0","C54","Italian Game: Classical Variation, Greco Gambit, Moeller-Therkatz Attack","e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 cxd4 Bb4+ Nc3 Nxe4 O-O Bxc3 d5 Na5 bxc3 Nxc4 Qd4 Ncd6 Qxg7 Qf6 Qxf6 Nxf6 Re1+ Kf8 Bh6+ Kg8 Re5 Nfe4 Re1 f5 Re7 b6 Ne5 Bb7 Rxe4 fxe4 Rg7+ Kf8 Rxh7+ Kg8 Rg7+ Kf8 Ng6+ Ke8 Nxh8 Bxd5 Ng6 Nf5 Rh7 Bg8 Rh8 Kf7 Ne5+ Ke6 Bf4 d6 Nc6 Kd5 Nb4+ Kc4 g4 Ng7 Bd2 a5 Nc2 Kd3 Bh6 Ne6 Ne3 Nd4 cxd4 Kxd4 Nf5+ Kd3 Ne7 Bd5 Rxa8 Bxa8 g5 d5 g6 d4 g7 e3 fxe3 Bd5 Nxd5 dxe3 Nxe3 c5 g8=Q c4 Qxc4+ Kd2 Qb5 Kc3 Qxb6 Kd3 Qxa5 Ke4 Qe1 Ke5 Nf1+ Kd4 Bf4 Kc5 Bg3 Kc6 Qc1+ Kd5 Kf2 Ke6 a4 Kf5 a5 Ke6 a6 Kd5 a7 Ke4 a8=Q+ Kf5 Qf3+ Ke6 Qcc6+ Ke7 Qff6#","Italian Game","BetterCallSacul"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","frederiksvane","2922","3168","1/2-1/2","C45","Scotch Game: Potter Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nb3 Bb6 Qe2 d6 Be3 Qf6 Nc3 Nge7 O-O-O Bd7 g3 O-O-O Bg2 g5 h4 h6 Kb1 Kb8 Bxb6 axb6 Rd2 Ne5 Nd4 Bg4 f3 Bd7 a4 Rdg8 h5 Rd8 Rhd1 Rhe8 Bf1 Qg7 Qe3 f5 Bb5 Bxb5 Ncxb5 Qf7 b3 fxe4 fxe4 N7c6 Nf5 Nc4 bxc4 Qxf5 exf5 Rxe3 Rd3 Re4 Nc3 Rxc4 Re1 Rf8 Re6 Rxf5 Re8+ Ka7 Nb5+ Rxb5+ axb5 Rb4+ Rb3 Rxb3+ cxb3 Ne5 Re6 Ng4 Re7 Kb8 Re8+ Ka7 Rc8 Nf6 Rxc7 Nxh5 Rc3 Nf6 Rd3 Ne4 Kc2 h5 Re3 d5 Kd3 h4 gxh4 gxh4 Kd4 Nf2 Rf3 Ne4 Rh3 Nd6 Kxd5 Nxb5 Rxh4 Nc7+ Kc4 Na6 Rh5 Nb8 b4 Nc6 b5 Na5+ Kb4 Kb8 Rh7 Kc8 Rg7 Kb8 Rg8+ Kc7 Ra8 Kd7 Rh8 Kc7 Rh7+ Kc8 Rh6 Kc7 Rg6 Nc6+ bxc6 bxc6 Kc4 Kb7 Kd4 Kc7 Ke5 b5 Kd4 Kb6 Rf6 Kc7 Kc5 Kd7 Rxc6 b4 Rb6 b3 Rxb3 Ke7 Rd3 Kf6 Kd5 Kf5 Re3 Kf4 Re4+ Kf3 Kd4 Kg3 Kd3 Kf3 Rd4 Kg3 Ke3 Kg2 Re4 Kg3 Ke2 Kh3 Rg4 Kxg4","Scotch Game","NodariousBIG"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","KillerBishop888","2818","3034","0-1","C24","Bishop's Opening: Vienna Hybrid","e4 e5 Nc3 Nf6 Bc4 Nc6 d3 Na5 Nge2 Nxc4 dxc4 d6 Ng3 Be7 O-O O-O h3 Be6 b3 Nd7 Nf5 Bg5 Qg4 Bxf5 exf5 Bxc1 Raxc1 Nf6 Qf3 c6 Rcd1 Qe7 Ne4 Rad8 Rd2 Rd7 Rfd1 Rfd8 Nxf6+ Qxf6 Qe4 g6 fxg6 hxg6 Rd3 Kg7 a4 Qe6 f4 f5 Qe3 e4 Qd4+ Kf7 Re3 d5 c5 Qf6 c3 b6 b4 Rb8 cxb6 axb6 c4 Qxd4 Rxd4 Ke6 cxd5+ Rxd5 Rc4 Kd6 Rg3 Rg8 Rgc3 c5 bxc5+ Rxc5 Rd4+ Kc6 Rb3 Rc1+ Kf2 Rc2+ Kf1 Ra8 Rdb4 Ra6 g4 Kc5 gxf5 gxf5 Rb5+ Kd4 R5b4+ Rc4 Rxb6 Rxb6 Rxb6 Ke3 Rb3+ Kxf4 Ra3 e3 a5 Kf3 Ra1 Rh4 a6 Rxh3 Kg1 Rh8 a7 Ra8 Kf1 f4 Ke1 Kg2 Ke2 Kg3 Rg1+ Kh4 Kf3 Rxa7 Kxf4 Rf7+ Kxe3 Kh3 Kd2 Re7 Re1 Rd7+ Kc2 Kg2 Re2+ Kf3 Rd2 Rc7+ Kb3 Ke3 Rd5 Rb7+ Kc4 Ke4 Rc5 Rb1 Rc6 Rc1+ Kb5 Rb1+ Kc5 Ke5 Rb6 Rc1+ Kb5 Kd5 Ra6 Rb1+ Ka5 Kc5 Ka4 Ra1+ Kb3 Rxa6","","viktorskliarov"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","6","KnightDuta","3161","2989","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O d6 c3 O-O Nbd2 Kh8 Re1 Ng8 d4 Bg4 h3 Bh5 Qc2 Bf6 dxe5 Nxe5 Nxe5 dxe5 Bb3 Bg5 Nc4 Bxc1 Qxc1 f6 Qe3 Qe7 a4 a5 Bd1 Bf7 Be2 Be6 Red1 b6 Rd2 Qf7 Na3 Rad8 Nb5 Bb3 Rd3 Bc4 Rd2 Bb3 Ra3 Be6 b4 Qe7 Na7 Rxd2 Qxd2 Rd8 Qb2 axb4 cxb4 Qd7 Rd3 Qe8 Rxd8 Qxd8 a5 bxa5 Nc6 Qa8 b5 a4 Qa3 Bb3 Bf1 Qe8 Na5 Qe7 Qc1 Qd6 Qc3 Ne7 Nxb3 axb3 Qxb3 g6 Qf7 Ng8 Bc4 Nh6 Qe8+ Kg7 Bd5 f5 f3 fxe4 fxe4 Kf6 Qh8+ Kg5 Qxh7 Qb6+ Kh2 Qf6 Qxc7 Qf4+ Kg1 Qe3+ Kf1 Kf4 Qc2 Qa3 Qd2+ Kg3 Qf2+ Kh2 Qg1+ Kg3 Qf2+ Kh2 g3+ Kxh3 Be6+ Nf5 exf5 Qd3+ Qe2 Qb1+ Kf2 gxf5 Qf1+ Qxf1+ Kxf1 Kxg3 Bxf5 Kf4 b6 Kxf5 b7 Ke4 b8=Q Kf4 Qb2 Ke3 Qb3+ Kd4 Kf2 Ke4 Qe3+ Kf5 Kf3 e4+ Qxe4+ Kf6 Qf4+ Ke6 Ke4 Ke7 Qe5+ Kd7 Qd5+ Kc8 Ke5 Kc7 Qd6+ Kb7 Kd5 Ka8 Kc5 Kb7 Kb5 Ka7 Qe7+ Ka8 Kb6 Kb8 Qd8#","Italian Game","Zhigalko_Sergei"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","Barad_Yeganegi01","2758","2951","0-1","C29","Vienna Game: Vienna Gambit, Main Line","e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Nc6 Bb5 Bc5 d4 Bb4 O-O Bxc3 bxc3 Nxc3 Bxc6+ bxc6 Qd3 Ne4 Ba3 c5 Nd2 Nxd2 Qxd2 O-O Bxc5 Re8 Rab1 Ba6 Rf3 Re6 a4 Qd7 Qb4 h5 Rg3 Kh7 Rg5 Rg6 Rxg6 Kxg6 Rb3 Qf5 Qd2 Qf1#","Vienna Game","ramitalab"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","Mr_ruthless","2895","2715","1-0","C70","Ruy Lopez: Morphy Defense, Classical Defense Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Bc5 O-O Nge7 c3 Ba7 d4 Ng6 Bg5 f6 Be3 O-O Nbd2 Kh8 Re1 exd4 Nxd4 Nxd4 Bxd4 d6 Bxa7 Rxa7 Nf3 Ra8 Nd4 Bd7 Bb3 f5 exf5 Bxf5 Be6 Nh4 Bxf5 Nxf5 Ne6 Qf6 Nxf8 Rxf8 Qf3 c6 Re4 Kg8 Rae1 Qg5 Re8 Rxe8 Rxe8+ Kf7 Re1 h5 Qe4 Ne7 Qe6+","Ruy Lopez","K_A_S_T_O_R"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","UST_B","3111","2559","1-0","C60","Ruy Lopez: Fianchetto Defense","e4 e5 Nf3 Nc6 Bb5 g6 O-O Bg7 Re1 a6 Ba4 Nge7 c3 O-O h3 d6 d4 b5 Bc2 exd4 cxd4 Nb4 Bb3 c5 a3 Nbc6 Be3 c4 Bc2 d5 Nc3 f5 e5 h6 Nh2 Be6 Ne2 g5 f4 Ng6 Qd2 gxf4 Nxf4 Nxf4 Bxf4 Kh7 Nf3 Ne7 Qf2 Qd7 Bd2 Qe8 Qh4 Ng6 Qh5 Ne7 Ng5+","Ruy Lopez","Ga_R"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","Kubas1010","2647","2785","0-1","C58","Italian Game: Two Knights Defense, Polerio Defense, Kieseritzky Variation","e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 Na5 d3 h6 Nf3 e4 Qe2 Nxc4 dxc4 Bd6 Nd4 O-O h3 c6 Nc3 Bb4 Bd2 cxd5 Nxd5 Nxd5 cxd5 Bxd2+ Qxd2 Qxd5 Nb3 Qe5 O-O-O Be6 Qd4 Qg5+ Qe3 Rac8 Qxg5 hxg5 Nd4 Bd7 g4 Rfe8 Rhe1 g6 Ne2 Bc6 Ng3 Re5 Re3 Rce8 Rde1 f5 Ne2 f4 Ra3 e3 fxe3 Rxe3 Rxe3 Rxe3 Kd2 Rxh3 Nd4 Kf7 Ne6 Kf6 Nd8 Bd7 Nxb7 Bxg4 Nd6 Bf5 c4 Rd3+","Italian Game","ural58"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","Ratushnyi_Victor","2202","2506","0-1","C45","Scotch Game: Potter Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Bc5 Nb3 Bb6 Qe2 Nf6 Nc3 O-O Be3 Re8 f3 d5 Bxb6 axb6 O-O-O d4 Nb5 Ra4 Kb1 Be6 Qd2 Qe7 a3 Rd8 g4 Na5 N5xd4 Nxb3 cxb3 Raxd4 Qxd4 Rxd4 Rxd4 Bxb3 Be2 g6 h4 Qe5 Rd8+ Kg7 h5 Nxe4 h6+ Kf6 f4 Nd2+ Ka1 Qxe2 Rd7 Nc4 g5+ Ke6 Rd8 Qxb2#","Scotch Game","shirovin"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","LiemLe","2956","3227","0-1","C45","Scotch Game","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Qf6 Nf3 Bb4+ c3 Bc5 Bd3 h6 O-O Nge7 Nbd2 O-O Re1 Ne5 Bc2 d6 Nb3 Bg4 Nbd2 N7g6 h3 Bh5 g4 Nxg4 hxg4 Bxg4 e5 Nxe5 Be4 Rae8 b4 Bb6 Kg2 c6 Rh1 d5 Bc2 Re6 Rb1 Rfe8 Rb3 Nxf3 Nxf3 Re2","Scotch Game","Torosyan_chess"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","lamomiablanca","2933","2726","1-0","C79","Ruy Lopez: Morphy Defense, Steinitz Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O d6 Re1 Bd7 Bxc6 Bxc6 Nc3 Be7 d4 exd4 Nxd4 Bd7 h3 O-O Qf3 g6 Bh6 Re8 Rad1 c6 e5 dxe5 Rxe5 Bd6 Ne6 Rxe6 Rxe6 Bxe6 Rxd6 Qe7 Rd1 Nd5 Ne4 Bf5 Re1 Kh8 c4 Bxe4 Rxe4","Ruy Lopez","Marat_Gilfanov"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","tptagain","2904","3121","0-1","C56","Italian Game: Scotch Invitation Declined","e4 e5 Nf3 Nc6 Bc4 d6 d4 Nf6 Nc3 Be7 h3 O-O O-O a6 a4 h6 Re1 Re8 b3 Bf8 Bb2 b6 Nd5 Bb7 Nxf6+ Qxf6 Bd5 Rab8 Qd2 Nxd4 Nxd4 Bxd5 exd5 exd4 Qxd4 Qf5 Qc4 b5 axb5 axb5 Qc6 Rxe1+ Rxe1 Qc8 Ra1 Rb6 Qc3 Qb7 Ra5 Qxd5 Qxc7 Rc6 Qb7 Qd1+ Kh2 Rxc2 Ra7 Rxf2 Ra8 Rxb2 Qe7 Rxg2+","Italian Game","Antosha_Chekhonte"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","Zurability","3087","2861","1-0","C26","Vienna Game: Falkbeer Variation","e4 e5 Nc3 Nf6 d4 exd4 Qxd4 Nc6 Qa4 Bc5 Nf3 Ng4 Nd1 O-O h3 Nge5 Nxe5 Nxe5 Be3 Qe7 Bxc5 Qxc5 Ne3 a6 O-O-O b5 Qb3 Bb7 Bd3 Rfe8 Rhe1 Bc6 Kb1 a5 a3 b4 a4 Ng6 f3 Qg5 Bc4 Rf8 Bd5 Bxd5 Rxd5 Qg3 Red1 d6 Qc4 Qf2 Qd4 Ne5 Nf5 Qxg2 Rg1 Qxf3 Rxe5 dxe5 Qxe5 f6 Rxg7+ Kh8 Rxh7+ Kxh7 Qe7+ Kg6 Qg7+ Kh5 Qh6#","Vienna Game","rezamahdavi2008"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","Zuko07","2672","2442","1-0","C21","Center Game: von der Lasa Gambit","e4 e5 d4 exd4 Bc4 Nc6 Nh3 Bc5 Bxf7+ Kxf7 Qh5+ g6 Qxc5 Nf6 O-O Re8 Nd2 Kg7 c3 d6 Qa3 Bxh3 gxh3 Nxe4 Nf3 Qf6 cxd4 Nxd4 Nxd4 Qxd4 Be3 Qf6 Rac1 c5 Qb3 Qf7 Qd3 Rad8 b4 b6 a4 Kg8 a5 Qf3 Qd5+ Kg7 Rc4 Re5 Qb7+ Qf7 a6 Qxb7 axb7 Rb8 Bf4 Re6 f3 Nf6 bxc5 bxc5 Rxc5 Rxb7 Rc6 Rb2 Rxd6 Rxd6 Bxd6 a5 Ra1 Rb5 Bc7 Rf5 Kf2 Rc5 Bxa5 Rc2+ Kg1 Nh5 Ra4 g5 Bd8 h6 h4 Nf4 hxg5 hxg5 h4 Nh3+ Kf1 Rf2+ Ke1 Rxf3 hxg5 Nf4 Bf6+ Kg6 Ra7 Ne6 Ra5 Re3+ Kf2 Rb3 Re5 Rb1 Rxe6 Kf5 Re1 Rxe1 Kxe1","","djano"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","WhiteKnight2612","3302","3084","1-0","C88","Ruy Lopez: Closed, Anti-Marshall","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O a4 Bb7 d3 d6 Nbd2 Qd7 Nf1 Nd8 Ng3 Ne6 Nf5 Rfe8 Ng5 Bf8 Qf3 d5 Nxe6 fxe6 Nh6+ Kh8 Ng4 Nxg4 Qxg4 Qf7 c3 c5 Bc2 Bd6 h4 Rf8 Qg3 Qc7 c4 bxc4 dxc4 d4 Bd2 Bc6 b3 Rab8 Rad1 Be8 Bc1 Qf7 Rd3 Qg6 Qh3 Qf7 Rf3 Qd7 Rxf8+ Bxf8 h5 h6 f4 d3 Rd1 Qd4+ Kh2 exf4 Rxd3 Qe5 Rf3 Qxh5 Bxf4 Rc8 Qxh5 Bxh5 Rd3 Be8 Be5 Kg8 Bd1 Bc6 Bg4 Re8 Bh5 Rc8 Bg6 Be7 Kh3 Rd8 Rxd8+ Bxd8 Bd6 Bb6 Kg4 Bb7 Kf4 Bc8 Ke5 Bd7 Bb8 Bd8 Kd6 Bc8 Kxc5 Bg5 Kc6 Kf8 Bd6+ Be7 e5 a5 c5 Ba6 Kd7 Bxd6 exd6 e5 c6 e4 c7 e3 c8=Q+ Bxc8+ Kxc8 e2 d7 e1=Q d8=Q+ Qe8 Qxe8#","Ruy Lopez","LyonBeast"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","carokannlover213","3306","3132","1-0","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 h6 O-O a6 a4 d6 Nc3 g6 Be3 Bg7 h3 O-O Re1 Kh8 d4 Qe7 dxe5 Nxe5 Nxe5 dxe5 Qf3 Be6 Bxe6 Qxe6 Rad1 Rad8 Bc5 Rfe8 Nd5 Nxd5 exd5 Qf6 Qb3 b6 Be3 a5 d6 Rxd6 Rxd6 Qxd6 Qxf7 Re6 b3 Qe7 Qxe7 Rxe7 Rd1 Kg8 Kf1 Kf7 Ke2 Ke6 Kf3 Rd7 Rxd7 Kxd7 Ke4 Ke6 Bd2 Bf8 f3 h5 g4 Bc5 Bc3 Bd6 Be1 Ba3 c3 Bd6 Bd2 Ba3 gxh5 gxh5 Be1 Be7 Bg3 Bd6 Bh2 c6 Bg3 Bb8 Bf2 Bc7 Be3 Bd8 Bd2 Be7 Be1 Bd6 Bf2 Bc7 c4 Bd8 Be3 Bc7 Bd2 Bd8 b4 axb4 Bxb4 Bc7 c5 bxc5 Bxc5 Ba5 Ba3 Bc3 Bc1 Ba5 Be3 Bc7 Bd2 c5 a5 c4 a6 Bb6 Be3 c3 Bxb6 c2 Be3","Italian Game","DenLaz"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","GMKrikor","2855","3064","1-0","C41","Philidor Defense: Exchange Variation","e4 e5 Nf3 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7 g3 O-O Bg2 Re8 O-O Bf8 Re1 a5 a4 Nbd7 Bf4 h6 Qd2 Ne5 Qe2 c6 Rad1 Qb6 b3 Bg4 f3 Qc5 Nb1 Bd7 Be3 Qb4 c3 Qb6 Nb5 c5 N1a3 Rad8 Bf2 Be6 c4 Nc6 Nc2 h5 Qd2 g6 h3 Bg7 f4 Bc8 Qc1 Nb4 Nxb4 axb4 Rd2 Bf8 Qb2 Bg7 Qc2 Bf8 Red1 Be6 Qa2 Rd7 Qb1 Rdd8 Qa1 Nh7 a5 Qc6 e5 d5 Bxd5 Qc8 Bxe6 fxe6 Rxd8 Rxd8 Rxd8 Qxd8 a6 bxa6 Qxa6 Kf7 Qb7+ Kg8 Qc6 Kf7 Nc7 Qe7 Kg2 g5 Bxc5 Qxc5 Qe8+","","arm-sam"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","MaxiDag30","2941","2735","1-0","C29","Vienna Game: Vienna Gambit, Paulsen Attack","e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Qf3 Nxc3 bxc3 Qh4+ g3 Qe4+ Qxe4 dxe4 Bg2 Nc6 Bxe4 Nxe5 d4 Nc4 Nf3 Nd6 Bd3 Be6 Bf4 f6 O-O O-O-O Nd2 Re8 Rfe1 Bf7 c4 b6 c5 bxc5 dxc5 Nb7 c6 Bc5+ Kf1 Nd6 Nb3 Bb4 Rxe8+ Rxe8 Rb1 g6 a3 Bc3 Nc5 Bd5 Ba6+ Kd8 Bxd6 cxd6 Rb8+ Kc7 Rxe8 dxc5 Rc8+ Kb6 Bb7 Be5 Ke2 Bb2 a4 a5 Kd2 Be5 Rh8 h5 Ba8 Bxc6 Bxc6 Kxc6 Kd3 Kd5 Rd8+ Ke6 Kc4 Bd4 Ra8 Kf5 Rxa5 Kg4 Rxc5 Bxc5 Kxc5 f5 a5 g5 a6 f4 gxf4 gxf4 a7 f3 a8=Q Kh3 Qf8 Kg2 Kd4 f2 Ke3 f1=Q Qxf1+ Kxf1 h4 Kg2 Kf4 Kf2 c4 Ke2 c5 Kd3 c6 Kd4 c7 Kd3 c8=Q Ke2 Qf5 Kf2 Qxh5 Kg2 Qg5+ Kh1 h5 Kh2 h6","Vienna Game","NikitaShandrygin"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","7","MikaKarttunen","2846","2711","1/2-1/2","C54","Italian Game: Classical Variation, Greco Gambit, Modern Line","e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d4 exd4 e5 d5 Bb5 Ne4 cxd4 Bb6 Nc3 Nxc3 bxc3 O-O O-O f6 Bxc6 bxc6 Re1 Bg4 e6 Re8 a4 a5 Bf4 Rxe6 Qd3 Rxe1+ Rxe1 Qd7 Qe3 Kf7 h3 Bh5 g4 Bg6 Nh4 Re8 Qxe8+ Qxe8 Rxe8 Kxe8 Nxg6 hxg6 Be3 Ba7 h4 Kd7 Kg2 c5 h5 cxd4 cxd4 g5 Kf3 Kd6 Ke2 c5 dxc5+ Bxc5 Bd2 Bb6 f3 Kc5 Kd3 Kd6 Bc3 Ke6 Bd2 Ke5 Bc1 Ke6 Bb2 Bc5 Bc3 Bb6 Bb2 Bc5 Ba1 Bb6 Bc3 Ke7 Bd2 Kf7 f4 gxf4 Bxf4 Ke6 Bg3 Kf7 Bd6 Kg8 Ba3 Kh7 Bb2 Kh6 Bc1+ g5 Bd2 f5 gxf5 Kxh5 f6 Kg6 f7 Kxf7 Bxg5 Ke6 Bd2 Ke5 Bc3+ d4 Bd2 Kd5 Be1 Bc7 Bd2 Bb6 Be1 Bc7 Bh4 Kc5 Be7+ Kd5 Bf6 Bb6 Bg7 Bc5 Bh8 Bb6 Bf6 Kc6 Kc4 d3 Kxd3 Kc5 Bd4+ Kb4 Bxb6 Kxa4 Kc4 Ka3 Bd4 a4 Kc3 Ka2 Bf6 Ka3 Be7+ Ka2 Kc2 Ka1 Bd6 Ka2 Bb4 Ka1 Ba3 Ka2 Bb2 a3 Bc1 Ka1 Be3 Ka2 Bc5 Ka1 Bd4+ Ka2 Be3 Ka1 Bd4+ Ka2 Bf2 Ka1 Be3 Ka2 Bc1 Ka1 Bd2 Ka2 Bb4 Ka1 Bc5 Ka2 Kc1 Ka1 Bb4 Ka2 Kc2 Ka1 Bxa3","Italian Game","CanidateMaster"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Elnaz_Kaliakhmet","2363","2639","0-1","C89","Ruy Lopez: Marshall Attack","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O c3 d5 exd5 Nxd5 a4 Bb7 axb5 axb5 Rxa8 Bxa8 Nxe5 Nxe5 Rxe5 Nf4 d4 Nxg2 d5 Nh4 Rh5 g6 Re5 Bd6 Re4 Qf6 Qg4 Nf3+ Kg2 Ne5 Qg5 Qf3+ Kf1 Qxe4 Nd2 Qd3+ Kg2 Bxd5+ Bxd5 Qxd5+ Kg1 Ra8 f4 Bc5+ Kf1 Qd3+","Ruy Lopez","thecatdoglady"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","gh6999","2484","2676","0-1","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 a4 O-O Nc3 d6 h3 Be6 O-O Bxc4 dxc4 Na5 b3 c6 Re1 b6 Nd2 Qd7 Nf1 Nb7 Ne3 Nc5 Nf5 a5 Bg5 Rfe8 Bxf6 Bxf6 Qxd6 Rad8 Qxd7 Rxd7 Rad1 Red8 Rxd7 Rxd7 Re2 g6 Ng3 Ne6 Re1 Rd2 Re2 Rd8 Re1 Nd4 Kf1 Nxc2 Rd1 Rxd1+ Nxd1 Nd4 Ne2 Nxb3 Ndc3 Nd2+","Italian Game","acidShazz"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","yegchesss","2872","2738","1-0","C40","Elephant Gambit: Paulsen Countergambit","e4 e5 Nf3 d5 exd5 e4 Qe2 Nf6 Nc3 Be7 Nxe4 O-O Nxf6+ Bxf6 d4 Re8 Be3 Qxd5 Qb5 Qd8 Bd3 Nc6 O-O-O a6 Qb3 Be6 d5 Bxd5 Bxh7+ Kxh7 Rxd5 Qc8 h4 Qe6 Ng5+ Bxg5 hxg5+ Kg8 Qd3 Qe4 Qd1 Qg6 Qf3 Nb4 Rc5 c6 Qh3 Kf8 Rf5 Rxe3 fxe3 Nd5 Re5 Ne7 Qd7 Ng8 Rd1 f6 gxf6 Nxf6 Qxb7 Re8 Rxe8+ Qxe8 Qc7 Qxe3+ Kb1 Ne4 Rd8#","","Brave_spirit12"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Witty_Alien","2779","2599","1-0","C40","Elephant Gambit","e4 e5 Nf3 d5 Nxe5 Nf6 d4 Nxe4 Nd2 Nxd2 Bxd2 Bd6 Bd3 Nd7 f4 Qh4+ g3 Qh3 Qf3 O-O Qxd5 Nf6 Qf3 Be6 Qf1 Qh5 Be2 Qf5 Bd3 Qh5 Qe2 Qh3 O-O-O Bxa2 g4 Bxe5 fxe5 Nxg4 Rdg1 h5 Rg3 Qh4 Rhg1 Be6 h3 a5 hxg4 Bxg4 Qe4 g6 e6","","Gangsterrito"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Little_Skib","3164","3002","1-0","C50","Italian Game: Giuoco Pianissimo, Normal","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 O-O a6 Nbd2 d6 c3 Ba7 Bb3 O-O h3 Nh5 Nc4 Qf6 Ne3 Nf4 Nd5 Nxd5 Bxd5 h6 Be3 Ne7 Bb3 Ng6 Kh2 Nf4 Ng1 Be6 g3 Ng6 Bxa7 Rxa7 f4 exf4 gxf4 c5 Qf3 b5 Qg3 Bxb3 axb3 b4 Ne2 Rb8 f5 Ne5 c4 Nc6 Rf2 Qxb2 Rg1 Qe5 Nf4 Nd4 Rfg2 f6 Kh1 Rbb7 Qg4 Nxb3 Nh5 Rf7 Qg6 Kh8 Nxg7","Italian Game","Zhigalko_Sergei"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","frederiksvane","3026","3160","1-0","C88","Ruy Lopez: Closed, Anti-Marshall","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O a4 Bb7 Nc3 b4 Nd5 Na5 Ba2 b3 cxb3 Bxd5 exd5 Nxd5 Nxe5 Nb4 Bb1 Bf6 d4 Rb8 Bd2 d6 Nf3 Qd7 Bc3 Qg4 d5 c5 Re4 Qh5 Bxf6 gxf6 Rh4 Qxd5 Bxh7+ Kg7 Qc1 Qg5 Nxg5 Nxb3 Ne6+ fxe6 Qh6+ Kf7 Bg6+ Ke7 Qg7+ Kd8 Qxf8+ Kc7 Rh7+ Kc6 Qxb8 Kd5 Rh5+ f5 Bxf5 exf5 Rxf5+ Ke4 Re1+ Kxf5 Qf8+ Kg6 Re6+ Kh5 Qh6+ Kg4 Qg6+ Kf4 g3+ Kf3 Re3#","Ruy Lopez","TimAina"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Artem_0degov","2778","2946","1/2-1/2","C42","Petrov's Defense: Three Knights Game","e4 e5 Nf3 Nf6 Nc3 Bb4 Nxe5 O-O Nd3 Bxc3 dxc3 Nxe4 Be2 Re8 O-O h6 Nf4 Nc6 Be3 d6 Re1 Ng5 a4 Ne6 Nd5 Ne7 a5 Nxd5 Qxd5 a6 Bf3 c6 Qd2 d5 Bb6 Qf6 Rad1 Bd7 c4 Ng5 Be2 Ne4 Qd4 Qxd4 Rxd4 Nf6 cxd5 Nxd5 Bc5 Bf5 c4 Nf6 Rdd1 Rad8 Bb4 Rxd1 Bxd1 Rxe1+ Bxe1 Bd3 b3 Kf8 Bb4+ Ke8 f3 Nd7 Kf2 c5 Bc3 f6 Ke3 Bf5 f4 Ke7 Bf3 b6 axb6 Nxb6 Ba5 Nd7 Kd2 Kd6 g4 Be6 f5 Bf7 Bb7 Nb8 Bb6 Be8 Ba7 Nc6 Bxc6 Bxc6 Ke3 Bg2 Bb8+ Kd7 Bg3 Bh3 Kf4 Bf1 Ke3 Bg2 Be1 Bh3 Kf4 Bf1 Ke3 Bh3 Kf4 Bg2 Bc3 Bf1 Ke3 Bh3 Kf4 Bf1 Ke3 Bh3 Kf4 Bf1","","PolishForce3000"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Sibelephant","3139","3252","0-1","C47","Four Knights Game: Scotch Variation Accepted, Main Line","e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 O-O O-O d5 exd5 cxd5 h3 c6 Qf3 Nd7 Bf4 Nc5 Ne2 Nxd3 cxd3 Qf6 a3 Be7 Qg3 Qg6 Rfe1 Qxg3 Nxg3 Be6 Rac1 c5 Be3 Rfc8 d4 c4 Bf4 Rc6 Ne2 Rb6 Rc2 Bf6 Be5 Bxe5 dxe5 Rab8 b4 cxb3 Rb2 Rc8 Nd4 Rc4 Rd1 Ra4 f4 g6 g4 Rxa3 Kf2 Ra2 Rdd2 Rxb2 Rxb2 a5 Rxb3 Rxb3 Nxb3 a4 Nd4 a3 Ke3 a2 Nc2 h5 gxh5 gxh5 h4 Kg7","Four Knights Game","crescentmoon2411"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","superchess02","2740","2956","1-0","C42","Petrov's Defense: Nimzowitsch Attack","e4 e5 Nf3 Nf6 Nxe5 d6 Nf3 Nxe4 Nc3 Nf6 d4 d5 Bd3 Bd6 O-O O-O Nb5 Be7 Bf4 Ne8 Re1 c6 Nc3 Be6 Ne2 Nd7 Ng3 Bd6 Bxd6 Nxd6 Ne5 Nf6 c3 a5 Qc2 a4 a3 Re8 Re3 Nc4 Bxc4 dxc4 Rae1 Bd5 h3 Qb6 Nf5 g6 Nd6 Red8 Ndxc4 Qa6 Nd2 b5 Ndf3 Qb6 Ng4 Nxg4 hxg4 c5 dxc5 Qxc5 Nd4 Bxg2 Re5 Bd5 Qd3 Rab8 Qg3 Qb6 Re7 Rb7 Re8+ Kg7 Qe5+ f6 Re7+ Kg8 Re8+ Kg7 Re7+ Kg8 Qf4 Rxe7 Rxe7 Qd6 Re8+ Kg7 Qxd6 Rxd6 Rb8 Bc4 f4 h5 gxh5 Rd5 hxg6 Kxg6 Kf2 Rh5 f5+ Kg5 Kg3 Rh1 Nxb5 Rg1+ Kf2 Rf1+ Kg3 Bd5 Nd4 Rg1+ Kf2 Rb1 Ke3 Re1+ Kd2 Rg1 Rd8 Rg2+ Kc1 Bc4 Rc8 Ba2 c4 Kf4 c5 Ke5 c6 Kd6 Rd8+ Kc7 Rd7+ Kb6 Rb7+ Ka6 Rb8 Rg7 Ne6 Rg1+ Kd2 Rg2+ Kc3 Bb3 Kd4 Ka7 Rb7+ Ka6 Nc7+ Ka5 Rb5#","","Lucsd"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","FREDERICKtheMATE","2783","3071","1-0","C48","Four Knights Game: Spanish Variation","e4 e5 Nf3 Nc6 Nc3 Nf6 Bb5 Bd6 d3 a6 Ba4 h6 a3 b5 Bb3 Bc5 Be3 Bxe3 fxe3 d6 h3 O-O Qe2 Ne7 g4 c5 Rg1 Qa5 Kf2 Be6 g5 hxg5 Rxg5 Bxb3 cxb3 g6 h4 b4 Nb1 Kg7 Nbd2 bxa3 bxa3 Rh8 Nc4 Qc7 Rag1 Rh6 h5 Rah8 hxg6 fxg6 Ke1 Rh1 Rg2 Rxg1+ Rxg1 Qb8 Qc2 Rh5 Kd1 Nh7 Kc1 Qf8 Qg2 Qf6 Rf1 Qe6 d4 cxd4 exd4 a5 dxe5 dxe5 Qg3 Nc6 Rd1 Qh3 Qf2 Nd4 Nxd4 exd4 Qxd4+ Kh6 Qd2+ Ng5 Kb1 Qxb3+ Nb2 Qxa3 e5 Qe7 Re1 Rh4 e6 Rb4 Rh1+ Kg7 Qc3+ Qf6 Qc7+ Kg8 Qc8+ Kg7 Qh8#","Four Knights Game","TheINfinity011"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","rasmussvane","3000","3158","0-1","C88","Ruy Lopez: Closed, Anti-Marshall","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 Bb3 O-O a4 Bb7 d3 d6 Nbd2 Nd7 c3 Nc5 Bc2 Nxa4 Bxa4 bxa4 Qxa4 Kh8 d4 exd4 cxd4 d5 e5 Nb4 Nf1 Qe8 Qb3 Qb5 Bg5 Bxg5 Nxg5 h6 Qh3 Nc2 Qf5 hxg5 Qxc2 Qb6 Qc3 Bc8 Rac1 Be6 Ne3 Rab8 Qxc7 Qxc7 Rxc7 Rxb2 h3 Rd2 Ra7 Rxd4 Rxa6 Re4 Rd1 Rxe5 Rd6 Kh7 Nxd5 f6 Ne3 Re8 Rd8 Re7 R8d6 Bf7 Rd7 Be8 Rxe7 Rxe7 Rd5 Bf7 Rd2 Rb7 g3 Be6 h4 gxh4 gxh4 Rb4 Rd6 Bf7 Rd7 Kg8 Rd8+ Kh7 Rd7 Be6 Re7 Rb6 h5 Kh6 Kh2 Rc6 Kg3 Bc8 Kf4 Rc5 Re8 Kxh5 f3 g5+ Kg3 Kg6 Re7 Bf5 Nxf5 Rxf5 Re8 Rd5 Rg8+ Kf5 Rb8 Ra5 Rb6 Rc5 Rb8 Rd5 Rb3 Rd4 Rc3 Kg6 Rc6 Rb4 Rc8 f5 Rg8+ Kh5 Rh8+ Kg6 Rg8+ Kh6 Rf8 Rb5 Rf6+ Kg7 Rc6 Rb1 Rc7+ Kg6 Rc6+ Kh5 Rc5 f4+ Kg2 Rb2+ Kg1 Kh4 Rd5 g4 fxg4 Kg3 Rd3+ f3 Rc3 Rb1+","Ruy Lopez","ShadowKing71"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Boundless_Strike","2552","2904","0-1","C40","Elephant Gambit","e4 e5 Nf3 d5 Nxe5 Bd6 d4 dxe4 Nc3 Bxe5 dxe5 Qxd1+ Kxd1 Nc6 Bb5 Bd7 Nxe4 O-O-O Bd2 Nxe5 Bxd7+ Rxd7 Ke2 f5 Nc5 Rd5 Nb3 Nf6 Rhd1 Re8 Kf1 Red8 Ke2 Ne4 Be3 Nc4 Bd4 Re8 Kf1 Red8 Ke2 a5 a4 g6 f3 Ned2 Nxd2 Rxd4 Nxc4 Rxc4 Rxd8+ Kxd8 Kd3 Rh4 h3 Kd7 b3 Rb4 Re1 Rb6 Re5 Rd6+ Ke2 Re6 Rxe6 Kxe6 f4 Kd5 Kd3 Kc5 Kc3 c6 g4 fxg4 hxg4 h6 f5 gxf5 gxf5 Kd5 Kd3 Ke5 f6 Kxf6 Kd4 h5 Kc5 h4 Kb6 h3 Kxb7 h2 Kxc6 h1=Q+ Kb5 Qe1 c4 Qb4+ Kc6 Qxb3 Kd5 Qxa4 c5 Qb5 Kd6 a4 c6 Qe5+ Kd7 a3 Kc8 a2 c7 a1=Q Kb7 Qab2+ Kc8 Qbc3 Kb7 Qcxc7+ Ka6 Qe2#","","ShadowOfHarmony"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Igor_Lysyj","3121","2990","0-1","C45","Scotch Game: Schmidt Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nxc6 bxc6 Qe2 Bc5 e5 Nd5 c4 Nb6 Qg4 g6 Bg5 Be7 h4 d5 Qg3 Bf5 Nd2 h6 Bxe7 Qxe7 cxd5 cxd5 Bb5+ Kf8 O-O Qb4 Qa3 Qxa3 bxa3 c5 Rac1 c4 a4 a6 Bc6 Rc8 Bb7 Rc7 Bxa6 Nxa4 Nf3 Kg7 Nd4 Ra8 Bb5 Bd3 Rfe1 Nc5 a4 Ne6 Nf3 Bf5 Red1 Rc5 Nd4 Nxd4 Rxd4 Ra5 f3 h5 Kf2 Rcxb5 axb5 Rxb5 Rc3 Rb2+ Ke3 Be6 g3 Rg2 Kf4 Re2 Rd1 Kf8 Ra3 Rb2 Ra8+ Kg7 Ra3 Rc2 Rd4 Re2 Rd1 Rc2 Ke3 Rg2 Rh1 Rc2 f4 Rg2 Rd1 Rxg3+ Kd4 Rxa3 Rc1 Rd3+ Kc5 c3 f5 gxf5 Rg1+ Kh7 Kd6 d4 Ke7 f4 Kf8 Rg3 Rf1 d3 Rxf4 d2 Rf1 c2 Rf6 d1=Q Ke7 Qd4 Kf8 Qb4+ Ke8 Qb8+ Ke7 Qc7+ Ke8 Qd7+ Kf8 Qd8#","Scotch Game","carokannlover213"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","Slawomir_Kurpiewski","2440","2174","1-0","C77","Ruy Lopez: Morphy Defense, Anderssen Variation","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 d3 b5 Bb3 Bc5 O-O d6 c3 Bg4 h3 Bh5 Re1 h6 Nbd2 g5 Nf1 g4 hxg4 Bxg4 N1h2 Be6 Bxe6 fxe6 d4 exd4 cxd4 Bb6 Qb3 Qe7 d5 Na5 Qd1 e5 Nh4 O-O-O Ng6 Qg7 Nxh8 Rxh8 Be3 Rg8 Qf3 Bxe3 Rxe3 Nc4 Re2 Kb8 a4 b4 g3 h5 Qd3 Nb6 a5 Nbd7 Qxa6 Nc5 Qb5+ Ka7 Rc1 Nfxe4 Rxe4 Nxe4 a6 Rb8 Qc6 Nc5 Nf3 Rb6 Qe8 Rxa6 Nxe5 Qxe5 Qxe5 dxe5 Rxc5 Kb7 Rb5+ Rb6 Rc5 Rd6 Rc4 Rxd5 Rxb4+ Kc6 Rh4 Rb5 Rxh5 Kd6 Rh6+ Kd5 Rh7 Rxb2 Rxc7 Ke4 Rc3 Kf5 Kg2 Rb5 Rd3 Ra5 Re3 Rb5 Kf3 Ra5 Rb3 Rc5 Ke3 Ra5 Kf3 Rc5 Kg2 Ra5 f3 e4 f4 Ra2+ Kh3 Ra1 Rb5+ Kf6 Re5 Re1 Kg2 Re3 Kf2 Rf3+ Kg2 Re3 Re8 Kf7 Rb8 Re2+ Kf1 Re3 Rb7+ Kf6 Rb6+ Kf5 Rb8 Kg4 Rg8+ Kf3 f5 Rb3 Ke1 e3 Kd1 e2+ Kd2 Rb2+ Ke1 Rb1+ Kd2 e1=Q+ Kd3","Ruy Lopez","Edward220312"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","8","BeanScreen","3099","2869","1/2-1/2","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O Re1 d6 c3 Na5 Bb5 a6 Ba4 b5 Bc2 c5 Nbd2 Nc6 h3 h6 Nf1 Be6 Ng3 Rc8 Nh2 Re8 Qf3 Bf8 Ng4 Nxg4 hxg4 g6 Bb3 Qh4 Bxe6 fxe6 a4 b4 Nf1 Bg7 a5 Rf8 Qg3 Qxg3 Nxg3 Rb8 Nf1 Rb5 Bd2 Rfb8 Ne3 Rxa5 cxb4 Rxa1 Rxa1 Nxb4 Bxb4 Rxb4 Rxa6 Rd4 Nc4 d5 Ne3 Rxd3 Rxe6 d4 Nd5 Rd1+ Kh2 d3 Rd6 c4 Ne3 Rc1 Rxg6 Kf7 Rc6 Bf8 Kg3 Ba3 Rc7+ Ke6 Rxc4 d2 Rc3 Bc5 Rxc5 Rxc5 Kf3 Rb5 Ke2 Rxb2 Nd1 Rc2 f3 Kf6 Kd3 Ra2 g3 Kg5 Ke2 Ra3 Nf2 Ra2 Nd1 Rc2 Ke3 Kg6 Ke2 Ra2 Ke3 Ra3+ Ke2 Rb3 Nf2 Rc3 Nd1 Ra3 Nf2 h5 gxh5+ Kxh5 Nd1 Kg5 Nf2 Rb3 Nh3+ Kf6 Nf2 Rb2 Nd1 Ra2 Nc3 Rc2 Nd5+ Ke6 Ne3 d1=Q+ Kxd1 Rf2 Ke1 Rxf3 Ke2 Rxg3 Nf1 Rg4 Nd2 Rf4 Ke3 Rg4 Ke2 Rxe4+ Nxe4 Kf5 Ke3 Ke6 Nd2 Ke7 Ke4 Ke8 Nf3 Kd8 Ne1 Ke8 Nd3 Kd8 Nf2 Ke8 Ng4 Kd8 Ne3 Ke8 Nd5 Kd8 Nc3 Ke8 Nb5 Kd8 Na3 Ke8 Nc4 Kd8 Nd2 Ke8 Nf3","Italian Game","Fandorine"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","UST_B","2726","2551","1-0","C60","Ruy Lopez: Fianchetto Defense","e4 e5 Nf3 Nc6 Bb5 g6 O-O Bg7 c3 a6 Ba4 d6 Re1 Nf6 h3 O-O d3 b5 Bb3 Na5 Bc2 c5 Bg5 Nc6 Nbd2 h6 Bh4 d5 exd5 Qxd5 Bxf6 Bxf6 Ne4 Be7 Bb3 Qd8 Qd2 Kg7 Qe3 Qb6 Bd5 Bf5 Ng3 Bd7 Nxe5 Nxe5 Bxa8 Bf6 Ne4","Ruy Lopez","lamomiablanca"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","WhiteKnight2612","2650","3088","0-1","C84","Ruy Lopez: Closed","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 Nf6 O-O Be7 Re1 b5 c3 bxa4 Qxa4 O-O d4 exd4 cxd4 Bb7 d5 Na7 Nc3 d6 Nd4 Qd7 Qc2 c6 dxc6 Nxc6 Nf5 Bd8 Bf4 d5 e5 Ne4 Nxe4 dxe4 Nd6 Nb4 Qb3 Nd3 Qxb7 Qxb7 Nxb7 Nxf4 Rxe4 Ne6 Rd1 Bb6 Rb4 Ba7 Rd6 Rac8 g3 Rc2 Rxa6 Bxf2+ Kf1 Be3 Rb3 Bd4","Ruy Lopez","feuervogel10"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","ChristopherYoo","3302","3196","1/2-1/2","C50","Italian Game: Giuoco Pianissimo","e4 e5 Nf3 Nc6 Bc4 Bc5 d3 d6 c3 Bb6 O-O h6 a4 a6 b4 Nge7 Be3 Bxe3 fxe3 O-O Nbd2 Ng6 Qe1 Qe7 Qg3 Be6 Bxe6 Qxe6 d4 Qe8 Rab1 f6 c4 Kh7 a5 Nce7 Qe1 f5 Qe2 f4 d5 fxe3 Qxe3 Nf4 g3 Qg6 Kh1 Nh3 c5 Qg4 Ng1 Nxg1 Kxg1 Ng6 Kh1 Rxf1+ Rxf1 Rf8 Rf3 Rxf3 Qxf3 Qxf3+ Nxf3 Kg8 Kg2 Kf8 Nd2 Ke7 Nc4 Nf8 Kf3 Nd7 cxd6+ cxd6 Ke3 Nf6 h3 h5 Kd3 g6 Nd2 Nd7 Nf3 Kf6 Kc4 Ke7 Ne1 Nf6 Kd3 Nd7 Nc2 Nf6 Na3 Nd7 Nc4 Nf6 Nd2 Nd7 Kc4 Nf6 Kc3 Nd7 Kd3 Nf6 Nc4 Nd7 Ne3 Nf6 Nd1 Nd7 Nf2 Nf6 Nd1 Nd7 Nc3 Nf6 Nd1","Italian Game","DenLaz"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","Zurability","3053","2878","0-1","C44","Scotch Game: Scotch Gambit, Göring Gambit Declined","e4 e5 Nf3 Nc6 d4 exd4 c3 d5 exd5 Qxd5 cxd4 Bb4+ Nc3 Bg4 Be2 Bxf3 Bxf3 Qc4 a3 Ba5 Be3 O-O-O Be2 Bxc3+ Kf1 Qe6 bxc3 Nf6 Rb1 Ne4 Qc2 Rhe8 Qb2 b6 c4 Qf5 c5 Nxd4 Ba6+ Kb8 cxb6 axb6 Rc1 Nc5 Bxd4 Nxa6 Be3 Rxe3","Scotch Game","MatthewG-p4p"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","SONIC-2025","2881","2609","1-0","C47","Four Knights Game: Scotch Variation Accepted","e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 d5 exd5 cxd5 O-O O-O Bg5 c6 Qf3 h6 Bxf6 Qxf6 Qxf6 gxf6 Ne2 Bd6 Nd4 c5 Nf5 Bxf5 Bxf5 Be5 Rab1 Rab8 b3 c4 Rfd1 Rfd8 g3 a5 f4 Bc3 Kf2 cxb3 axb3 d4 Kf3 Re8 Bd3 Kg7 Rf1 Rb6 Rbd1 Re3+ Kg2 Rbe6 Rf3 Re1 Rxe1 Rxe1 Rf2 Re7 Kf3 h5 Re2 Rxe2 Bxe2 f5 Kg2 Kg6 Kh3 Bb4 Kg2 Be1 Kf1 Bb4 Kf2 Bd2 Kf3 Be1 Bd3 Kf6 Ke2 Bb4 Kd1 Bc3 Bf1 Bb4 Ke2 Ke6 Kd3 Kd5 Bg2+ Kc5 Bf3 Be1 Ke2 Bc3 Bxh5 f6 Bg6 Bb4 Bxf5 Kd5 Kf3 Bf8 g4 Bh6 h4 Bg7 Bd3 Kc5 g5 fxg5 fxg5 Kb4 h5","Four Knights Game","AkibaRubi"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","wqws","2839","3020","0-1","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O a4 d6 h3 Be6 Nbd2 h6 a5 a6 Bxe6 fxe6 c3 Kh8 Nc4 Qe8 Qb3 Rb8 Be3 Nh5 Nh2 d5 exd5 exd5 Na3 Qd7 Nc2 d4 cxd4 exd4 Bd2 Bd6 Ng4 Nf6 Nxf6 Rxf6 Rae1 Rbf8 Re4 Rg6 Kh1 Rf3 Rh4 Qf5 Re1 Rxf2 Re8+ Bf8 Rg4 Rxg4 hxg4 Qxg4 Qd5 Rf1+","Italian Game","ElHelvetico"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","IMRosen","2612","2898","0-1","C24","Bishop's Opening: Vienna Hybrid","e4 e5 Nc3 Nf6 Bc4 Nc6 d3 Na5 Qf3 Bc5 Nge2 h6 Ng3 d6 Nf5 Bxf5 Qxf5 Nxc4 dxc4 Qd7 Qxd7+ Kxd7 f3 Bd4 Bd2 Bxc3 Bxc3 b6 a4 a5 b3 Ke6 h4 h5 Ke2 Nd7 Bd2 Ke7 Rh3 Nc5 Rg1 Ne6 g4 hxg4 Rxg4 Rh5 Be3 Rah8 Kf2 f6 f4 exf4 Bxf4 Kf7 Be3 R8h7 Kg2 Re5 Kf3 Rh8 Kg2 Reh5 Bf2 Re8 Rd3 Kf8 Rd5 Rh7 Be3 Kf7 Rf5 Reh8 Bf2 Ke7 Rg6 Nf8 Rg4 Nd7 Bg3 Kf7 Bf2 Ne5 Rgf4 Ng6 Rg4 Nxh4+ Bxh4 Rxh4 Rff4 g5 Rxh4 Rxh4 Rf1 Rxe4","","SiriusGGJJ"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","GMKrikor","2757","3061","0-1","C41","Philidor Defense: Exchange Variation","e4 e5 Nf3 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7 Be2 O-O O-O Re8 h3 Bf8 Bf3 a5 a4 Nbd7 Re1 Ne5 Be2 c6 Bg5 h6 Bh4 Ng6 Bxf6 Qxf6 Bf3 Nf4 Qd2 Qg5 Kh2 Nxh3 Qxg5 Nxg5 Kg3 Nxf3 Kxf3 g6 Rad1 Bd7 Kg3 Rad8 f3 h5 Nb3 b6 Nd2 Be6 Nf1 Bg7 Ne3 Bxc3 bxc3 Kf8 c4 Ke7 Rb1 Rb8 Rb2 Kd8 Rd1 Kc7 c3 f6 Rbd2 Rbd8 Kf2 g5 Rh1 h4 Rb1 Rb8 Rbd1 Rbd8 Rb1 Rf8 Re1 Rh8 Rh1 Rhf8 Re1 Rf7 Red1 Re7 Re1 Bc8 Red1 Re5 Re1 Be6 Red1 Rc5 Rd4 Re5 R4d2 f5 exf5 Bxf5 Nxf5 Rxf5 Re1 Re5 Rxe5 dxe5 Re2 Kd6 Re4 Rf8 g3 hxg3+ Kxg3 Rf4 Re3 Rxc4 Rd3+ Ke6 Rd8 Rxa4 Re8+ Kd6 Rg8 Rc4 Rg6+ Kd5 Rxg5 a4 Rg8 b5 Rd8+ Kc5 Re8 Kd6 Rd8+ Ke7 Rd3 a3 Rd2 Rxc3 Re2 Kf6 Kg4 b4 Rd2 b3 Rd6+ Ke7 Rd2 b2","","KononenkoD"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","Hikaru","3239","3477","0-1","C65","Ruy Lopez: Berlin Defense, Anti-Berlin Variation","e4 e5 Nf3 Nc6 Bb5 Nf6 d3 Bc5 Bxc6 dxc6 Nbd2 Nd7 O-O O-O a4 a5 Nc4 Re8 h3 b6 Be3 Bf8 Kh1 f6 Nfd2 Nc5 f4 exf4 Bxf4 Ne6 Bh2 c5 Nf3 Bb7 Qd2 Qd7 b3 g6 Rae1 Bg7 Qf2 Rf8 Qh4 Rae8 Re2 f5 exf5 Rxf5 Ncd2 Nd4 Nxd4 Rxf1+ Nxf1 Bxd4 Qg4 Qf7 Rxe8+ Qxe8 Qd1 Qe6 h4 h5 Nd2 Qe3 Nf3 Bxf3 gxf3 Qf2 Bxc7 Qxh4+ Kg2 Qf2+ Kh1 h4 Bh2 h3","Ruy Lopez","Grischuk"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","screwdriver2009","2898","2731","1-0","C50","Italian Game: Giuoco Pianissimo, Normal","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Bc5 a3 a5 Nc3 d6 Bg5 h6 Bh4 g5 Bg3 Bg4 Bb5 O-O Bxc6 bxc6 h4 Nh5 hxg5 Nxg3 fxg3 hxg5 Qd2 f6 O-O-O Kg7 Rdf1 Qe7 Ne2 d5 Nc3 d4 Nb1 Rfb8 Rh2 Rh8 Rxh8 Kxh8 Nh2 Be6 Qe2 Kg7 Ng4 Bxg4 Qxg4 Rh8 Nd2 a4 Nc4 Rh2 Rf2 Rh1+ Kd2 Bb4+ Ke2 Re1+ Kf3 Bc5 Qh3 Qe8 g4 Qg6 Kg3 Be7 Qh5 Qxh5 gxh5 Kh6 Kg4 Rh1 Kf5 Kxh5 Ke6 Bf8 Kxf6 Kg4 Kxe5 Bg7+ Ke6 Kg3 Rf7 Bh6 e5 Kxg2 Kd7 g4 e6 g3 e7 Re1 e8=Q Rxe8 Kxe8 Be3 Ne5 Kh2 Rh7+ Kg1 Nf3+ Kf2 Rf7 g2 Nh4+ Kg3 Nxg2 Kxg2 Rf6 Bf4 Rxf4","Italian Game","ChessQueen"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","ArtemyKhan","2726","2868","1/2-1/2","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 a4 O-O O-O d5 exd5 Nxd5 h3 Kh8 a5 a6 c3 Bf5 Re1 f6 Nbd2 Qd7 Ne4 Rfd8 Qb3 Rab8 Ng3 Be6 Be3 Bg8 d4 exd4 Bxd4 Nxd4 Nxd4 Bc5 Rad1 c6 Re4 Qc7 Qa2 Re8 Rde1 Rxe4 Rxe4 Bxd4 Rxd4 Re8 Rd1 g6 Bxd5 Bxd5 c4 Bf7 b4 Kg7 Qc2 Rd8 Rxd8 Qxd8 Qc3 Qe7 f3 Qe6 Ne4 Qe7 g4 h6 h4 g5 hxg5 hxg5 Nxg5 Bxc4 Ne4 Bd5 Ng3 Qe6 Nf5+ Kf7 Kf2 Qd7 Qd4 Qc7 f4 Be6 Nd6+ Ke7 Nf5+ Bxf5 gxf5 Qd6 Qe3+ Kf7 Qe4 Qd2+ Kf3 Qd1+ Kg3 Qg1+ Kf3 Qh1+ Ke3 Qc1+ Kf3 Qc3+ Ke2 Qb2+ Kd3 Qb3+ Ke2 Qa2+ Ke3 Qb3+ Kf2 Qd5 Ke3 Qd6 Qc4+ Qd5 Qxd5+ cxd5 Kd4 Ke7 Kxd5 Kd7 Kc5 Kc7 b5 axb5 Kxb5 Kc8 Kb6 Kb8 a6 bxa6 Kxa6 Kc7 Kb5 Kd6 Kc4 Kc6 Kd4 Kd6 Kc4 Kc6 Kd4 Kd6 Kc4","Italian Game","MikaKarttunen"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","carokannlover213","2901","3116","1/2-1/2","C70","Ruy Lopez: Morphy Defense, Schliemann Defense Deferred","e4 e5 Nf3 Nc6 Bb5 a6 Ba4 f5 d3 fxe4 dxe4 Nf6 O-O d6 Nc3 Be7 Bb3 Na5 Bg5 Nxb3 axb3 O-O Nd5 Bg4 h3 Bh5 Qd3 Kh8 Nxe7 Qxe7 Nd2 Qe6 f3 Nd7 Qc4 Qg6 Be3 Rac8 g4 d5 exd5 Nb6 Qe4 Rfd8 c4 Nd7 Kh2 Qxe4 Nxe4 Bg6 b4 Kg8 b3 Rf8 Ng5 Rfe8 Ne4 Bxe4 fxe4 Nf6 Rxf6 gxf6 Rf1 Kg7 h4 Ra8 Ra1 Kg6 Kh3 Rh8 h5+ Kf7 Rf1 h6 Bf2 Kg7 Bh4 Rhf8 Ra1 Kf7 Bf2 Kg7 Bc5 Rfc8 Rf1 Kf7 Be3 Kg7 Bd2 Rd8 Ra1 Rd7 b5 Rdd8 bxa6 Rxa6 Rxa6 bxa6 Ba5 Rb8 b4 Kf7 Kg3 Ke8 c5 Kd7 Kf3 c6 d6 Ke6 Bb6 Kd7 Kg3 Rg8 Kf3 Ra8 Kg3 Rf8 Kf3 Rf7 Kg3 Kc8 Kf3 Kb7 Kg3 Rd7 Kf3 Kc8 Ba5 Rb7 Ke3 Kd7 Kf3 Ke6 Kg3 Rg7 Kf3 Rg8 Kg3 Rh8 Kf3 Rb8 Kg3 Ra8 Kf3 Ra7 Kg3 Rd7 Kf3 f5 exf5+ Kf6 b5 axb5 Be1 Kg7 Ke4 b4 Kxe5 b3 Ke6 Rb7 Bc3+ Kf8 d7 Rb8 Bf6 Kg8 Kd6 Kf7 Bb2 Ra8 Kc7 Ra7+ Kc8 Ra6 Kc7 Ra7+ Kc8 Ra2 d8=Q Rxb2 Qd7+ Kf6 Qd6+ Kg5 Qg6+ Kf4 Qf6 Rd2 Qxh6+ Kf3 Qxd2 Ke4 Qb2 Kd5 Qxb3+ Kd4 Qb7 Kd5 Qxc6+ Kd4 Kd8 Kc3 Kd7 Kc2","Ruy Lopez","GalaxyRoman"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","rpragchess","3232","3269","1-0","C24","Bishop's Opening: Vienna Hybrid","e4 e5 Bc4 Nc6 Nc3 Nf6 d3 Bb4 Bg5 h6 Bxf6 Bxc3+ bxc3 Qxf6 Ne2 d6 Bb3 Bd7 Qd2 g5 Qe3 O-O-O a4 a5 Bc4 b6 Bb5 Kb7 O-O h5 c4 Nd4 Nxd4 exd4 Qd2 c6 f4 g4 f5 cxb5 axb5 Qe5 Ra3 Ra8 Raa1 h4 Rfe1 g3 h3 Qf6 Rf1 Qh6 Qe2 Rae8 Qf3 Re5 Qg4 f6 Rfe1 Be8 Qd1 Bh5 Qb1 Qf4 Rf1 Qe3+ Kh1 Be2 Re1 Qf2 Qc1 Re7 Rg1 Bh5 Qa3 Qf4 Qb2 Qe5 Rgf1 Rc8 Ra4 Rc5 Qa3 Kc8 Ra1 Qf4 Rg1 Qf2 Qc1 Qe3 Qa1 Rh7 Re1 Qd2 Rg1 Qe3 Re1 Be2 Ra2 Rhc7 Qb1 Kb7 Qa1 d5 exd5 Re7 Rb2 Re5 Ra2 Qf2 c3 dxc3 Qxc3 Rc7 d6 Rd7 d4 Rxf5 Raa1 Bf3 Rg1 Rxd6 c5 Rxd4 cxb6 Rd7 Qxa5 Qxb6 Qa8+ Kc7 Rac1+ Kd6 Qf8+ Ke5 Qe8+ Kf4 Qxd7 Rd5 Qh7","","FabianoCaruana"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","9","SuanQuek","2668","2474","1-0","C48","Four Knights Game: Spanish Variation, Classical Variation","e4 e5 Nf3 Nc6 Bb5 Nf6 Nc3 Bc5 O-O d6 d4 exd4 Nxd4 Bd7 Nf5 O-O Bg5 h6 Bh4 a6 Ba4 b5 Bb3 Ne5 Nd5 Bxf5 Nxf6+ gxf6 exf5 Kh7 Qh5 d5 Rad1 c6 Kh1 Rg8 f4 Ng4 Rd3 Rg7 c3 Qd6 Rh3 Rh8 Bd1 Ne3 Bf2 Kg8 Bxe3 d4 cxd4 Bb6 Bb3 c5 Rg3 c4 Rxg7+ Kxg7 Bc2 Kf8 Rf3 Bxd4 Bxd4 Qxd4 h3 Qd2 Be4 Ke7 Kh2 Qe1 Bd5 Rh7 Qg4 Kf8 Qg3 Qd1 Re3","Four Knights Game","Vahan"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","10","ssunu","2484","2400","0-1","C22","Center Game: Paulsen Attack Variation","e4 e5 d4 exd4 Qxd4 Nc6 Qe3 Bb4+ Bd2 Qe7 Nc3 Nf6 O-O-O O-O f3 a5 Kb1 Bc5 Qe1 a4 a3 b5 Bxb5 Rb8 Ka2 Nd4 Bxa4 Ba6 Bb3 Nxb3 cxb3 Qe6 Nd5 Nxd5 exd5 Qxd5 Bb4 Bxb4 axb4 Bd3","","Mirchi_26"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","10","Hikaru","3302","3473","1/2-1/2","C67","Ruy Lopez: Berlin Defense, Berlin Wall","e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 dxc6 dxe5 Nf5 Qxd8+ Kxd8 Nc3 Bd7 h3 h6 b3 Be7 Bb2 Nh4 Nxh4 Bxh4 Ne2 Rg8 Rfe1 Kc8 Nf4 Bg5 Nh5 Be6 f4 Be7 g4 g6 Nf6 Rd8 Rad1 a5 Rxd8+ Kxd8 Rd1+ Kc8 Rf1 Bxf6 exf6 a4 Re1 axb3 axb3 Kd8 f5 gxf5 gxf5 Bxf5 Re7 Bg6 Be5 Ra2 Bxc7+ Kc8 Bb6 Ra6 Bc5 b6 Bd6 Ra1+ Kf2 Ra2 Rc7+ Kd8 Rxc6 Bxc2 Rxb6 Bxb3+ Kg3 Bd5 Kh4 Rf2 Be7+ Kc7 Rd6 Rf5 Kg3 Be6 Rd3 Rg5+ Kf4 Rh5 Re3 Bxh3 Re5","Ruy Lopez","LyonBeast"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","10","crescentmoon2411","3258","3156","0-1","C50","Italian Game: Giuoco Pianissimo, Normal","e4 e5 Nf3 Nc6 Bc4 Bc5 d3 Nf6 Be3 Bb6 Nc3 d6 a4 h6 h3 Be6 Bxe6 fxe6 d4 exd4 Nxd4 Bxd4 Bxd4 O-O O-O Nxd4 Qxd4 Nh5 Ne2 Qf6 Qc4 Rf7 Ra3 Raf8 Rb3 b6 g3 Qe7 Kg2 d5 Qa6 Qc5 f4 Qxc2 Qd3 Qxd3 Rxd3 dxe4 Re3 e5 f5 Rxf5 Rxf5 Rxf5 Rxe4 Nf6 Rc4 Nd5 Re4 Kf7 g4 Nf4+ Kh2 Rf6 Nc3 Nd3 b3 Rf3 Nb5 Nf4 Rxe5 Rxh3+ Kg1 g5 Nxc7 Rxb3 Nb5 Rg3+ Kf1 Rxg4 Nxa7 h5 Nc8 h4 Re7+ Kg6 Re8 h3 Rh8 Kg7","Italian Game","rpragchess"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","10","GMWSO","3302","3309","1/2-1/2","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O Re1 d6 a4 Na5 Ba2 c5 c3 Nc6 Na3 a6 h3 Be6 Bxe6 fxe6 Bd2 h6 b4 cxb4 cxb4 d5 Rb1 Nd7 Nc2 b5 Ne3 dxe4 dxe4 Nd4 Nxd4 exd4 Ng4 Nb6 axb5 axb5 Rb3 Bg5 Bxg5 Qxg5 Qxd4 Nc4 Rg3 Rad8 Qc3 Qd2 Qxd2 Rxd2 Nxh6+ Kh7 Ng4 Rb2 Rd1 Rf7 e5 Rxb4 Rd4 Kh8 Kh2 Rb2 Rgd3 Kh7 h4 Re2 f4 Rc2 h5 b4 h6 gxh6 Nf6+ Kg6 Kh3 Rc7","Italian Game","DenLaz"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","10","Slawomir_Kurpiewski","2348","2184","0-1","C44","Ponziani Opening","e4 e5 Nf3 Nc6 c3 d5 Qa4 Qd6 d4 exd4 exd5 Qxd5 Nxd4 Bd7 Bb5 Nxd4 Bxd7+ Qxd7 Qxd7+ Kxd7 cxd4 Bb4+ Nc3 Nf6 Bd2 Rhe8+ Kd1 Rad8 Kc2 Kc8 Rhe1 Rxd4 Rxe8+ Nxe8 Re1 Kd7 a3 Ba5 Be3 Bxc3 Kxc3 Rd5 b4 a6 Bc5 Nd6 Re3 b6 Bxd6 Rxd6 Rf3 f6 Rh3 h6 Rg3 g5 Rh3 f5 Re3 Re6 Rd3+ Kc6 f3 Re2 g4 fxg4 fxg4 Rxh2 Rf3 Rh4 Rf6+ Kb7 a4 Rxg4 Rxh6 Rf4 Rg6 g4 Kb3 Rf3+ Kc4 g3 b5 axb5+ axb5 Kc8 Rg7 Kd8 Kd5 Rc3 Kd4 Rc5 Rxg3 Rxb5 Rg7 Kc8 Kc4 Rc5+ Kb4 Kb7 Rg8 Rh5 Rg7 Rh4+ Kb5 Rh5+ Kb4 Rf5 Rg8 Rf4+ Kb3 Kc6 Rg6+ Kb5 Rg5+ c5 Re5 Rf3+ Kb2 Kb4 Rh5 b5 Rh4+ c4 Rh2 Rb3+ Ka2 Ra3+ Kb2 c3+ Kb1 Kb3 Rb2+ Kc4 Rh2 b4 Rh4+ Kb3 Rh2 c2+ Rxc2 Ra1+ Kxa1 Kxc2 Ka2 b3+ Ka3 b2 Ka4 b1=Q Ka5 Qb7 Ka4 Qb6 Ka3 Qb3#","","willsidney"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","10","Sibelephant","3380","3254","1/2-1/2","C55","Italian Game: Two Knights Defense, Modern Bishop's Opening","e4 e5 Nf3 Nc6 Bc4 Nf6 d3 Be7 O-O O-O Re1 d6 a4 a5 Nc3 h6 h3 Re8 Nd5 Bf8 c3 Nxd5 Bxd5 Be6 Qb3 b6 Bxe6 Rxe6 Be3 Ne7 Rad1 d5 Bc1 dxe4 Rxe4 Ng6 d4 Qf6 Qc4 Bd6 d5 Ree8 Qe2 Qd8 g4 Qc8 Nh2 Rf8 Rd3 f5 gxf5 Qxf5 Rg3 Nf4 Qg4 Qf7 Bxf4 exf4 Rd3 Rae8 Rxe8 Rxe8 Nf3 Kh7 Kf1 Re4 b3 Qg6 Qxg6+ Kxg6 Nd2 Re8 f3 Kf5 Ne4 g5 Rd2 h5 Re2 Rd8 c4 g4 hxg4+ hxg4 fxg4+ Kxg4 Nd2 Rh8 Rg2+ Kf5 Nf3 Ke4 Ke2 Kf5 Kd3 Rh3 Ke2 Rg3 Rf2 Ke4 Nd2+ Kd4 Kd1 Kd3 Rf1 Bc5 Nf3 Be3 Ne5+ Kc3 Ke2 Kxb3 Rh1 Kc3 Rh7 Bd4 Nf3 Rg2+ Ke1 Rg3 Ke2 Rg2+ Ke1 Rg3 Ke2","Italian Game","Sina-Movahed"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","10","Vahan","2752","2678","0-1","C57","Italian Game: Two Knights Defense, Ulvestad Variation","e4 e5 Nf3 Nc6 Bc4 Nf6 Ng5 d5 exd5 b5 Bf1 Nxd5 Bxb5 Bb7 Nf3 Bd6 d4 O-O Bxc6 Bxc6 dxe5 Re8 O-O Bxe5 Nxe5 Rxe5 Qg4 Nf6 Qg3 Re2 Bh6 Ne8 Nc3 Rxc2 Rad1 Qf6 Bc1 Nd6 Qd3 Qg6 Qxg6 hxg6 Rfe1 Re8 Rxe8+ Bxe8 Kf1 Bc6 Re1 Kf8 h3 f6 Kg1 g5 Ne2 Nf5 Be3 Nxe3 fxe3 Rxb2 Rc1 Be4 Nd4 Rxg2+ Kf1 c6 a4 Ra2 Ne6+ Kf7 Nc5 Bg2+ Ke1 Bxh3 Rd1 Be6 Rd6 Bd5 Rd7+ Kg6 e4 Bc4 Rd4 Bf7 Rd7 g4 Kf1 g3 Kg1 Bc4 Rd4 Be2 e5 fxe5 Re4 Kf5 Re3 Kf4 Re4+ Kf3 Nb3 Kxe4 Nd2+ Rxd2 Kg2 Kf4 Kh3 Bf1+ Kh4 Rh2#","Italian Game","zverr1"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","snehahalder2009","2576","2702","1-0","C47","Four Knights Game","e4 e5 Nf3 Nf6 Nc3 Nc6 Be2 Bb4 Nd5 d6 Nxb4 Nxb4 d3 h6 O-O O-O c3 Nc6 h3 Be6 Re1 Qd7 Bf1 d5 d4 dxe4 Nxe5 Nxe5 dxe5 Qxd1 Rxd1 Nd7 Bf4 Nb6 Rd4 Bd5 c4 c5 Rxd5","Four Knights Game","gaidym72"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","The_BOSS_67","2701","2554","1-0","C56","Italian Game: Scotch Gambit, Janowski Defense","e4 e5 Nf3 Nc6 Bc4 Nf6 d4 exd4 O-O d6 Nxd4 Nxd4 Qxd4 Be7 Nc3 O-O Re1 Re8 Bf4 Bf8 Rad1 Be6 Bxe6 Rxe6 Nd5 Nxd5 exd5 Rxe1+ Rxe1 Qd7 h3 g6 b3 a5 a4 b6 Qe3 Qf5 c4 f6 Bh6 Qd7 Bxf8 Kxf8 Qd4 Kf7 Re6 Qd8 g4 c5 Qf4 Ra7 Rxd6 Rd7 Re6 Re7 Qxf6+","Italian Game","sniperovic"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","UST_B","2678","2567","0-1","C60","Ruy Lopez: Fianchetto Defense","e4 e5 Nf3 Nc6 Bb5 g6 O-O Bg7 c3 a6 Ba4 d6 h3 Nf6 Re1 O-O d4 b5 Bc2 exd4 cxd4 Nb4 e5 Nxc2 exf6 Nxe1 fxg7 Nxf3+ Qxf3 Re8 Be3 Bf5 Nd2 Qe7 g4 Be4 Qg3 Bb7 Re1 Qe6 Rc1 Rac8 Kh2 Qxa2 Rc2 Qd5 Rc1 c5 dxc5 dxc5 h4 Rxe3","Ruy Lopez","Aandi123"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","wqws","3160","3018","1-0","C29","Vienna Game: Vienna Gambit, Main Line","e4 e5 Nc3 Nf6 f4 d5 fxe5 Nxe4 Nf3 Nc6 d3 Nxc3 bxc3 d4 Be2 Be7 O-O dxc3 Qe1 O-O Qg3 Bf5 Rb1 Rb8 Kh1 Bg6 h4 b5 Ng5 Nd4 Bd1 h6 Ne4 Bxh4 Qg4 h5 Qh3 Rb6 Be3 Bxe4 dxe4 Bg5 Bg1 Re6 Qxc3 c5 Qxc5 Nc6 Bh2 Rfe8 Bxh5 g6 Bg4 Be7 Qd5 Nd4 Rbd1","Vienna Game","yosephtaher"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","GMKrikor","2900","3069","0-1","C41","Philidor Defense: Exchange Variation","e4 e5 Nf3 d6 d4 exd4 Nxd4 Nf6 Nc3 Be7 g3 O-O Bg2 Re8 O-O Bf8 h3 a5 a3 Nbd7 Kh2 a4 Bg5 h6 Be3 Nc5 f3 d5 Qd2 dxe4 fxe4 Ncxe4 Nxe4 Nxe4 Qd3 Nf6 Rae1 c6 Bf4 Rxe1 Rxe1 Nd5 Nxc6 bxc6 c4 Qa5 Re5 Qa6 Re8 Bb7 Bb8 Nf6 Rd8 c5 Rxf8+ Kxf8 Qd6+ Kg8 Qd8+ Kh7 Bf1 Be4 Qc7 Qb7","","GalaxyRoman"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","rasmussvane","3314","3163","1-0","C54","Italian Game: Classical Variation, Giuoco Pianissimo","e4 e5 Bc4 Nf6 d3 Nc6 Nf3 Bc5 O-O d6 c3 a5 Re1 O-O h3 Ba7 a4 Be6 Bxe6 fxe6 Be3 Bxe3 Rxe3 Qd7 Nbd2 Rae8 Nf1 d5 N1h2 Qd6 Qc2 Qc5 Qb3 b6 Rae1 d4 R3e2 dxc3 bxc3 Rf7 Rc2 Rd7 Qb5 Red8 Re3 Rd6 Kf1 Nd7 Ke2 Qxb5 axb5 Na7 Rb2 c5 Ng4 a4 c4 Ra8 Ra2 Nc8 Ngxe5 Nxe5 Nxe5 Ne7 Kd2 Ra7 Kc3 Rd8 Re1 Ng6 Nc6 Rda8 Nxa7 Rxa7 Rea1 Rf7 f3 Nf4 h4 h5 g3 Ng6 f4 Rd7 Rxa4 Nf8 Ra7 Rd8 Ra8 Rd6 R1a7","Italian Game","GMWSO"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","FairChess_on_YouTube","3150","3258","0-1","C47","Four Knights Game: Scotch Variation Accepted, Main Line","e4 e5 Nf3 Nc6 Nc3 Nf6 d4 exd4 Nxd4 Bb4 Nxc6 bxc6 Bd3 O-O O-O d5 exd5 cxd5 h3 Rb8 Bg5 c6 Qf3 Bd6 b3 Be5 Bf4 Qd6 Bxe5 Qxe5 Rfe1 Qg5 Na4 Rb4 c4 Rb8 Qe3 Qxe3 Rxe3 Rd8 Rae1 Kf8 Nc5 h6 Re5 a5 g4 Nd7 Nxd7+ Bxd7 cxd5 cxd5 Rxd5 Bxg4 Rxa5 Bxh3 Bc4 Ra8 Rxa8 Rxa8 a4 Bd7 Re5 g5 a5 f6 Rc5 Ke7 a6 Kd6 Rd5+ Kc7 b4 Bc6 Rf5 Rd8 Rxf6 Rd1+ Kh2 Rh1+ Kg3 Rg1+ Kh3 Rh1+ Kg4 Rh4+ Kf5 Rxc4 Rxh6 g4 Kg5 Rxb4 a7 Ra4 Rh7+ Kb6 Rh6 Kc5 Rh7 Bf3","Four Knights Game","crescentmoon2411"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","SuanQuek","2685","2465","1-0","C67","Ruy Lopez: Berlin Defense, l'Hermet Variation","e4 e5 Nf3 Nc6 Bb5 Nf6 O-O Nxe4 d4 Nd6 Bxc6 bxc6 Nxe5 Be7 Qg4 O-O Re1 Bf6 Nc3 Nb5 Nxb5 cxb5 Qf3 Rb8 Bf4 Bb7 d5 d6 Nc6 Bxc6 dxc6 Bxb2 Rab1 Bf6 Qd5 Re8 h3 a6 c4 b4 c5 Rb5 Bxd6 cxd6 Qxd6 Rf8 c7 Qc8 c6 a5 Re4 a4 Rexb4 Rxb4 Rxb4 Be7 Qxe7 Re8 Rb8","Ruy Lopez","Let_it_be_1"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","BeanScreen","3066","2866","1-0","C44","King's Knight Opening: Konstantinopolsky","e4 e5 Nf3 Nc6 g3 Bc5 Bg2 d6 c3 Bb6 O-O Nge7 b4 O-O a4 a6 d3 f5 Nbd2 f4 Nc4 fxg3 hxg3 Bg4 Nxb6 cxb6 Qb3+ Kh8 Ng5 Qe8 f3 Bh5 Be3 h6 Nh3 Bf7 Qb2 Be6 Bxb6 Qh5 g4 Qf7 b5 axb5 axb5 Rxa1 Qxa1 Nb8 Qa3 Nd7 Bc7 d5 Bd6 Re8 Bxe7 Rxe7 Qd6 dxe4 fxe4 Qe8 g5 Rf7 Rxf7 Qxf7 gxh6 gxh6 Nf2 Kh7 d4 exd4 cxd4 Nf8 d5 Bc8 e5 Ng6 e6 Qg7 Qg3 Qa1+ Kh2 Qf6 Qc7+ Ne7 Nh3 Kg6 Qg3+ Kh7 Be4+ Kh8 Qf4 Qb2+ Bg2 Nxd5 Qxh6+ Kg8 Qg5+ Kf8 Qxd5 Qf6 Qd6+ Ke8 b6 Qxe6 Qxe6+ Bxe6 Bxb7 Kd7 Nf4 Bf5 Bg2 Kd6 Kg3 Bd7 Kf2 Bb5 Ke3 Ba6 Kd4 Bb5 Ne6 Ba6 Nc7 Bc8 Nb5+ Ke7 Kc5 Kd8 Kd6 Bd7 b7 Bc8 b8=Q","","FREDERICKtheMATE"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","FARIZA2018","2612","2751","0-1","C34","King's Gambit Accepted: Bonsch-Osmolovsky Variation","e4 e5 f4 exf4 Nf3 Ne7 d4 d5 e5 Ng6 c4 c6 cxd5 cxd5 Nc3 Nc6 Qb3 Bb4 Bd2 Bxc3 bxc3 O-O Bd3 Na5 Qc2 Nc4 h4 Nxd2 Kxd2 h5 Ng5 Bg4 Raf1 Rc8 e6 f5 Qb3 Qa5 Nf7 Rc6 Re1 Rfc8 e7 Kxf7 e8=Q+ Rxe8 Qxb7+ Rc7 Qb3 Rec8 Rc1 Kg8 Rhe1 Kh7 Re6 Re7 Ra6 Qc7 Qxd5 Rd8 Qb5 Qd7 Rc6 Rc8 Rxc8 Qxc8 c4 Qe6 d5 Qe3+ Kc2 Ne5 Bf1 f3 gxf3 Bxf3 d6 Be4+ Kb2 Qd4+ Rc3 Rb7","","SiriusGGJJ"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","Elnaz_Kaliakhmet","2753","2662","0-1","C45","Scotch Game: Schmidt Variation","e4 e5 Nf3 Nc6 d4 exd4 Nxd4 Nf6 Nc3 Bb4 Nxc6 bxc6 Bd3 d5 Bd2 Bxc3 Bxc3 dxe4 Bxf6 Qxf6 Bxe4 Ba6 Qf3 Qxf3 Bxf3 O-O-O Bg4+ Kb8 f4 Rhe8+ Kf2 Rd2+ Kg3 Rxc2 Rhc1 Rxb2 Rab1 Rb6 a4 Re3+ Bf3 Ra3 Ra1 Rxa1 Rxa1 Bb7 a5 Rb3 a6 Bc8 Kf2 Rb6 Be2 c5 Ke3 c6 g4 Kc7 f5 f6 Bc4 Rb2 h4 Rh2 h5 Rg2 Kf3 Rc2 Bd3 Rc3 Ke4 c4 Be2 Rc2 Bf1 Kb6 Rb1+ Kc5 Ra1 Rf2 Ke3 Rh2 Be2 c3 Ra4 c2 Rc4+ Kb6 Rxc2 Bxa6 Bd1 Rxc2 Bxc2 h6 Kd4 Bb7 Kc4 c5 Bd1 a5 Kc3 Bd5 Be2 a4 Bd1 a3 Be2 a2 Kb2 Ka5 Bf1 Bf3 Kxa2 Bxg4 Kb3 Bxf5 Kc4 Kb6 Be2 Be6+ Kc3 c4 Kd4 Kb5 Bd1 Kb4 Bf3 c3 Be4 Bb3 Bg6 c2 Bxc2 Bxc2 Kd5 f5 Ke6 f4","Scotch Game","KononenkoD"],["2026.10.13","Titled-Tuesday-Blitz-October-13-2026","Chess.com","11","bulgakdamir","2826","2686","1-0","C24","Bishop's Opening: Vienna Hybrid","e4 e5 Nc3 Nc6 Bc4 Nf6 d3 Bc5 a3 O-O h3 d6 Nge2 Be6 Nd5 Bxd5 exd5 Ne7 Nc3 Bd4 Qf3 c6 dxc6 bxc6 Ne4 Nxe4 dxe4 d5 Ba2 f5 exd5 cxd5 O-O e4 Qd1 Bf6 c3 Kh8 Be3 Qd6 f4 Rab8 Rb1 Rb7 Rf2 Rfb8 Rd2 h6 Bxd5 Nxd5 Rxd5 Qe6 b4 Bxc3 Qb3 Qf6 Rc1 Rc8 Kh2 Rbc7 b5 Kh7 a4 Ba5 Rc6 Rxc6 bxc6 Rxc6 Rxa5 Rc3 Qd5 Rxe3 Qxf5+ Qxf5 Rxf5 Rd3 Ra5 Rd7 Re5 Rd4 a5 Ra4 f5 Kg8 Kg3 Kf7 Kf4 Kf6 Re6+ Kf7 a6 Ra2 g4 Ra4 Rc6 Kg8 h4 Kh7 h5 Kg8 Re6 Kh7 Rxe4 Rxa6 Re7 Ra4+ Kf3 a5 f6 Ra3+ Kg2 Kg8 Rxg7+ Kh8 Ra7 Ra2+ Kf3 Ra1 Kf4 Rf1+ Ke5 Kg8 Rxa5 Kf7 Ra7+ Kg8 Ke6 Kh8 Ra8+ Kh7 Kf7 Re1 Ra7 Rf1 Kf8+ Kh8 f7 Rxf7+ Kxf7 Kh7 Kf6+ Kh8 Kg6 Kg8 Ra8#","","viktorskliarov"]],"chips":[["Italian Game",50],["Ruy Lopez",41],["Four Knights Game",19],["Scotch Game",11],["Vienna Game",8]],"trees":{"Italian Game":{"slug":"e4-e5--italian-game","moves":"1.e4 e5","n":50},"Ruy Lopez":{"slug":"e4-e5--ruy-lopez","moves":"1.e4 e5 2.Nf3 Nc6 3.Bb5","n":41},"Four Knights Game":{"slug":"e4-e5--four-knights-game","moves":"1.e4 e5 2.Nf3","n":19},"Scotch Game":{"slug":"e4-e5--scotch-game","moves":"1.e4 e5 2.Nf3 Nc6 3.d4 exd4","n":11},"Vienna Game":{"slug":"e4-e5--vienna-game","moves":"1.e4 e5 2.Nc3","n":8}},"player":"White","playerShort":"White","side":"white","field":true};
+const ME=DATA.player, MESHORT=DATA.playerShort, SIDE=DATA.side, WIN=SIDE==='white'?'1-0':'0-1', LOSS=SIDE==='white'?'0-1':'1-0';
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k){try{return localStorage.getItem('cw_'+DATA.side+'_'+k)}catch(e){return null}},set(k,v){try{localStorage.setItem('cw_'+DATA.side+'_'+k,v)}catch(e){}}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const files='abcdefgh';
+const FIELD=!!DATA.field;
+const G=DATA.games.map((r,i)=>({me:r[12]||ME,i,date:r[0],event:r[1],site:r[2],round:r[3],opp:r[4],welo:r[5],belo:r[6],res:r[7],eco:r[8],opn:r[9],moves:r[10].split(' '),fam:r[11]||''}));
+const last=n=>n.split(',')[0].trim();
+const short=n=>{const p=n.split(',');return p.length>1?p[0].trim()+', '+p[1].trim()[0]:n};
+const yr=g=>FIELD?(g.round&&g.round!=='?'?'R'+g.round:''):g.date.slice(0,4).replace(/\?/g,'');
+const WN=g=>SIDE==='white'?g.me:g.opp, BN=g=>SIDE==='white'?g.opp:g.me;
+const MS=g=>FIELD?short(g.me):MESHORT;
+let view=[], shown=0, fam='', q='', sortk='new', cur={k:null,p:0}, flipped=(store.get('flip')===null?SIDE==='black':store.get('flip')==='1');
+const PAGE=25;
+let hashOK=false; addEventListener('load',()=>{hashOK=true});
+
+/* ---------- list, filter, sort ---------- */
+function applyFilter(){
+  const terms=q.toLowerCase().split(/\s+/).filter(Boolean);
+  view=G.filter(g=>{
+    if(fam&&g.fam!==fam) return false;
+    if(!terms.length) return true;
+    const hay=(g.opp+' '+g.me+' '+g.event+' '+g.site+' '+g.date+' '+g.opn+' '+g.eco+' '+g.res).toLowerCase();
+    return terms.every(t=>hay.includes(t));
+  });
+  const num=v=>parseInt(v)||0;
+  const cmp={new:(a,b)=>b.date.localeCompare(a.date)||b.i-a.i, old:(a,b)=>a.date.localeCompare(b.date)||a.i-b.i,
+    elo:FIELD?((a,b)=>Math.max(num(b.welo),num(b.belo))-Math.max(num(a.welo),num(a.belo))):((a,b)=>num(SIDE==='white'?b.belo:b.welo)-num(SIDE==='white'?a.belo:a.welo)), long:(a,b)=>b.moves.length-a.moves.length}[sortk];
+  view.sort(cmp);
+  shown=0; $('#games').innerHTML=''; renderMore(); renderToc(); renderStats();
+}
+function renderStats(){
+  let w=0,d=0,l=0; view.forEach(g=>{if(g.res===WIN)w++;else if(g.res===LOSS)l++;else d++});
+  const n=view.length, sc=n?Math.round((w+d/2)/n*100):0;
+  $('#stats').innerHTML=n?`<b>${n}</b> game${n==1?'':'s'} · ${ME} <b>+${w} =${d} −${l}</b> · score <b>${sc}%</b>`:'';
+}
+function renderToc(){
+  $('#tocn').textContent='('+view.length+')';
+  $('#toc').innerHTML=view.map(g=>`<a data-k="${g.i}" title="${esc(g.event)} ${esc(g.date)}">${yr(g)} · ${FIELD?esc(last(WN(g)))+' – '+esc(last(BN(g))):esc(last(g.opp))} <span class="r">${g.res.replace('1/2-1/2','½')}</span></a>`).join('');
+  markToc();
+}
+function markToc(){ $$('#toc a').forEach(a=>a.classList.toggle('on',cur.k!==null&&+a.dataset.k===cur.k)); const on=$('#toc a.on'), box=$('nav.toc'); if(on&&box.offsetParent!==null){ const t=on.offsetTop, h=box.clientHeight; if(t<box.scrollTop+30||t>box.scrollTop+h-60) box.scrollTop=Math.max(0,t-h/2) } }
+function movesHTML(g){
+  return g.moves.map((s,i)=>`<a class="mv" data-k="${g.i}" data-p="${i+1}">${i%2?'':(i/2+1)+'.'}${esc(s)}</a>`).join(' ');
+}
+function blockHTML(g){
+  const ev=[g.event,g.site&&g.site!=='?'?g.site:''].filter(Boolean).join(', ');
+  const rd=g.round&&g.round!=='?'&&g.round!=='-'?' · rd '+esc(g.round):'';
+  return `<section class="game" id="g${g.i}" data-k="${g.i}">
+  <h2 data-k="${g.i}">${SIDE==="white"?esc(last(g.me))+" – "+esc(last(g.opp)):esc(last(g.opp))+" – "+esc(last(g.me))}</h2>
+  <div class="gamehead">${SIDE==='white'?`<b>${esc(MS(g))}</b>${g.welo?' ('+esc(g.welo)+')':''} – <b>${esc(short(g.opp))}</b>${g.belo?' ('+esc(g.belo)+')':''}`:`<b>${esc(short(g.opp))}</b>${g.welo?' ('+esc(g.welo)+')':''} – <b>${esc(MS(g))}</b>${g.belo?' ('+esc(g.belo)+')':''}`}</div>
+  <div class="gamehead">${esc(ev)} · ${esc(g.date.replace(/\.\?\?/g,''))}${rd} · ${esc(g.res)}</div>
+  ${g.opn?`<div class="opn">${esc(g.eco)} · ${esc(g.opn)}</div>`:''}
+  <p class="ml">${movesHTML(g)} <span class="res">${esc(g.res)}</span></p>
+</section>`;
+}
+function renderMore(){
+  const next=view.slice(shown,shown+PAGE);
+  $('#games').insertAdjacentHTML('beforeend',next.map(blockHTML).join(''));
+  shown+=next.length;
+  $('#more').hidden=shown>=view.length;
+  $('#more').textContent='Show more games ('+(view.length-shown)+' left)';
+  if(!view.length) $('#games').innerHTML='<p class="empty">No games match.</p>';
+  paintCur();
+}
+function ensureShown(k){ let idx=view.findIndex(g=>g.i===k); if(idx<0) return false; while(shown<=idx) renderMore(); return true }
+
+/* ---------- board ---------- */
+function boardHTML(fen,lm){
+  const rows=fen.split(' ')[0].split('/'); const grid=[];
+  rows.forEach((r,ri)=>{let c=0;for(const ch of r){if(/\d/.test(ch))c+=+ch;else{grid[ri*8+c]=ch;c++}}});
+  let sq='';
+  for(let i=0;i<64;i++){
+    const r=flipped?7-Math.floor(i/8):Math.floor(i/8), c=flipped?7-i%8:i%8;
+    const name=files[c]+(8-r), p=grid[r*8+c];
+    sq+=`<div class="sq ${(r+c)%2?'d':'l'}${lm.includes(name)?' lm':''}">${p?`<div class="pc ${p===p.toUpperCase()?'w':'b'}${p.toUpperCase()}"></div>`:''}</div>`;
+  }
+  const rk=[...Array(8)].map((_,i)=>`<span>${flipped?i+1:8-i}</span>`).join('');
+  const fs=[...Array(8)].map((_,i)=>`<span>${files[flipped?7-i:i]}</span>`).join('');
+  return `<div class="bwrap"><div class="rk">${rk}</div><div class="bd">${sq}</div><div class="fl">${fs}</div></div>`;
+}
+function render(){
+  const g=cur.k===null?null:G[cur.k];
+  const c=new Chess(); let lastMv=null;
+  if(g) for(let i=0;i<cur.p;i++) lastMv=c.move(g.moves[i],{sloppy:true});
+  $('#live').innerHTML=boardHTML(c.fen(),lastMv?[lastMv.from,lastMv.to]:[]);
+  if(!g){ $('#who').textContent='Pick a game'; $('#cur').textContent=''; return }
+  $('#who').textContent=(SIDE==='white'?last(g.me)+' – '+last(g.opp):last(g.opp)+' – '+last(g.me))+' · '+yr(g);
+  const lab=cur.p===0?'Start':(cur.p%2?((cur.p+1)/2)+'.':(cur.p/2)+'...')+g.moves[cur.p-1];
+  $('#cur').textContent=lab;
+  let m=c.in_checkmate()?'Checkmate.':c.in_stalemate()?'Stalemate.':'';
+  if(!m&&cur.p===g.moves.length) m='End of game · '+g.res.replace('1/2-1/2','draw');
+  $('#msg').textContent=m||((c.turn()==='w'?'White':'Black')+' to move');
+  $('#bPrev').disabled=$('#bStart').disabled=cur.p===0;
+  $('#bNext').disabled=$('#bEnd').disabled=cur.p>=g.moves.length;
+  const gi=view.findIndex(x=>x.i===cur.k);
+  $('#gPrev').disabled=gi<=0; $('#gNext').disabled=gi<0||gi>=view.length-1;
+}
+function paintCur(){
+  $$('main a.mv.cur').forEach(a=>a.classList.remove('cur'));
+  if(cur.k===null||cur.p===0) return null;
+  const a=document.querySelector(`main a.mv[data-k="${cur.k}"][data-p="${cur.p}"]`);
+  if(a) a.classList.add('cur');
+  return a;
+}
+function go(k,p,fromText){
+  cur={k,p}; render(); markToc();
+  const a=paintCur();
+  if(a&&!fromText){const r=a.getBoundingClientRect(), bp=document.querySelector('aside.bp').getBoundingClientRect(), pb=(bp.width>innerWidth*0.9)?bp.bottom:80;
+    if(r.top<pb+8||r.bottom>innerHeight-20) scrollBy({top:r.top-(pb+innerHeight)/2+r.height/2,behavior:'smooth'})}
+  if(hashOK){try{history.replaceState(null,'','#g'+k)}catch(e){}}
+}
+function gotoGame(k,scroll){
+  if(!ensureShown(k)) return;
+  go(k,0,true);
+  if(scroll){const el=document.getElementById('g'+k); if(el){const bp=document.querySelector('aside.bp').getBoundingClientRect(); const off=(bp.width>innerWidth*0.9)?bp.bottom+10:70; scrollTo({top:el.getBoundingClientRect().top+scrollY-off,behavior:'smooth'})}}
+}
+const L=()=>cur.k===null?0:G[cur.k].moves.length;
+const next=()=>{if(cur.k!==null&&cur.p<L())go(cur.k,cur.p+1)};
+const prev=()=>{if(cur.k!==null&&cur.p>0)go(cur.k,cur.p-1)};
+const start=()=>{if(cur.k!==null)go(cur.k,0)};
+const end=()=>{if(cur.k!==null)go(cur.k,L())};
+function gstep(d){const gi=view.findIndex(x=>x.i===cur.k); const n=view[gi+d]; if(n) gotoGame(n.i,true)}
+const flip=()=>{flipped=!flipped;store.set('flip',flipped?'1':'0');render()};
+$('#bNext').onclick=next;$('#bPrev').onclick=prev;$('#bStart').onclick=start;$('#bEnd').onclick=end;$('#bFlip').onclick=flip;
+$('#gPrev').onclick=()=>gstep(-1);$('#gNext').onclick=()=>gstep(1);
+$('#more').onclick=renderMore;
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a.mv'); if(a){go(+a.dataset.k,+a.dataset.p,true);return}
+  const h=e.target.closest('h2[data-k]'); if(h){go(+h.dataset.k,0,true);return}
+  const t=e.target.closest('#toc a'); if(t){gotoGame(+t.dataset.k,true)}
+});
+document.addEventListener('keydown',e=>{
+  if(e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName))return;
+  const k=e.key;
+  if(k==='ArrowRight'){next();e.preventDefault()}else if(k==='ArrowLeft'){prev();e.preventDefault()}
+  else if(k==='Home'){start();e.preventDefault()}else if(k==='End'){end();e.preventDefault()}
+  else if(k==='['){gstep(-1)}else if(k===']'){gstep(1)}
+  else if(k==='f'||k==='F')flip();
+});
+/* chips: opening names in this line; each one also swaps the tree above the games */
+(function(){
+  const el=$('#chips'), top=DATA.chips||[];
+  const link=$('#treeLink'), img=$('#treeImg'), cap=$('#treeCap'), note=$('#treeNote');
+  const base=link?{href:link.getAttribute('href'),src:img.getAttribute('src'),cap:cap.textContent}:null;
+  function setTree(f){
+    if(!base) return;
+    const t=f&&DATA.trees&&DATA.trees[f];
+    if(t){
+      link.setAttribute('href','../../trees/'+t.slug+'/'); img.setAttribute('src','../../trees/'+t.slug+'/preview.jpg');
+      img.alt='Opening tree for '+f; cap.textContent='Open the zoomable tree for '+f+' \u2192';
+      note.innerHTML='Tree of the <b>'+t.n+'</b> '+esc(f)+' games. They all start <b>'+esc(t.moves)+'</b> and differ after that.';
+    } else {
+      link.setAttribute('href',base.href); img.setAttribute('src',base.src); img.alt='Opening tree'; cap.textContent=base.cap;
+      note.textContent=f?'No separate tree for '+f+' (too few games).':'';
+    }
+  }
+  if(top.length<2){el.remove();return}
+  const draw=()=>{el.innerHTML=`<button class="${fam?'':'on'}" data-f="">All <small>${G.length}</small></button>`+top.map(([f,n])=>`<button class="${fam===f?'on':''}" data-f="${esc(f)}">${esc(f)} <small>${n}</small></button>`).join('')};
+  el.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; fam=b.dataset.f; draw(); setTree(fam); applyFilter()});
+  draw();
+})();
+$('#q').addEventListener('input',e=>{q=e.target.value; applyFilter()});
+$('#sort').addEventListener('change',e=>{sortk=e.target.value; applyFilter()});
+/* text size & dark mode */
+let fs=+store.get('fs')||21;
+const setFs=v=>{fs=Math.max(15,Math.min(34,v));document.documentElement.style.setProperty('--fs',fs+'px');store.set('fs',fs)};
+$('#fplus').onclick=()=>setFs(fs+2);$('#fminus').onclick=()=>setFs(fs-2);setFs(fs);
+const setDark=d=>{document.documentElement.dataset.theme=d?'dark':'light';$('#dark').textContent=d?'Light':'Dark';store.set('dark',d?'1':'0')};
+let dk=store.get('dark')==='1';setDark(dk);$('#dark').onclick=()=>{dk=!dk;setDark(dk)};
+(function(){var b=$('#bTog');b.onclick=function(){var h=document.body.classList.toggle('hideb');b.textContent=h?'Show board':'Hide board'}})();
+/* go */
+applyFilter();
+const hash=location.hash.match(/^#g(\d+)$/);
+if(hash&&G[+hash[1]]){ gotoGame(+hash[1],true) } else if(view.length){ go(view[0].i,0,true) } else render();
+})();
+</script>
+</body>
+</html>

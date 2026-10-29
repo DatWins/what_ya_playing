@@ -38,11 +38,18 @@ def main():
         for part, title, body in (("overview", f"{label} · Overview", ov), ("white", f"{label} · What White plays", sec["white"]), ("black", f"{label} · What Black plays", sec["black"])):
             open(os.path.join(ch, f"{weight:02d}-{ev}-{part}.md"), "w", encoding="utf-8").write(front(title, f"{ev}-{part}", weight) + body)
             weight += 1
-    open(os.path.join(ch, "99-how.md"), "w", encoding="utf-8").write(
-        front("How This Is Made", "how-it-works", 99, menu_on=False) +
-        "Each tournament PGN in `data/` becomes one tab. To add a new Titled Tuesday, save its PGN as `data/TTC_MMDDYY.pgn`, run `./build.sh TTC_MMDDYY.pgn` and push.\n\n"
-        "Every game is replayed move by move and added to one tree per colour, counting how many games pass through each position and how that colour scored.\n\n"
-        "## Tools\n"
+    open(os.path.join(ch, "99-about.md"), "w", encoding="utf-8").write(
+        front("About", "About", 99) +
+        "**What Ya Playing?** is for looking at the openings that were played at the Titled Tuesday. Each Titled Tuesday Blitz is one tournament tab under the title: "
+        "pick a tournament, then look at what White played and what Black replied.\n\n"
+        "## What you can see\n"
+        "- the most popular first moves, openings, variations and lines, with how often each was played and how it scored\n"
+        "- a tree of the whole field for White and for Black, then a tree for each first move, then every game in each line\n"
+        "- every game replayed on a live board, with the players and their ratings\n\n"
+        "## New tournaments\n"
+        "Every time there is a new Titled Tuesday, it is added as another tab (named TTC_MMDDYY, for example TTC_102726 is October 27, 2026). The newest tournament opens first.\n\n"
+        "## How it is made\n"
+        "Every game is replayed move by move and added to one tree per colour, counting how many games pass through each position and how that colour scored. Every game appears on both sides: on the White side it is scored for White, on the Black side for Black.\n\n"
         "- [python-chess](https://github.com/niklasf/python-chess) reads the games and draws the boards\n"
         "- [Graphviz](https://graphviz.org/) lays out the branches\n"
         "- [Lichess opening names](https://github.com/lichess-org/chess-openings) (CC0) give each game its opening name\n"

@@ -1,7 +1,7 @@
 # What Ya Playing?
 
 What the field plays in a tournament: for White and for Black, the first moves, openings, variations and most popular lines, with the full games.
-Current data: Chess.com Titled Tuesday Blitz, October 27, 2026 (2,230 games with moves).
+Current data: Chess.com Titled Tuesday Blitz, October 27, 2026 (2,230 games with moves); also TTC_101326 (October 13, 2026).
 
 ## Analyse a new tournament
 1. Save the new PGN in `data/` as `TTC_MMDDYY.pgn` (the file name becomes the tab name). Each PGN is one tab.
