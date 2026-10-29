@@ -1,0 +1,173 @@
+---
+title: "What Black plays"
+header_menu_title: "Black"
+navigation_menu_title: "Black"
+weight: 3
+header_menu: true
+---
+**2,230 games** with Black, +951 =178 −1101, score **47%** (average rating 2752). The thicker the branch, the more often White played it. Boards are shown from Black's side. Scores are always from the point of view of Black.
+
+[![What Black played, the big picture](black/trees/big-picture/preview.jpg)](black/trees/big-picture/)
+
+- [Open the zoomable big-picture tree](black/trees/big-picture/)
+
+### Most popular replies to 1.e4 / 1.d4 / 1.Nf3 / 1.c4
+
+| Move | Games | Share | Score | Avg rating |
+| --- | --- | --- | --- | --- |
+| 1.e4 c5 | 451 | 20% | 45% | 2719 |
+| 1.e4 e5 | 218 | 10% | 49% | 2794 |
+| 1.e4 e6 | 114 | 5% | 50% | 2709 |
+| 1.d4 Nf6 | 395 | 18% | 50% | 2775 |
+| 1.d4 d5 | 205 | 9% | 46% | 2720 |
+| 1.d4 e6 | 29 | 1% | 48% | 2761 |
+| 1.c4 Nf6 | 33 | 1% | 48% | 2710 |
+| 1.c4 e6 | 25 | 1% | 38% | 2774 |
+| 1.c4 e5 | 23 | 1% | 41% | 2755 |
+| 1.Nf3 Nf6 | 119 | 5% | 50% | 2809 |
+| 1.Nf3 d5 | 94 | 4% | 38% | 2735 |
+| 1.Nf3 c5 | 32 | 1% | 50% | 2792 |
+
+### Most popular openings
+
+Grouped by Lichess opening name.
+
+| Opening | Games | Share | + = − | Score | Avg rating |
+| --- | --- | --- | --- | --- | --- |
+| Sicilian Defense | 453 | 20% | +187 =31 −235 | 45% | 2719 |
+| English Opening | 130 | 6% | +51 =7 −72 | 42% | 2770 |
+| French Defense | 123 | 6% | +56 =14 −53 | 51% | 2717 |
+| Queen's Pawn Game | 120 | 5% | +43 =10 −67 | 40% | 2762 |
+| Queen's Gambit Declined | 110 | 5% | +51 =16 −43 | 54% | 2784 |
+| Caro-Kann Defense | 108 | 5% | +50 =10 −48 | 51% | 2747 |
+| Zukertort Opening | 83 | 4% | +40 =10 −33 | 54% | 2746 |
+| King's Indian Defense | 82 | 4% | +45 =4 −33 | 57% | 2723 |
+| Ruy Lopez | 77 | 3% | +35 =9 −33 | 51% | 2817 |
+| King's Indian Attack | 76 | 3% | +28 =4 −44 | 39% | 2776 |
+| Indian Defense | 67 | 3% | +30 =7 −30 | 50% | 2806 |
+| Italian Game | 48 | 2% | +23 =2 −23 | 50% | 2831 |
+| Nimzo-Larsen Attack | 42 | 2% | +14 =3 −25 | 37% | 2693 |
+| Rapport-Jobava System | 40 | 2% | +14 =4 −22 | 40% | 2774 |
+| Catalan Opening | 38 | 2% | +16 =2 −20 | 45% | 2774 |
+
+### Most popular variations
+
+| Variation | Games | Share | Score |
+| --- | --- | --- | --- |
+| Sicilian Defense: Najdorf Variation | 48 | 2% | 38% |
+| King's Indian Attack | 46 | 2% | 42% |
+| Sicilian Defense: Nyezhmetdinov-Rossolimo Attack | 44 | 2% | 30% |
+| Sicilian Defense: Closed | 41 | 2% | 44% |
+| Rapport-Jobava System | 40 | 2% | 40% |
+| Ruy Lopez: Morphy Defense | 40 | 2% | 50% |
+| Sicilian Defense: Alapin Variation | 38 | 2% | 58% |
+| English Opening: Anglo-Indian Defense | 31 | 1% | 42% |
+| Queen's Gambit Declined: Exchange Variation | 31 | 1% | 63% |
+| English Opening: Symmetrical Variation | 28 | 1% | 48% |
+| French Defense: Advance Variation | 28 | 1% | 39% |
+| Caro-Kann Defense: Advance Variation | 28 | 1% | 57% |
+| English Opening: King's English Variation | 24 | 1% | 50% |
+| Queen's Pawn Game: London System | 24 | 1% | 23% |
+| Queen's Pawn Game | 23 | 1% | 33% |
+| King's Indian Defense: Fianchetto Variation | 23 | 1% | 63% |
+| English Opening: Agincourt Defense | 21 | 1% | 31% |
+| Pirc Defense | 20 | 1% | 50% |
+| Zukertort Opening: Sicilian Invitation | 19 | 1% | 45% |
+| Sicilian Defense: Kan Variation | 18 | 1% | 53% |
+
+### Most popular lines
+
+The most-travelled paths, followed while at least 25 games stay on them (up to 10 plies).
+
+| Line | Games | Score |
+| --- | --- | --- |
+| 1.e4 c5 2.Nf3 d6 3.d4 cxd4 4.Nxd4 Nf6 5.Nc3 a6 | 48 | 40% |
+| 1.e4 c5 2.Nf3 Nc6 3.Bb5 | 44 | 30% |
+| 1.e4 e5 2.Nf3 Nc6 3.Bc4 | 42 | 52% |
+| 1.e4 c5 2.Nf3 e6 3.d4 cxd4 4.Nxd4 | 41 | 49% |
+| 1.d4 d5 2.c4 e6 3.Nc3 | 41 | 59% |
+| 1.d4 d5 2.c4 c6 | 37 | 31% |
+| 1.d4 Nf6 2.Nf3 e6 | 35 | 39% |
+| 1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 | 32 | 42% |
+| 1.d4 Nf6 2.c4 e6 3.Nf3 d5 | 30 | 45% |
+| 1.e4 d6 2.d4 Nf6 | 29 | 38% |
+| 1.d4 Nf6 2.c4 g6 3.Nc3 Bg7 4.e4 | 29 | 50% |
+| 1.e4 e6 2.d4 d5 3.Nc3 | 28 | 57% |
+| 1.e4 c6 2.d4 d5 3.e5 | 28 | 57% |
+| 1.d4 Nf6 2.Nc3 d5 3.Bf4 | 28 | 41% |
+| 1.d4 Nf6 2.Nf3 g6 | 27 | 43% |
+
+
+### Against 1.e4 {#black-1e4}
+
+**1051 games**, +440 =89 −522, score **46%**. Most often: Sicilian Defense (451), French Defense (117), Caro-Kann Defense (102), Ruy Lopez (77).
+
+[![1.e4 opening tree](black/trees/e4/preview.jpg)](black/trees/e4/)
+
+- [Open the zoomable tree](black/trees/e4/)
+
+{{< linecards >}}
+{{< linecard href="black/lines/e4-c5-nf3/" title="1.e4 c5 2.Nf3" n="329" w="131" d="17" l="181" score="42%" names="Sicilian Defense" >}}
+{{< linecard href="black/lines/e4-c5-nc3/" title="1.e4 c5 2.Nc3" n="50" w="20" d="7" l="23" score="47%" names="Sicilian Defense" >}}
+{{< linecard href="black/lines/e4-c5-c3/" title="1.e4 c5 2.c3" n="31" w="15" d="4" l="12" score="55%" names="Sicilian Defense" >}}
+{{< linecard href="black/lines/e4-c5-other/" title="1.e4 c5 — other second moves" n="41" w="20" d="3" l="18" score="52%" names="Sicilian Defense" >}}
+{{< linecard href="black/lines/e4-e5/" title="1.e4 e5" n="218" w="97" d="21" l="100" score="49%" names="Ruy Lopez · Italian Game · Four Knights Game" >}}
+{{< linecard href="black/lines/e4-e6/" title="1.e4 e6" n="114" w="51" d="13" l="50" score="50%" names="French Defense" >}}
+{{< linecard href="black/lines/e4-c6/" title="1.e4 c6" n="102" w="46" d="10" l="46" score="50%" names="Caro-Kann Defense" >}}
+{{< linecard href="black/lines/e4-d6/" title="1.e4 d6" n="43" w="14" d="4" l="25" score="37%" names="Pirc Defense · Philidor Defense · Czech Defense" >}}
+{{< linecard href="black/lines/e4-d5/" title="1.e4 d5" n="29" w="13" d="3" l="13" score="50%" names="Scandinavian Defense" >}}
+{{< linecard href="black/lines/e4-g6/" title="1.e4 g6" n="27" w="11" d="2" l="14" score="44%" names="Modern Defense · Rat Defense · Sicilian Defense" >}}
+{{< linecard href="black/lines/e4-other/" title="1.e4 — other replies" n="67" w="22" d="5" l="40" score="37%" names="Alekhine Defense · Nimzowitsch Defense · King's Pawn Game" >}}
+{{< /linecards >}}
+
+### Against 1.d4 {#black-1d4}
+
+**703 games**, +312 =59 −332, score **49%**. Most often: Queen&#x27;s Pawn Game (108), Queen&#x27;s Gambit Declined (100), Indian Defense (61), King&#x27;s Indian Defense (60).
+
+[![1.d4 opening tree](black/trees/d4/preview.jpg)](black/trees/d4/)
+
+- [Open the zoomable tree](black/trees/d4/)
+
+{{< linecards >}}
+{{< linecard href="black/lines/d4-nf6/" title="1.d4 Nf6" n="395" w="182" d="32" l="181" score="50%" names="King's Indian Defense · Indian Defense · Rapport-Jobava System" >}}
+{{< linecard href="black/lines/d4-d5/" title="1.d4 d5" n="205" w="83" d="22" l="100" score="46%" names="Queen's Gambit Declined · Queen's Pawn Game · Slav Defense" >}}
+{{< linecard href="black/lines/d4-e6/" title="1.d4 e6" n="29" w="13" d="2" l="14" score="48%" names="Horwitz Defense · Queen's Indian Defense · Queen's Gambit Declined" >}}
+{{< linecard href="black/lines/d4-other/" title="1.d4 — other replies" n="74" w="34" d="3" l="37" score="48%" names="Queen's Pawn Game · Modern Defense · Indian Defense" >}}
+{{< /linecards >}}
+
+### Against 1.c4 {#black-1c4}
+
+**107 games**, +44 =6 −57, score **44%**. Most often: English Opening (81).
+
+[![1.c4 opening tree](black/trees/c4/preview.jpg)](black/trees/c4/)
+
+- [Open the zoomable tree](black/trees/c4/)
+
+{{< linecards >}}
+{{< linecard href="black/lines/c4-nf6/" title="1.c4 Nf6" n="33" w="15" d="2" l="16" score="48%" names="English Opening · King's Indian Defense" >}}
+{{< linecard href="black/lines/c4-e6/" title="1.c4 e6" n="25" w="8" d="3" l="14" score="38%" names="English Opening · Queen's Gambit Declined · Semi-Slav Defense" >}}
+{{< linecard href="black/lines/c4-other/" title="1.c4 — other replies" n="49" w="21" d="1" l="27" score="44%" names="English Opening" >}}
+{{< /linecards >}}
+
+### Against 1.Nf3 {#black-1nf3}
+
+**282 games**, +121 =19 −142, score **46%**. Most often: Zukertort Opening (81), King&#x27;s Indian Attack (73), English Opening (46).
+
+[![1.Nf3 opening tree](black/trees/nf3/preview.jpg)](black/trees/nf3/)
+
+- [Open the zoomable tree](black/trees/nf3/)
+
+{{< linecards >}}
+{{< linecard href="black/lines/nf3-nf6/" title="1.Nf3 Nf6" n="119" w="55" d="8" l="56" score="50%" names="Zukertort Opening · King's Indian Attack · English Opening" >}}
+{{< linecard href="black/lines/nf3-d5/" title="1.Nf3 d5" n="94" w="33" d="5" l="56" score="38%" names="King's Indian Attack · Zukertort Opening · Nimzo-Larsen Attack" >}}
+{{< linecard href="black/lines/nf3-c5/" title="1.Nf3 c5" n="32" w="14" d="4" l="14" score="50%" names="Zukertort Opening · English Opening · Sicilian Defense" >}}
+{{< linecard href="black/lines/nf3-other/" title="1.Nf3 — other replies" n="37" w="19" d="2" l="16" score="54%" names="Zukertort Opening · English Opening · Indian Defense" >}}
+{{< /linecards >}}
+
+### Other first moves {#black-others}
+
+**87 games**, +34 =5 −48, score **42%**.
+
+{{< linecards >}}
+{{< linecard href="black/lines/other-first-moves/" title="Other first moves" n="87" w="34" d="5" l="48" score="42%" names="Nimzo-Larsen Attack · Hungarian Opening · Van Geet Opening" >}}
+{{< /linecards >}}
